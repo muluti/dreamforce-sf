@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+:root {
+  /* ── Modern Premium Light Theme ── */
+  --color-page: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f1f5f9;
+  --color-surface-elevated: #ffffff;
+
+  /* ── Typography & Foregrounds ── */
+  --color-foreground: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+  --color-text-subtle: #cbd5e1;
+
+  /* ── Brand Colors (SF Cloud & Dreamforce Royal Blue) ── */
+  --color-blue: #4f46e5;
+  --color-blue-hover: #4338ca;
+  --color-blue-active: #3730a3;
+  --color-blue-soft: #eef2ff;
+  --color-blue-border: #c7d2fe;
+  --color-blue-text: #4338ca;
+
+  /* ── Borders & Shadows ── */
+  --color-border: #e2e8f0;
+  --color-border-subtle: #f1f5f9;
+  --shadow-xs: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+  --shadow-card: 0 4px 16px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+  --shadow-deep: 0 12px 28px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+  --shadow-glow-blue: 0 0 20px -4px rgba(79, 70, 229, 0.25);
+
+  /* ── Semantic System Status ── */
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #e11d48;
+  --color-info: #0284c7;
+
+  /* ── Insight Warning Banner ── */
+  --color-background-warning: #fffbeb;
+  --color-border-warning: #fde68a;
+  --color-text-warning: #b45309;
+}
+
+[data-theme='dark'] {
+  /* ── Modern Premium Dark Theme ── */
+  --color-page: #0b0f17;
+  --color-surface: #141b26;
+  --color-surface-alt: #1c2636;
+  --color-surface-elevated: #222e40;
+
+  /* ── Dark Typography ── */
+  --color-foreground: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+  --color-text-subtle: #334155;
+
+  /* ── Brand Colors ── */
+  --color-blue: #6366f1;
+  --color-blue-hover: #818cf8;
+  --color-blue-active: #a5b4fc;
+  --color-blue-soft: rgba(99, 102, 241, 0.14);
+  --color-blue-border: rgba(99, 102, 241, 0.3);
+  --color-blue-text: #c7d2fe;
+
+  /* ── Borders & Shadows ── */
+  --color-border: #222e40;
+  --color-border-subtle: #182232;
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 8px 24px -4px rgba(0, 0, 0, 0.45);
+  --shadow-deep: 0 16px 36px -6px rgba(0, 0, 0, 0.6);
+  --shadow-glow-blue: 0 0 24px -4px rgba(99, 102, 241, 0.35);
+
+  /* ── Insight Warning Banner ── */
+  --color-background-warning: #241c0f;
+  --color-border-warning: #78350f;
+  --color-text-warning: #fbbf24;
+}
+
+@layer base {
+  button, input, select, textarea {
+    font: inherit;
+  }
+  
+  * {
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+  }
+
+  html, body, #root {
+    background-color: var(--color-page) !important;
+    color: var(--color-foreground) !important;
+    font-family: "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    word-break: keep-all;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  button, a, input, select, textarea {
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 180ms ease, transform 160ms ease;
+  }
+}
+
+/* ── JS Style Layout & Typography Classes ── */
+.notion-shell {
+  min-height: 100vh;
+  padding: 16px 14px 108px;
+  background-color: var(--color-page) !important;
+  color: var(--color-foreground) !important;
+}
+
+.notion-main {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.notion-hero {
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  border-radius: 24px;
+  padding: 20px 18px 18px;
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.notion-kicker {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.notion-display {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--color-foreground);
+  line-height: 1.25;
+}
+
+.notion-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.os-virtualized-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-xs);
+  transition: all 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stripe-number {
+  font-feature-settings: "tnum" on, "lnum" on, "zero" on;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-foreground);
+}
+
+.notion-button-primary {
+  background: var(--color-blue);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px -2px rgba(79, 70, 229, 0.3);
+  transition: all 160ms ease;
+}
+.notion-button-primary:hover {
+  background: var(--color-blue-hover);
+  transform: translateY(-1px);
+}
+.notion-button-primary:active {
+  transform: scale(0.97);
+}
+
+.notion-button-secondary {
+  background: var(--color-surface-alt);
+  color: var(--color-foreground);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 160ms ease;
+}
+.notion-button-secondary:hover {
+  background: var(--color-surface);
+  border-color: var(--color-text-muted);
+}
+.notion-button-secondary:active {
+  transform: scale(0.97);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+[data-theme='dark'] ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
