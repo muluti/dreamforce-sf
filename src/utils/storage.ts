@@ -1,18 +1,23 @@
 import { AppData } from "../types";
 import { initialAppData } from "../data/initialData";
 
-const STORAGE_KEY = "dreampass_app_data_v5";
+const STORAGE_KEY = "dreampass_app_data_v6";
 const AUTH_KEY = "dreampass_auth_session";
 
 export function loadAppData(): AppData {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem("dreampass_app_data_v5");
     if (!raw) {
       saveAppData(initialAppData);
       return initialAppData;
     }
     const parsed = JSON.parse(raw);
-    return { ...initialAppData, ...parsed };
+    const places = (parsed.places && parsed.places.length > 0) 
+      ? parsed.places 
+      : initialAppData.places;
+    const merged = { ...initialAppData, ...parsed, places };
+    saveAppData(merged);
+    return merged;
   } catch (e) {
     console.error("Failed to load app data from storage:", e);
     return initialAppData;

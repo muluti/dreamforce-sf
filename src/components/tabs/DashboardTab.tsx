@@ -1,11 +1,10 @@
-import React from "react";
 import { 
   ShieldAlert, 
   Calendar, 
   CheckCircle2, 
   MapPin, 
   ArrowRight, 
-  Languages, 
+  Compass, 
   CreditCard,
   AlertTriangle,
   Phone,
@@ -36,6 +35,8 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
   const totalChecks = data.checklist.length;
   const checkedCount = data.checklist.filter((c) => c.checked).length;
   const totalUSD = data.expenses.reduce((acc, cur) => acc + cur.amountUSD, 0);
+  const totalPlaces = data.places?.length || 0;
+  const visitedPlacesCount = data.places?.filter((p) => p.visited).length || 0;
 
   return (
     <div className="space-y-4 pb-24 max-w-md mx-auto">
@@ -117,19 +118,19 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
           </div>
         </div>
 
-        {/* Box 4: English SOS */}
+        {/* Box 4: SF Places & Shopping */}
         <div 
-          onClick={() => onChangeTab("english")}
+          onClick={() => onChangeTab("places")}
           className="flex items-center justify-between rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-3.5 shadow-xs transition-all hover:border-slate-300 dark:hover:border-slate-600 cursor-pointer active:scale-[0.96] group"
         >
           <div>
-            <p className="text-[11px] font-bold text-[var(--color-text-secondary)]">영어 SOS</p>
+            <p className="text-[11px] font-bold text-[var(--color-text-secondary)]">명소 & 쇼핑</p>
             <p className="text-[18px] font-extrabold leading-tight tracking-tight text-sky-600 dark:text-sky-400 stripe-number mt-1">
-              {data.englishPhrases.length}개
+              {visitedPlacesCount} <span className="text-[12px] text-[var(--color-text-muted)] font-normal">/ {totalPlaces}곳</span>
             </p>
           </div>
           <div className="h-9 w-9 rounded-xl bg-sky-50 dark:bg-sky-950/50 text-sky-600 dark:text-sky-400 flex items-center justify-center border border-sky-200/60 dark:border-sky-800/50 group-hover:scale-105 transition-transform">
-            <Languages className="h-4.5 w-4.5" />
+            <Compass className="h-4.5 w-4.5" />
           </div>
         </div>
       </div>

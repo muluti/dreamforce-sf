@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   loadAppData, 
   saveAppData, 
@@ -12,7 +12,7 @@ import {
   ChecklistItem, 
   ColleagueContact, 
   BusinessCardRecord, 
-  EnglishPhrase, 
+  PlaceItem, 
   ProTip, 
   ExpenseRecord, 
   CustomSection, 
@@ -29,7 +29,7 @@ import { ProTipsModal } from "./components/ProTipsModal";
 import { DashboardTab } from "./components/tabs/DashboardTab";
 import { ScheduleTab } from "./components/tabs/ScheduleTab";
 import { TripHubTab } from "./components/tabs/TripHubTab";
-import { EnglishTab } from "./components/tabs/EnglishTab";
+import { PlacesTab } from "./components/tabs/PlacesTab";
 import { WellnessTab } from "./components/tabs/WellnessTab";
 
 export function App() {
@@ -204,15 +204,37 @@ export function App() {
     }));
   };
 
-  // English Phrase CRUD
-  const handleAddPhrase = (phrase: EnglishPhrase) => {
-    setData((prev) => ({ ...prev, englishPhrases: [...prev.englishPhrases, phrase] }));
-  };
-
-  const handleDeletePhrase = (id: string) => {
+  // Places & Shopping CRUD
+  const handleTogglePlaceVisited = (id: string) => {
     setData((prev) => ({
       ...prev,
-      englishPhrases: prev.englishPhrases.filter((p) => p.id !== id)
+      places: prev.places.map((p) =>
+        p.id === id
+          ? {
+              ...p,
+              visited: !p.visited,
+              visitedAt: !p.visited ? new Date().toISOString().slice(0, 10) : undefined
+            }
+          : p
+      )
+    }));
+  };
+
+  const handleAddPlace = (place: PlaceItem) => {
+    setData((prev) => ({ ...prev, places: [place, ...prev.places] }));
+  };
+
+  const handleUpdatePlace = (place: PlaceItem) => {
+    setData((prev) => ({
+      ...prev,
+      places: prev.places.map((p) => (p.id === place.id ? place : p))
+    }));
+  };
+
+  const handleDeletePlace = (id: string) => {
+    setData((prev) => ({
+      ...prev,
+      places: prev.places.filter((p) => p.id !== id)
     }));
   };
 
@@ -373,11 +395,13 @@ export function App() {
             />
           )}
 
-          {activeTab === "english" && (
-            <EnglishTab
-              phrases={data.englishPhrases}
-              onAddPhrase={handleAddPhrase}
-              onDeletePhrase={handleDeletePhrase}
+          {activeTab === "places" && (
+            <PlacesTab
+              places={data.places}
+              onToggleVisited={handleTogglePlaceVisited}
+              onAddPlace={handleAddPlace}
+              onUpdatePlace={handleUpdatePlace}
+              onDeletePlace={handleDeletePlace}
             />
           )}
 

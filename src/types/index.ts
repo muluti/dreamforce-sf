@@ -1,4 +1,4 @@
-﻿export interface MediaItem {
+export interface MediaItem {
   id: string;
   type: "image" | "video" | "link";
   url: string; // Base64 data URL or external URL (YouTube / Web)
@@ -120,6 +120,29 @@ export interface SafetyZone {
   address?: string;
 }
 
+export interface PlaceItem {
+  id: string;
+  name: string; // 한글 명칭
+  nameEn: string; // 영문 명칭
+  category: "mart_shopping" | "bookstore" | "near_lodging" | "near_moscone" | "mission" | "viewpoint" | "landmark" | "cinema_tour" | "custom";
+  rating?: number; // e.g. 4.7
+  ratingText?: string; // e.g. "4.7 · 독립서점" or "4.0 · 대형할인점"
+  address: string;
+  locationTag: string; // e.g. "Moscone 도보 5분" / "숙소 인근" / "Mission" / "North Beach"
+  phone?: string;
+  hours?: string; // e.g. "09:00 - 21:00" / "매일 10:00 - 22:00"
+  googleMapsQuery: string; // query for https://www.google.com/maps/search/?api=1&query=
+  recommendedTime?: string; // e.g. "9/15~17 행사 종료 후", "9/13 첫날 저녁", "17:30~19:30 일몰"
+  themeTags: string[];
+  description: string;
+  shoppingTips?: string[]; // Recommended items to buy / check out
+  recommendedCourse?: string;
+  visited: boolean;
+  visitedAt?: string;
+  notes?: string;
+  priority?: "must_visit" | "recommended" | "optional";
+}
+
 export interface AppData {
   pin: string;
   userName: string;
@@ -129,9 +152,11 @@ export interface AppData {
   checklist: ChecklistItem[];
   colleagues: ColleagueContact[];
   businessCards: BusinessCardRecord[];
-  englishPhrases: EnglishPhrase[];
+  englishPhrases?: EnglishPhrase[];
+  places: PlaceItem[];
   proTips: ProTip[];
   expenses: ExpenseRecord[];
   customSections: CustomSection[];
   safetyZones: SafetyZone[];
 }
+
