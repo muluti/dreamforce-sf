@@ -132,6 +132,8 @@ export interface PlaceItem {
   phone?: string;
   hours?: string; // e.g. "09:00 - 21:00" / "매일 10:00 - 22:00"
   googleMapsQuery: string; // query for https://www.google.com/maps/search/?api=1&query=
+  lat?: number; // GPS Latitude
+  lng?: number; // GPS Longitude
   recommendedTime?: string; // e.g. "9/15~17 행사 종료 후", "9/13 첫날 저녁", "17:30~19:30 일몰"
   themeTags: string[];
   description: string;

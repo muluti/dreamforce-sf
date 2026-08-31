@@ -1,19 +1,26 @@
 import { AppData } from "../types";
 import { initialAppData } from "../data/initialData";
 
-const STORAGE_KEY = "dreampass_app_data_v6";
+const STORAGE_KEY = "dreampass_app_data_v7";
 const AUTH_KEY = "dreampass_auth_session";
 
 export function loadAppData(): AppData {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem("dreampass_app_data_v5");
+    const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem("dreampass_app_data_v6") || localStorage.getItem("dreampass_app_data_v5");
     if (!raw) {
       saveAppData(initialAppData);
       return initialAppData;
     }
     const parsed = JSON.parse(raw);
-    const places = (parsed.places && parsed.places.length > 0) 
-      ? parsed.places 
+    const initialPlaceMap = new Map(initialAppData.places.map((p) => [p.id, p]));
+    const places = (parsed.places && parsed.places.length > 0)
+      ? parsed.places.map((p: any) => {
+          const initP = initialPlaceMap.get(p.id);
+          if (initP && (!p.lat || !p.lng)) {
+            return { ...p, lat: initP.lat, lng: initP.lng };
+          }
+          return p;
+        })
       : initialAppData.places;
     const merged = { ...initialAppData, ...parsed, places };
     saveAppData(merged);
