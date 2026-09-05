@@ -25,6 +25,7 @@ import { Header } from "./components/Header";
 import { Navbar, TabType } from "./components/Navbar";
 import { MediaModal } from "./components/MediaModal";
 import { ProTipsModal } from "./components/ProTipsModal";
+import { FlightArrivalGuideModal } from "./components/FlightArrivalGuideModal";
 
 import { DashboardTab } from "./components/tabs/DashboardTab";
 import { ScheduleTab } from "./components/tabs/ScheduleTab";
@@ -37,6 +38,9 @@ export function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => isSessionAuthenticated());
   const [isChangingPin, setIsChangingPin] = useState(false);
   const [activeTab, setActiveTab] = useState<TabType>("dashboard");
+
+  // Flight & SFO Arrival Guide Modal State
+  const [isFlightGuideOpen, setIsFlightGuideOpen] = useState(false);
 
   // Pro Tips Modal State
   const [isTipsModalOpen, setIsTipsModalOpen] = useState(false);
@@ -339,6 +343,12 @@ export function App() {
         onDeleteMedia={handleDeleteMediaItem}
       />
 
+      {/* 20단계 비행기 탑승 ~ SFO 호텔 체크인 가이드 모달 */}
+      <FlightArrivalGuideModal
+        isOpen={isFlightGuideOpen}
+        onClose={() => setIsFlightGuideOpen(false)}
+      />
+
       {/* Notion Main Column Wrapper */}
       <div className="notion-main">
         {/* 3절 Notion Hero Page Header */}
@@ -357,6 +367,7 @@ export function App() {
               data={data}
               onChangeTab={setActiveTab}
               onOpenTips={() => setIsTipsModalOpen(true)}
+              onOpenFlightGuide={() => setIsFlightGuideOpen(true)}
               onSelectEvent={(evt) => {
                 setActiveTab("schedule");
               }}
@@ -370,6 +381,7 @@ export function App() {
               onUpdateEvent={handleUpdateEvent}
               onDeleteEvent={handleDeleteEvent}
               onOpenMediaModal={handleOpenMediaModal}
+              onOpenFlightGuide={() => setIsFlightGuideOpen(true)}
             />
           )}
 
@@ -392,6 +404,7 @@ export function App() {
               onAddBusinessCard={handleAddBusinessCard}
               onDeleteBusinessCard={handleDeleteBusinessCard}
               onOpenMediaModal={handleOpenMediaModal}
+              onOpenFlightGuide={() => setIsFlightGuideOpen(true)}
             />
           )}
 

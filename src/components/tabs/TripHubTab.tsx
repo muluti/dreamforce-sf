@@ -15,7 +15,8 @@ import {
   Tag, 
   AlertTriangle,
   Copy,
-  X
+  X,
+  Plane
 } from "lucide-react";
 import { 
   TravelDocument, 
@@ -44,6 +45,7 @@ interface TripHubTabProps {
   onAddBusinessCard: (card: BusinessCardRecord) => void;
   onDeleteBusinessCard: (id: string) => void;
   onOpenMediaModal: (title: string, mediaList: MediaItem[], onUpdate: (items: MediaItem[]) => void) => void;
+  onOpenFlightGuide?: () => void;
 }
 
 export const TripHubTab: React.FC<TripHubTabProps> = ({
@@ -63,7 +65,8 @@ export const TripHubTab: React.FC<TripHubTabProps> = ({
   onDeleteColleague,
   onAddBusinessCard,
   onDeleteBusinessCard,
-  onOpenMediaModal
+  onOpenMediaModal,
+  onOpenFlightGuide
 }) => {
   const [subTab, setSubTab] = useState<"docs" | "checklist" | "team" | "safety">("docs");
 
@@ -226,6 +229,16 @@ export const TripHubTab: React.FC<TripHubTabProps> = ({
                     <span>{hasMedia ? `사진 (${doc.media?.length})` : "+ 사진"}</span>
                   </button>
                 </div>
+
+                {doc.id === "doc-icn-sfo-guide" && onOpenFlightGuide && (
+                  <button
+                    onClick={onOpenFlightGuide}
+                    className="w-full py-2.5 px-3 rounded-xl bg-[var(--color-blue)] hover:bg-blue-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 cursor-pointer shadow-xs transition-colors"
+                  >
+                    <Plane className="h-4 w-4" />
+                    <span>📖 20단계 전체 가이드북 및 7단계 요약 열기</span>
+                  </button>
+                )}
 
                 <div className="space-y-1.5 text-xs">
                   {doc.fields.map((f, idx) => (

@@ -56,11 +56,11 @@ export const initialAppData: AppData = {
       id: "ev-2",
       date: "2026-09-13",
       time: "16:20 - 16:50 (KST)",
-      title: "UA 892 비행기 탑승 (좌석 47K) & 샌프란시스코로 이륙",
+      title: "UA 892 탑승 (좌석 47K) & 기내 휴대폰 완충 & SFO로 이륙",
       category: "flight",
       location: "유나이티드 항공 UA 892 (Boeing 787-9 Dreamliner) / 탑승구",
-      description: "탑승구 화면에 'UA892 San Francisco Boarding'이 뜨면 탑승권 스캔 후 탑승. 47K 좌석 착석. 기내 가방 정리, 휴대폰 비행기 탑승 모드 전환, 좌석 벨트 착용 후 16:50 정시 이륙",
-      proTip: "이륙 후 시계를 즉시 샌프란시스코 현지 시각(11:40)으로 맞추세요. 10시간 50분의 장거리 비행 동안 기내식 후 안대를 착용하고 수면을 유도하세요.",
+      description: "16:20 Gate 도착 (손에 실물 여권, 모바일 탑승권, 휴대폰 꺼내두기). 화면 UA892 확인 후 탑승. 47K 좌석 착석 (캐리어는 선반 Overhead Bin, 소형 가방은 앞 좌석 아래). 비행기 모드, 안전벨트 착용. ★ 기내 USB 포트로 휴대폰 100% 완충 필수! (도착 직후 지도/Uber/연락 집중 사용). 기내식 물 요청: 'Could I have some water, please?'",
+      proTip: "★ 장거리 비행 후 SFO에 도착하자마자 지도/Uber/연락에 배터리를 집중 사용하므로 기내에서 100% 충전하세요! 착륙 1시간 전: 여권 꺼내기, 배터리 확인, CBP 3문장 머릿속 연습.",
       isImportant: true,
       completed: false
     },
@@ -68,11 +68,11 @@ export const initialAppData: AppData = {
       id: "ev-3",
       date: "2026-09-13",
       time: "11:40 - 13:30 (PDT)",
-      title: "SFO 공항 도착 (11:40) & 미국 입국 4단계 완벽 통과",
+      title: "SFO 공항 착륙 (11:40) & 미국 입국 8단계 완벽 통과",
       category: "flight",
       location: "San Francisco International Airport (SFO)",
-      description: "샌프란시스코 도착 후 순서: ① 입국심사(Immigration) -> ② 수하물 찾기(Baggage Claim) -> ③ 세관(Customs) -> ④ SFO 공항 밖. 심사관에게 'I'm here for a conference and tourism.'이라고 간단 명료하게 답변",
-      proTip: "★ 입국심사 답변: 'I'm here for a conference and tourism. (드림포스 참가 및 관광)'. 숙소 주소(137 Milton St)와 예약 바우처는 휴대폰에 바로 띄워둘 수 있게 준비하세요.",
+      description: "① 표지판 'Arrivals / Immigration / Passport Control' 따라 이동 -> ② CBP 입국심사: 단문 답변 ('For a conference and tourism', 'Five days', '137 Milton St') -> ③ 'Baggage Claim' 이동 -> ④ 전광판 UA892 확인 후 23kg 수하물 벨트 대기 -> ⑤ 인천에서 받은 수하물 태그 번호 대조 필수! -> ⑥ Customs(세관) 통과 -> ⑦ ★ 초특급 주의: 환승길(Connecting Flights) 가지 말고 'San Francisco' 출구로 나오기!",
+      proTip: "★ 'Connecting Flights(환승)'는 다른 도시로 갈아타는 사람용 통로입니다! 우리는 SFO가 최종 목적지이므로 반드시 'San Francisco' 출구로 나와야 로비로 이어집니다.",
       isImportant: true,
       completed: false
     },
@@ -80,11 +80,11 @@ export const initialAppData: AppData = {
       id: "ev-4",
       date: "2026-09-13",
       time: "13:30 - 15:00",
-      title: "SFO 공항 -> DK BMC 단체 숙소 이동 & 체크인",
+      title: "SFO 공항 -> Milton St 숙소 이동 (Uber/Taxi) & 체크인 & 객실 5대 점검",
       category: "hotel",
       location: "137 Milton St, San Francisco, CA 94112",
-      description: "공항에서 Uber XL 또는 BART로 Milton St 숙소 이동, 15:00 체크인 및 짐 정리 (팀원 5인 공동 숙소)",
-      proTip: "숙소 호스트 연락처: +1 213-361-1889. 체크인 후 인근 Safeway 마트에서 팀 생수/간식 장보기.",
+      description: "Ride App Pickup 구역에서 Uber 호출. 탑승 전 차종, 번호판, 기사 대조 ('Are you here for JS?'). 택시 이용 시 Taxi 표지판 -> 줄서기 -> 137 Milton St 주소 제시. 숙소 도착 후 프런트 'Hi, I have a reservation under Jinsoo Kim.' (말이 빠르면 'Could you speak a little more slowly, please?'). 방 입장 즉시 5대 점검 (여권, 지갑/카드, 폰 충전, 캐리어 잠금, 호텔키)!",
+      proTip: "★ 방에 들어가자마자 짐부터 풀지 마세요! [여권 / 지갑카드 / 휴대폰 충전 / 캐리어 잠금 / 호텔키 보관] 5대 필수 점검을 마친 후 휴식을 취하세요.",
       isImportant: true,
       completed: false
     },
@@ -276,19 +276,31 @@ export const initialAppData: AppData = {
     {
       id: "doc-icn-sfo-guide",
       category: "custom",
-      title: "🛫 [초보자 필독] 인천공항 출국 ~ SFO 입국 완벽 시뮬레이터",
-      subtitle: "김진수 님(UA892) 5대 행동 강령 & 15단계 A to Z",
+      title: "🛫 [초보자 필독] 비행기 탑승 ~ SFO 입국 ~ 호텔 체크인 20단계 실전 가이드",
+      subtitle: "김진수 님(UA892) 탑승부터 객실 5대 점검까지 완벽 시뮬레이터",
       fields: [
-        { label: "14:00 전후 (인천공항)", value: "도착 즉시 전광판에서 UA892 찾기 (카운터 바로 가지 말기)" },
-        { label: "14:00~15:00 (체크인)", value: "여권 제시 후 'San Francisco', 위탁수하물 태그 'SFO' 확인" },
-        { label: "15:00 전후 (보안/출국)", value: "보안검색(노트북분리) -> 출국심사 -> 면세구역 진입" },
-        { label: "16:00 전후 (면세구역)", value: "★ 쇼핑 전에 전광판에서 탑승구(Gate) 위치 먼저 확인/이동" },
-        { label: "16:20 (탑승구 도착)", value: "탑승구 도착 대기 (출발 30분 전 마감 유의, 좌석 47K)" },
-        { label: "16:50 (출발 & 비행)", value: "10시간 50분 비행, 샌프란시스코 도착 현지시각 11:40" },
-        { label: "SFO 입국 4단계", value: "① 입국심사 -> ② 수하물 찾기 -> ③ 세관 -> ④ 공항 밖" },
-        { label: "미국 입국심사 답변", value: "'I\\'m here for a conference and tourism.'" }
+        { label: "1. 16:20 Gate 탑승 준비", value: "실물 여권, 모바일 탑승권, 휴대폰 손에 꺼내두기 (화면 UA892 확인)" },
+        { label: "2. 좌석 47K & 짐정리", value: "기내 캐리어는 선반(Overhead Bin), 소형 가방은 앞 좌석 밑" },
+        { label: "3. ★ 기내 휴대폰 충전", value: "비행 중 좌석 USB 포트로 100% 완충 필수! (도착 즉시 지도/Uber/연락 사용)" },
+        { label: "4. 기내 필수 소지 서류", value: "여권, 숙소 바우처(137 Milton St), 일정표, 귀국티켓, ESTA" },
+        { label: "5. 기내식 물 요청 영어", value: "'Could I have some water, please?'" },
+        { label: "6. 착륙 1시간 전 4대 체크", value: "여권 꺼내기, 배터리 확인, 주소 확인, CBP 답변 머릿속 연습" },
+        { label: "7. SFO 착륙 (11:40)", value: "표지판 'Arrivals / Immigration / Passport Control' 이동" },
+        { label: "8. ★ CBP 입국심사 답변", value: "'For a conference and tourism' / 'Five days' (단문 답변)" },
+        { label: "9. 입국심사 통과 후", value: "여권 돌려받고 'Baggage Claim' 표지판 따라 이동" },
+        { label: "10. 수하물(23kg) 찾기", value: "전광판 UA892 확인 -> 컨베이어 번호 벨트에서 캐리어 대기" },
+        { label: "11. ★ 내 가방 확인(태그)", value: "인천공항 위탁 시 받은 수하물 태그 번호와 캐리어 태그 대조 필수" },
+        { label: "12. 세관(Customs)", value: "신고 물품 없으면 직진 통과" },
+        { label: "13. ★ 공항 밖 출구 주의", value: "'Connecting Flights(환승)' 절대 X! 'San Francisco' 출구로 진출" },
+        { label: "14. 숙소 이동 (Uber/Lyft)", value: "목적지 사전입력, 요금 사전확정, 자동 카드결제로 추천" },
+        { label: "15. ★ Uber 탑승 전 3대 확인", value: "차종, 번호판, 기사 대조 후 기사에게 'Are you here for JS?'" },
+        { label: "16. 택시(Taxi) 이용 시", value: "Taxi 표지판 -> 승차장 줄서기 -> 기사에게 137 Milton St 주소 제시" },
+        { label: "17. 차 안에서 행동 요령", value: "Google Maps로 실시간 경로 확인, 현금 꺼내지 않기" },
+        { label: "18. 호텔 프런트 데스크", value: "'Hi, I have a reservation. It\\'s under Jinsoo Kim.'" },
+        { label: "19. 말이 빠를 때 만능 영어", value: "'Could you speak a little more slowly, please?'" },
+        { label: "20. ★ 방 입실 직후 5대 점검", value: "짐 풀기 전 [여권 / 지갑카드 / 폰충전 / 캐리어잠금 / 호텔키] 즉시 확인" }
       ],
-      notes: "★ [JS님이 실제로 기억해야 할 5개 핵심 요약]\n1. 14:00 전후: 인천공항 도착 → 전광판에서 UA892 찾기\n2. 14:00~15:00: 체크인/수하물 위탁 → 수하물 태그에 'SFO' 찍혔는지 확인\n3. 15:00 전후: 보안검색 & 대한민국 출국심사 → 이후 면세구역 진입\n4. 16:20: 탑승구(Gate) 도착 → 좌석 47K 확인 (면세점 구경 전 Gate 위치 먼저 확인 필수!)\n5. 16:50: 비행기 이륙 → 샌프란시스코 현지 도착 11:40\n\n★ [공항에서 멘붕 방지 황금 공식]\n'공항에서 뭘 해야 하지?' 고민하지 말고 딱 다음 단계만 찾으세요:\n[전광판] → [체크인] → [수하물] → [보안검색] → [출국심사] → [Gate] → [탑승]\n\n★ [SFO 도착 후 입국 절차]\n① 비행기 하차 후 'Immigration / Passport Control' 표지판 따라가기\n② 입국심사관에게 여권 제시, 'I'm here for a conference and tourism.' 답변\n③ Baggage Claim으로 가서 전광판 UA892 컨베이어에서 23kg 수하물 수령\n④ 세관 통과 후 공항 밖으로 나와 BART 또는 Uber 탑승!"
+      notes: "★ [초보자를 위한 SFO 도착 7단계 핵심 동선]\n① Immigration (CBP 입국심사: 'For conference and tourism')\n② Baggage Claim (UA892 벨트에서 23kg 수하물 태그 대조)\n③ Customs (세관 통과)\n④ 'San Francisco' 출구 (★ Connecting Flights 환승길 절대 가지 말기!)\n⑤ Uber / Lyft / Taxi (번호판 확인 & 137 Milton St)\n⑥ Hotel 도착 ('Reservation under Jinsoo Kim')\n⑦ Check-in & 객실 입실 (짐 풀기 전 5대 필수 점검!)\n\n※ 이번 여행은 SFO가 최종 목적지이므로 국내선 환승 절차가 없어 생각보다 매우 단순합니다. 상단의 '20단계 전체 가이드북'을 터치하여 상세 매뉴얼을 확인하세요!"
     },
     {
       id: "doc-1",
@@ -718,10 +730,45 @@ export const initialAppData: AppData = {
     },
     {
       id: "tip-icn-to-sfo-flow",
-      stage: "flight",
+      stage: "immigration",
       urgency: "gold",
       title: "✈️ 머릿속에 딱 하나만 기억할 공항 6단계 행동 순서",
       content: "공항에서 '지금 뭘 해야 하지?' 복잡하게 생각하지 마시고 다음 단계만 따라가세요:\n① 전광판 (UA892 카운터 찾기)\n② United 체크인 & 수하물 위탁 (태그 SFO 확인)\n③ 보안검색 (기내 가방/노트북 분리)\n④ 대한민국 출국심사 (미국 입국심사 아님!)\n⑤ Gate 확인 및 탑승구로 이동\n⑥ 탑승구 주변 면세구역에서 여유 (16:20까지 Gate 대기)"
+    },
+    {
+      id: "tip-charge-in-flight",
+      stage: "immigration",
+      urgency: "gold",
+      title: "🔋 [기내 핵심] 비행기 안에서 휴대폰 100% 완충하기!",
+      content: "• 좌석(47K) 모니터 하단 USB 포트나 충전기를 연결해 비행 중 배터리를 100% 채워두세요.\n• 11시간 비행 후 SFO에 내리자마자 Google Maps 내비, Uber/Lyft 호출, 팀원 연락, 입국 바우처 확인에 배터리가 대량 소모됩니다.\n• 휴대폰이 꺼지면 공항 밖에서 이동이 매우 난감해지므로 충전은 필수입니다!"
+    },
+    {
+      id: "tip-cbp-short-answers",
+      stage: "immigration",
+      urgency: "gold",
+      title: "🛃 [미국 입국심사] 절대 길게 말하지 마세요! 단문 3문장 원칙",
+      content: "• CBP 심사관의 질문에는 절대 미사여구를 붙이지 말고 단문으로만 답하세요:\n  - 목적: 'I'm here for a conference and tourism.'\n  - 체류기간: 'Five days.'\n  - 숙소: '137 Milton St, San Francisco.' (예약 바우처 화면 제시)\n• 쓸데없이 길게 말하면 오히려 꼬투리를 잡힐 수 있습니다. 단문으로 말하면 30초 만에 통과합니다."
+    },
+    {
+      id: "tip-sfo-exit-rule",
+      stage: "immigration",
+      urgency: "warning",
+      title: "🚪 [SFO 출구 주의] 'Connecting Flights' 환승길 절대 금지! 오직 'San Francisco' 출구!",
+      content: "• 세관 통과 후 나오는 출구 표지판에서 절대 환승객용 'Connecting Flights'를 따라가지 마세요!\n• 우리는 SFO가 최종 목적지이므로 반드시 'San Francisco'라고 적힌 출구로 나가야 International Arrivals Meeting Area(로비)로 연결됩니다."
+    },
+    {
+      id: "tip-uber-verification",
+      stage: "immigration",
+      urgency: "gold",
+      title: "🚗 [Uber/Lyft 탑승] 아무 차나 타지 마세요! 번호판 확인 & 'Are you here for JS?'",
+      content: "• 차가 도착하면 문을 열기 전 다음 3가지를 확인하세요: ① 차량 종류/색상 ② 번호판 일치 여부 ③ 기사 이름.\n• 창문 너머로 'Are you here for JS?'라고 물어보고 기사가 맞다고 하면 탑승하세요.\n• 일반 택시를 탈 경우엔 Taxi 표지판을 따라 승차장으로 가서 줄을 서고, 기사에게 휴대폰으로 '137 Milton St, San Francisco, CA 94112' 영문 주소를 보여주면 됩니다."
+    },
+    {
+      id: "tip-room-check-5",
+      stage: "immigration",
+      urgency: "gold",
+      title: "🏨 [호텔 방 입실 직후] 짐 풀기 전 5대 필수 즉시 점검!",
+      content: "• 방에 들어가자마자 침대에 눕거나 짐부터 풀지 마세요! 다음 5가지를 먼저 확인하세요:\n  ① 실물 여권 소지 확인\n  ② 지갑 및 신용카드 확인\n  ③ 휴대폰 110V 어댑터로 즉시 충전 연결\n  ④ 캐리어 잠금 상태 유지\n  ⑤ 호텔 키 카드 안전한 곳(지갑/폰케이스) 보관\n• 말이 빠를 땐 프런트에 'Could you speak a little more slowly, please?'라고 하시면 친절히 도와줍니다."
     },
     {
       id: "tip-ohana",

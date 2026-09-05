@@ -20,7 +20,9 @@ import {
   FileText,
   Clock,
   ExternalLink,
-  Users
+  Users,
+  Plane,
+  ChevronRight
 } from "lucide-react";
 import { TimelineEvent, MediaItem } from "../../types";
 
@@ -30,6 +32,7 @@ interface ScheduleTabProps {
   onUpdateEvent: (event: TimelineEvent) => void;
   onDeleteEvent: (id: string) => void;
   onOpenMediaModal: (title: string, mediaList: MediaItem[], onUpdate: (items: MediaItem[]) => void) => void;
+  onOpenFlightGuide?: () => void;
 }
 
 const DATES = [
@@ -67,7 +70,8 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
   onAddEvent,
   onUpdateEvent,
   onDeleteEvent,
-  onOpenMediaModal
+  onOpenMediaModal,
+  onOpenFlightGuide
 }) => {
   const [selectedDate, setSelectedDate] = useState("all");
   const [showMosconeGuide, setShowMosconeGuide] = useState(false);
@@ -182,6 +186,17 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
             <Compass className="h-4 w-4" />
             <span className="hidden sm:inline font-bold">캠퍼스 맵/아젠다</span>
           </button>
+
+          {onOpenFlightGuide && (
+            <button
+              onClick={onOpenFlightGuide}
+              className="p-2 rounded-xl border border-blue-200 bg-blue-50/70 dark:bg-blue-950/40 text-[var(--color-blue)] text-xs font-semibold flex items-center gap-1 transition-all active:scale-95 cursor-pointer hover:bg-blue-100"
+              title="비행기 탑승 ~ SFO 호텔 체크인 20단계 가이드"
+            >
+              <Plane className="h-4 w-4" />
+              <span className="hidden sm:inline font-bold">20단계 입국 가이드</span>
+            </button>
+          )}
 
           <button
             onClick={handleOpenAdd}
@@ -440,6 +455,34 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
 
       {/* 6절 리스트 아이템 카드 목록 */}
       <div className="space-y-3">
+        {/* 9/13 출국일 전용 20단계 가이드 배너 */}
+        {(selectedDate === "2026-09-13" || selectedDate === "all") && onOpenFlightGuide && (
+          <div
+            onClick={onOpenFlightGuide}
+            className="p-3.5 rounded-2xl border border-blue-200 dark:border-blue-800 bg-blue-50/80 dark:bg-blue-950/30 flex items-center justify-between cursor-pointer active:scale-[0.98] transition-all hover:border-blue-300 shadow-xs group"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-[var(--color-blue)] text-white flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                <Plane className="w-4.5 h-4.5" />
+              </div>
+              <div>
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <span className="px-1.5 py-0.2 rounded text-[10px] font-extrabold bg-blue-200 text-blue-900 dark:bg-blue-900 dark:text-blue-200">
+                    9/13 출국 필수
+                  </span>
+                  <h4 className="text-[13px] font-bold text-blue-950 dark:text-blue-200">
+                    비행기 탑승 ~ SFO 호텔 체크인 20단계
+                  </h4>
+                </div>
+                <p className="text-[11.5px] font-medium text-blue-800/90 dark:text-blue-300">
+                  기내 폰충전 · CBP 3문답 · "San Francisco" 출구 · Uber 탑승 확인
+                </p>
+              </div>
+            </div>
+            <ChevronRight className="w-4 h-4 text-blue-600 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+          </div>
+        )}
+
         {filteredEvents.length === 0 ? (
           <div className="rounded-[16px] border border-dashed border-slate-200 bg-slate-50/50 px-4 py-12 text-center text-sm text-slate-400">
             해당 날짜에 등록된 일정이 없습니다.

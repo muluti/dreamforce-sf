@@ -10,7 +10,8 @@ import {
   Phone,
   Clock,
   Sparkles,
-  ChevronRight
+  ChevronRight,
+  Plane
 } from "lucide-react";
 import { AppData, TimelineEvent } from "../../types";
 import { TabType } from "../Navbar";
@@ -19,6 +20,7 @@ interface DashboardTabProps {
   data: AppData;
   onChangeTab: (tab: TabType) => void;
   onOpenTips: () => void;
+  onOpenFlightGuide?: () => void;
   onSelectEvent: (event: TimelineEvent) => void;
 }
 
@@ -26,6 +28,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
   data,
   onChangeTab,
   onOpenTips,
+  onOpenFlightGuide,
   onSelectEvent
 }) => {
   const upcomingEvents = data.timelineEvents
@@ -67,6 +70,36 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
           <ChevronRight className="h-4 w-4 shrink-0 text-amber-600/80 dark:text-amber-400 group-hover:translate-x-0.5 transition-transform" />
         </div>
       </div>
+
+      {/* 20단계 출국/입국 실전 가이드 배너 */}
+      {onOpenFlightGuide && (
+        <div
+          onClick={onOpenFlightGuide}
+          className="overflow-hidden rounded-2xl border border-blue-200/90 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/30 p-3.5 transition-all duration-200 active:scale-[0.98] shadow-xs hover:border-blue-300 dark:hover:border-blue-700 cursor-pointer group"
+        >
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[var(--color-blue)] text-white shadow-xs">
+              <Plane className="h-4.5 w-4.5" />
+            </div>
+            
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <span className="shrink-0 whitespace-nowrap px-1.5 py-0.2 rounded text-[10px] font-extrabold bg-blue-200/80 dark:bg-blue-900/60 text-blue-900 dark:text-blue-200">
+                  초보자 필독
+                </span>
+                <h4 className="truncate text-[13px] font-bold text-blue-950 dark:text-blue-200">
+                  비행기 탑승 ~ SFO 호텔 체크인 20단계
+                </h4>
+              </div>
+              <p className="truncate text-[11.5px] font-medium text-blue-800/90 dark:text-blue-300/80">
+                기내 폰충전 · CBP 3문답 · "San Francisco" 출구 · Uber 탑승 확인
+              </p>
+            </div>
+
+            <ChevronRight className="h-4 w-4 shrink-0 text-blue-600/80 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform" />
+          </div>
+        </div>
+      )}
 
       {/* 2. 2x2 Quick Metric Grid */}
       <div className="grid grid-cols-2 gap-2.5">
