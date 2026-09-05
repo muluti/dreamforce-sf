@@ -97,6 +97,10 @@ export function loadAppData(): AppData {
     // 5. Pro Tips Smart Merge
     const proTips = initialAppData.proTips;
 
+    // 6. Memos Smart Merge (Preserve existing, fallback to initial sample)
+    const existingMemos = Array.isArray(parsed.memos) ? parsed.memos : [];
+    const memos = existingMemos.length > 0 ? existingMemos : (initialAppData.memos || []);
+
     const merged: AppData = {
       ...initialAppData,
       ...parsed,
@@ -104,7 +108,8 @@ export function loadAppData(): AppData {
       timelineEvents,
       travelDocuments,
       checklist,
-      proTips
+      proTips,
+      memos
     };
 
     if (merged.pin === "1234") {

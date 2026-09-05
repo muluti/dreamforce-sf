@@ -145,6 +145,21 @@ export interface PlaceItem {
   priority?: "must_visit" | "recommended" | "optional";
 }
 
+export type MemoCategory = "session" | "idea" | "shopping" | "dining" | "sightseeing" | "general";
+
+export interface MemoItem {
+  id: string;
+  title: string;
+  content: string;
+  createdAt: string; // e.g. "2026-09-13 15:30"
+  updatedAt?: string;
+  category: MemoCategory;
+  tags?: string[];
+  photos: string[]; // compressed Base64 data URLs
+  location?: string;
+  isPinned?: boolean;
+}
+
 export interface AppData {
   pin: string;
   userName: string;
@@ -160,5 +175,6 @@ export interface AppData {
   expenses: ExpenseRecord[];
   customSections: CustomSection[];
   safetyZones: SafetyZone[];
+  memos?: MemoItem[];
 }
 

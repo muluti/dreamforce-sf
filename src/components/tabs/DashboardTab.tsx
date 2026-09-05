@@ -16,7 +16,8 @@ import {
   DollarSign,
   Compass as CompassIcon,
   HelpCircle,
-  Receipt
+  Receipt,
+  StickyNote
 } from "lucide-react";
 import { AppData, TimelineEvent } from "../../types";
 import { TabType } from "../Navbar";
@@ -148,6 +149,39 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
               <ArrowRight className="w-3 h-3" />
             </button>
           )}
+        </div>
+      </div>
+
+      {/* 현장 메모 & 사진 퀵 액션 카드 */}
+      <div 
+        onClick={() => onChangeTab("memos")}
+        className="rounded-2xl border border-blue-200/80 dark:border-blue-800/60 bg-gradient-to-r from-blue-500/10 via-indigo-500/5 to-transparent p-3.5 flex items-center justify-between transition-all duration-200 active:scale-[0.98] shadow-xs hover:border-blue-400 cursor-pointer group"
+      >
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-2xs group-hover:scale-105 transition-transform">
+            <StickyNote className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] font-extrabold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+                FIELD MEMO & PHOTO
+              </span>
+              {(data.memos?.length || 0) > 0 && (
+                <span className="px-1.5 py-0.2 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 text-[10px] font-bold">
+                  {data.memos?.length}건
+                </span>
+              )}
+            </div>
+            <h4 className="text-[13px] font-black text-[var(--color-foreground)]">
+              현장 메모 & 사진 보관함
+            </h4>
+            <p className="text-[11px] text-[var(--color-text-secondary)]">
+              세션 발표, 부스 데모, 맛집 영수증 사진을 즉시 남겨보세요
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center text-blue-600 dark:text-blue-400 pl-2">
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
         </div>
       </div>
 

@@ -17,7 +17,8 @@ import {
   ExpenseRecord, 
   CustomSection, 
   CustomSectionItem, 
-  MediaItem 
+  MediaItem,
+  MemoItem
 } from "./types";
 
 import { AuthModal } from "./components/AuthModal";
@@ -32,6 +33,7 @@ import { EmergencySosModal } from "./components/EmergencySosModal";
 
 import { DashboardTab } from "./components/tabs/DashboardTab";
 import { ScheduleTab } from "./components/tabs/ScheduleTab";
+import { MemosTab } from "./components/tabs/MemosTab";
 import { TripHubTab } from "./components/tabs/TripHubTab";
 import { PlacesTab } from "./components/tabs/PlacesTab";
 import { WellnessTab } from "./components/tabs/WellnessTab";
@@ -304,6 +306,37 @@ export function App() {
     }));
   };
 
+  // Memos CRUD
+  const handleAddMemo = (memo: MemoItem) => {
+    setData((prev) => ({
+      ...prev,
+      memos: [memo, ...(prev.memos || [])]
+    }));
+  };
+
+  const handleUpdateMemo = (memo: MemoItem) => {
+    setData((prev) => ({
+      ...prev,
+      memos: (prev.memos || []).map((m) => (m.id === memo.id ? memo : m))
+    }));
+  };
+
+  const handleDeleteMemo = (id: string) => {
+    setData((prev) => ({
+      ...prev,
+      memos: (prev.memos || []).filter((m) => m.id !== id)
+    }));
+  };
+
+  const handleTogglePinMemo = (id: string) => {
+    setData((prev) => ({
+      ...prev,
+      memos: (prev.memos || []).map((m) =>
+        m.id === id ? { ...m, isPinned: !m.isPinned } : m
+      )
+    }));
+  };
+
   const handleRestoreData = (restored: AppData) => {
     setData(restored);
   };
@@ -411,6 +444,16 @@ export function App() {
               onDeleteEvent={handleDeleteEvent}
               onOpenMediaModal={handleOpenMediaModal}
               onOpenFlightGuide={() => setIsFlightGuideOpen(true)}
+            />
+          )}
+
+          {activeTab === "memos" && (
+            <MemosTab
+              memos={data.memos || []}
+              onAddMemo={handleAddMemo}
+              onUpdateMemo={handleUpdateMemo}
+              onDeleteMemo={handleDeleteMemo}
+              onTogglePinMemo={handleTogglePinMemo}
             />
           )}
 

@@ -946,5 +946,29 @@ export const initialAppData: AppData = {
       description: "바닷바람과 베이브릿지가 보이는 쾌적하고 안전한 산책로",
       safetyRule: "아침 조깅 및 점심 식사로 최고의 안전 구역."
     }
+  ],
+  memos: [
+    {
+      id: "memo-sample-1",
+      title: "드림포스 참관 현장 핵심 메모 작성 팁 💡",
+      content: "이곳은 출장 기간 동안 사진과 텍스트를 자유롭게 남길 수 있는 나만의 전용 메모 공간입니다.\n\n• 세션 슬라이드나 부스 데모 화면을 스마트폰 카메라로 찍어 즉시 첨부할 수 있습니다.\n• 고용량 사진도 브라우저에서 자동 최적화 압축되어 용량 걱정 없이 안전하게 보관됩니다.\n• 카테고리(세션, 아이디어, 맛집, 쇼핑 등)와 위치 태그를 지정하여 언제든 빠르게 찾아보세요.\n• 우측 상단의 ⭐ 핀 버튼을 누르면 중요한 메모를 항상 상단에 고정해 둘 수 있습니다.",
+      createdAt: "2026-09-13 09:00",
+      category: "idea",
+      tags: ["드림포스", "사용가이드", "사진메모"],
+      photos: [],
+      location: "Moscone Center",
+      isPinned: true
+    },
+    {
+      id: "memo-sample-2",
+      title: "블루보틀 민트 플라자 뉴올리언스(NOLA) 커피 ☕",
+      content: "모스콘 센터 도보 3분 거리에 위치한 블루보틀 민트 플라자.\n\n시그니처 메뉴인 'NOLA (New Orleans-style Iced Coffee)' 추천. 치커리 향과 고소한 유기농 우유가 어우러져 시차 적응과 아침 세션 전 리프레시에 제격!",
+      createdAt: "2026-09-13 14:15",
+      category: "dining",
+      tags: ["블루보틀", "커피", "모스콘근처"],
+      photos: [],
+      location: "Mint Plaza, SF",
+      isPinned: false
+    }
   ]
 };

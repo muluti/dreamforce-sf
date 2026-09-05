@@ -1,7 +1,7 @@
 import React from "react";
-import { LayoutDashboard, CalendarDays, Briefcase, Compass, MoonStar } from "lucide-react";
+import { LayoutDashboard, CalendarDays, StickyNote, Briefcase, Compass, MoonStar } from "lucide-react";
 
-export type TabType = "dashboard" | "schedule" | "hub" | "places" | "wellness";
+export type TabType = "dashboard" | "schedule" | "memos" | "hub" | "places" | "wellness";
 
 interface NavbarProps {
   activeTab: TabType;
@@ -12,8 +12,9 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onChangeTab }) => {
   const tabs = [
     { id: "dashboard", label: "홈", icon: LayoutDashboard },
     { id: "schedule", label: "일정", icon: CalendarDays },
+    { id: "memos", label: "메모", icon: StickyNote },
     { id: "hub", label: "허브", icon: Briefcase },
-    { id: "places", label: "명소/쇼핑", icon: Compass },
+    { id: "places", label: "명소", icon: Compass },
     { id: "wellness", label: "웰니스", icon: MoonStar }
   ];
 
