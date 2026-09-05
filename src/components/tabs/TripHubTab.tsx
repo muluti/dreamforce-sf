@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { 
   FileText, 
   CheckSquare, 
@@ -251,7 +251,7 @@ export const TripHubTab: React.FC<TripHubTabProps> = ({
                 </div>
 
                 {doc.notes && (
-                  <div className="text-[11px] text-[var(--color-text-warning)] bg-[var(--color-background-warning)] border border-[var(--color-border-warning)]/40 p-2.5 rounded-xl font-medium">
+                  <div className="text-[11.5px] text-[var(--color-text-warning)] bg-[var(--color-background-warning)] border border-[var(--color-border-warning)]/40 p-3 rounded-xl font-medium whitespace-pre-line leading-relaxed">
                     💡 {doc.notes}
                   </div>
                 )}
