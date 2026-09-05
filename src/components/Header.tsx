@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Clock, CloudFog, Lock, Settings, Sparkles, Moon, Sun, Flame, MapPin } from "lucide-react";
+import { Clock, CloudFog, Lock, Settings, Sparkles, Moon, Sun, Flame, MapPin, ShieldAlert } from "lucide-react";
 
 interface HeaderProps {
   userName: string;
@@ -7,6 +7,7 @@ interface HeaderProps {
   onLock: () => void;
   onOpenSettings: () => void;
   onOpenTips: () => void;
+  onOpenEmergencySos?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -14,7 +15,8 @@ export const Header: React.FC<HeaderProps> = ({
   exchangeRate,
   onLock,
   onOpenSettings,
-  onOpenTips
+  onOpenTips,
+  onOpenEmergencySos
 }) => {
   const [sfTime, setSfTime] = useState("");
   const [seoulTime, setSeoulTime] = useState("");
@@ -124,8 +126,19 @@ export const Header: React.FC<HeaderProps> = ({
           <span className="text-[10.5px] font-bold text-[var(--color-blue)]">San Francisco</span>
         </div>
 
-        {/* 4 Action Icons */}
+        {/* 5 Action Icons */}
         <div className="flex items-center gap-1.5 shrink-0">
+          {onOpenEmergencySos && (
+            <button
+              onClick={onOpenEmergencySos}
+              className="h-8 px-2 rounded-xl flex items-center justify-center gap-1 bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-[11px] shadow-xs active:scale-90 cursor-pointer animate-pulse"
+              title="1초 긴급 SOS"
+            >
+              <ShieldAlert className="w-3.5 h-3.5" />
+              <span>SOS</span>
+            </button>
+          )}
+
           <button
             onClick={onOpenTips}
             className="h-8 w-8 rounded-xl flex items-center justify-center bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/20 transition-all active:scale-90 cursor-pointer"

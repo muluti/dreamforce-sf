@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { 
   MoonStar, 
   Sun, 
@@ -32,6 +32,7 @@ interface WellnessTabProps {
   onDeleteItemFromSection: (sectionId: string, itemId: string) => void;
   onRestoreData: (data: AppData) => void;
   onOpenMediaModal: (title: string, mediaList: MediaItem[], onUpdate: (items: MediaItem[]) => void) => void;
+  onOpenCalculator?: () => void;
 }
 
 export const WellnessTab: React.FC<WellnessTabProps> = ({
@@ -43,7 +44,8 @@ export const WellnessTab: React.FC<WellnessTabProps> = ({
   onAddItemToSection,
   onDeleteItemFromSection,
   onRestoreData,
-  onOpenMediaModal
+  onOpenMediaModal,
+  onOpenCalculator
 }) => {
   const [activeSound, setActiveSound] = useState<"rain" | "cabin" | "waves" | null>(null);
   const [subSection, setSubSection] = useState<"jetlag" | "expenses" | "report" | "custom">("jetlag");
@@ -354,6 +356,16 @@ ${partners || "- 파트너 미팅 완료"}
               </div>
             </div>
           </div>
+
+          {onOpenCalculator && (
+            <button
+              onClick={onOpenCalculator}
+              className="w-full py-2.5 px-3 rounded-xl border border-emerald-200/80 bg-emerald-50/80 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-200 font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 cursor-pointer shadow-xs hover:bg-emerald-100"
+            >
+              <DollarSign className="w-4 h-4 text-emerald-600" />
+              <span>💵 미국 식당 팁(15/18/20%) & 더치페이 계산기 열기</span>
+            </button>
+          )}
 
           <div className="flex justify-end">
             <button

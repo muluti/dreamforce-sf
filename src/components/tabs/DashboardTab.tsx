@@ -7,11 +7,16 @@ import {
   Compass, 
   CreditCard,
   AlertTriangle,
-  Phone,
   Clock,
   Sparkles,
   ChevronRight,
-  Plane
+  Plane,
+  Phone,
+  MessageSquare,
+  DollarSign,
+  Compass as CompassIcon,
+  HelpCircle,
+  Receipt
 } from "lucide-react";
 import { AppData, TimelineEvent } from "../../types";
 import { TabType } from "../Navbar";
@@ -21,6 +26,9 @@ interface DashboardTabProps {
   onChangeTab: (tab: TabType) => void;
   onOpenTips: () => void;
   onOpenFlightGuide?: () => void;
+  onOpenEnglishSos?: () => void;
+  onOpenCalculator?: () => void;
+  onOpenEmergencySos?: () => void;
   onSelectEvent: (event: TimelineEvent) => void;
 }
 
@@ -29,6 +37,9 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
   onChangeTab,
   onOpenTips,
   onOpenFlightGuide,
+  onOpenEnglishSos,
+  onOpenCalculator,
+  onOpenEmergencySos,
   onSelectEvent
 }) => {
   const upcomingEvents = data.timelineEvents
@@ -43,6 +54,103 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
 
   return (
     <div className="space-y-4 pb-24 max-w-md mx-auto">
+      {/* 0. 초보자 안심 4대 서바이벌 퀵 액션 그리드 */}
+      <div className="space-y-1.5">
+        <div className="flex items-center justify-between px-1">
+          <span className="text-[11.5px] font-extrabold text-[var(--color-foreground)] tracking-tight flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+            <span>초보자 안심 4대 편의 도구</span>
+          </span>
+          <span className="text-[10px] text-slate-400 font-medium">원터치 팝업</span>
+        </div>
+
+        <div className="grid grid-cols-4 gap-2">
+          {/* 1. 영어 SOS */}
+          <button
+            onClick={onOpenEnglishSos}
+            className="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-amber-200/80 dark:border-amber-800/60 bg-amber-50/80 dark:bg-amber-950/30 hover:border-amber-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
+          >
+            <div className="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform">
+              <MessageSquare className="w-4 h-4" />
+            </div>
+            <span className="text-[11px] font-extrabold text-amber-950 dark:text-amber-200">영어 SOS</span>
+            <span className="text-[9.5px] text-amber-700/80 dark:text-amber-400 font-medium">보여주기</span>
+          </button>
+
+          {/* 2. 팁 & 환율 */}
+          <button
+            onClick={onOpenCalculator}
+            className="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-emerald-200/80 dark:border-emerald-800/60 bg-emerald-50/80 dark:bg-emerald-950/30 hover:border-emerald-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
+          >
+            <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform">
+              <DollarSign className="w-4 h-4" />
+            </div>
+            <span className="text-[11px] font-extrabold text-emerald-950 dark:text-emerald-200">팁 & 환율</span>
+            <span className="text-[9.5px] text-emerald-700/80 dark:text-emerald-400 font-medium">더치페이</span>
+          </button>
+
+          {/* 3. 20단계 가이드 */}
+          <button
+            onClick={onOpenFlightGuide}
+            className="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-blue-200/80 dark:border-blue-800/60 bg-blue-50/80 dark:bg-blue-950/30 hover:border-blue-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
+          >
+            <div className="w-8 h-8 rounded-xl bg-[var(--color-blue)] text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform">
+              <Plane className="w-4 h-4" />
+            </div>
+            <span className="text-[11px] font-extrabold text-blue-950 dark:text-blue-200">입국 가이드</span>
+            <span className="text-[9.5px] text-blue-700/80 dark:text-blue-400 font-medium">20단계</span>
+          </button>
+
+          {/* 4. 긴급 SOS */}
+          <button
+            onClick={onOpenEmergencySos}
+            className="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-rose-200/80 dark:border-rose-800/60 bg-rose-50/80 dark:bg-rose-950/30 hover:border-rose-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
+          >
+            <div className="w-8 h-8 rounded-xl bg-rose-600 text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform animate-pulse">
+              <ShieldAlert className="w-4 h-4" />
+            </div>
+            <span className="text-[11px] font-extrabold text-rose-950 dark:text-rose-200">긴급 SOS</span>
+            <span className="text-[9.5px] text-rose-700/80 dark:text-rose-400 font-medium">911·영사관</span>
+          </button>
+        </div>
+      </div>
+
+      {/* 투어가이드 오늘의 행동 나침반 */}
+      <div className="rounded-2xl border border-indigo-200/80 dark:border-indigo-800/60 bg-indigo-50/70 dark:bg-indigo-950/30 p-3.5 space-y-2 shadow-xs">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-base">🧭</span>
+            <h4 className="text-[13px] font-black text-indigo-950 dark:text-indigo-200">
+              투어가이드의 출장 코칭 나침반
+            </h4>
+          </div>
+          <span className="px-2 py-0.5 rounded-full bg-indigo-200/80 text-indigo-900 text-[10px] font-extrabold">
+            D-8 준비기
+          </span>
+        </div>
+        <p className="text-[11.5px] text-indigo-900/90 dark:text-indigo-300/90 leading-relaxed font-medium">
+          "지금은 출국 전 최종 점검 주간입니다! <strong>110V 돼지코 어댑터, 필수 상비약, ESTA 승인 번호</strong>를 패킹 탭에서 확인하고, 9/13 비행기 탑승 준비를 미리 눈에 익혀두세요."
+        </p>
+        <div className="flex gap-2 pt-1">
+          <button
+            onClick={() => onChangeTab("hub")}
+            className="flex-1 py-1.5 px-2.5 rounded-xl bg-white dark:bg-slate-800 border border-indigo-200 text-indigo-700 dark:text-indigo-300 font-bold text-[11px] flex items-center justify-center gap-1 active:scale-95"
+          >
+            <span>패킹 체크리스트 ({checkedCount}/{totalChecks})</span>
+            <ArrowRight className="w-3 h-3" />
+          </button>
+          {onOpenFlightGuide && (
+            <button
+              onClick={onOpenFlightGuide}
+              className="flex-1 py-1.5 px-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-[11px] flex items-center justify-center gap-1 active:scale-95 shadow-2xs"
+            >
+              <span>20단계 가이드</span>
+              <ArrowRight className="w-3 h-3" />
+            </button>
+          )}
+        </div>
+      </div>
+
       {/* 1. Safety Alert Banner (Pixel Perfect Warning Card) */}
       <div
         onClick={onOpenTips}

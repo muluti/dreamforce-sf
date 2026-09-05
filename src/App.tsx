@@ -26,6 +26,9 @@ import { Navbar, TabType } from "./components/Navbar";
 import { MediaModal } from "./components/MediaModal";
 import { ProTipsModal } from "./components/ProTipsModal";
 import { FlightArrivalGuideModal } from "./components/FlightArrivalGuideModal";
+import { EnglishSosModal } from "./components/EnglishSosModal";
+import { QuickCalculatorModal } from "./components/QuickCalculatorModal";
+import { EmergencySosModal } from "./components/EmergencySosModal";
 
 import { DashboardTab } from "./components/tabs/DashboardTab";
 import { ScheduleTab } from "./components/tabs/ScheduleTab";
@@ -39,8 +42,11 @@ export function App() {
   const [isChangingPin, setIsChangingPin] = useState(false);
   const [activeTab, setActiveTab] = useState<TabType>("dashboard");
 
-  // Flight & SFO Arrival Guide Modal State
+  // Survival Toolkit Modal States
   const [isFlightGuideOpen, setIsFlightGuideOpen] = useState(false);
+  const [isEnglishSosOpen, setIsEnglishSosOpen] = useState(false);
+  const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
+  const [isEmergencySosOpen, setIsEmergencySosOpen] = useState(false);
 
   // Pro Tips Modal State
   const [isTipsModalOpen, setIsTipsModalOpen] = useState(false);
@@ -349,6 +355,25 @@ export function App() {
         onClose={() => setIsFlightGuideOpen(false)}
       />
 
+      {/* 초보자 실전 영어 SOS & 쇼스크린 모달 */}
+      <EnglishSosModal
+        isOpen={isEnglishSosOpen}
+        onClose={() => setIsEnglishSosOpen(false)}
+      />
+
+      {/* 미국 팁 & 환율 간이 계산기 모달 */}
+      <QuickCalculatorModal
+        isOpen={isCalculatorOpen}
+        onClose={() => setIsCalculatorOpen(false)}
+        exchangeRate={data.exchangeRate}
+      />
+
+      {/* 1초 긴급 SOS 모달 */}
+      <EmergencySosModal
+        isOpen={isEmergencySosOpen}
+        onClose={() => setIsEmergencySosOpen(false)}
+      />
+
       {/* Notion Main Column Wrapper */}
       <div className="notion-main">
         {/* 3절 Notion Hero Page Header */}
@@ -358,6 +383,7 @@ export function App() {
           onLock={handleLock}
           onOpenSettings={() => setIsChangingPin(true)}
           onOpenTips={() => setIsTipsModalOpen(true)}
+          onOpenEmergencySos={() => setIsEmergencySosOpen(true)}
         />
 
         {/* Tab Contents */}
@@ -368,6 +394,9 @@ export function App() {
               onChangeTab={setActiveTab}
               onOpenTips={() => setIsTipsModalOpen(true)}
               onOpenFlightGuide={() => setIsFlightGuideOpen(true)}
+              onOpenEnglishSos={() => setIsEnglishSosOpen(true)}
+              onOpenCalculator={() => setIsCalculatorOpen(true)}
+              onOpenEmergencySos={() => setIsEmergencySosOpen(true)}
               onSelectEvent={(evt) => {
                 setActiveTab("schedule");
               }}
@@ -429,6 +458,7 @@ export function App() {
               onDeleteItemFromSection={handleDeleteItemFromSection}
               onRestoreData={handleRestoreData}
               onOpenMediaModal={handleOpenMediaModal}
+              onOpenCalculator={() => setIsCalculatorOpen(true)}
             />
           )}
         </main>

@@ -65,6 +65,39 @@ const CAMPUS_ZONES = [
   { id: 16, name: "Jessie Square", tag: "Plaza", desc: "야외 휴식 광장" }
 ];
 
+const DAILY_MISSIONS: Record<string, { mission: string; badge: string; color: string }> = {
+  "2026-09-13": {
+    badge: "Day 1 출국 & SFO 착륙",
+    mission: "✈️ 16:50 UA892 출국 ➡️ 11:40 SFO 착륙 ➡️ 입국 7단계 ➡️ 137 Milton St 숙소 체크인",
+    color: "bg-blue-50 border-blue-200 text-blue-900 dark:bg-blue-950/40 dark:border-blue-800 dark:text-blue-200"
+  },
+  "2026-09-14": {
+    badge: "Day 2 사전 배지 수령 & 디너",
+    mission: "🎫 Moscone West 1층 사전 배지 수령(실물 여권 필수!) ➡️ 18:00 Korea Night 디너 (BIX SF)",
+    color: "bg-purple-50 border-purple-200 text-purple-900 dark:bg-purple-950/40 dark:border-purple-800 dark:text-purple-200"
+  },
+  "2026-09-15": {
+    badge: "Day 3 메인 오프닝 키노트",
+    mission: "🌟 09:00 Marc Benioff 메인 키노트 (South LL) ➡️ 모스콘 부스 탐방 ➡️ 2번 City View 라운지",
+    color: "bg-amber-50 border-amber-200 text-amber-900 dark:bg-amber-950/40 dark:border-amber-800 dark:text-amber-200"
+  },
+  "2026-09-16": {
+    badge: "Day 4 오하나 투어 & 드림페스트",
+    mission: "🏢 14:00 Salesforce Tower 61F 오하나 투어 (Group A) ➡️ 18:00 Dreamfest 야구장 콘서트 (백팩 금지!)",
+    color: "bg-rose-50 border-rose-200 text-rose-900 dark:bg-rose-950/40 dark:border-rose-800 dark:text-rose-200"
+  },
+  "2026-09-17": {
+    badge: "Day 5 한국 랩업 & 기념품 쇼핑",
+    mission: "🇰🇷 15:00 Korea Wrap-up 세션 (Tower West 3F) ➡️ Trader Joe's/City Lights 마트 쇼핑 ➡️ 짐정리",
+    color: "bg-emerald-50 border-emerald-200 text-emerald-900 dark:bg-emerald-950/40 dark:border-emerald-800 dark:text-emerald-200"
+  },
+  "2026-09-18": {
+    badge: "Day 6 귀국 & 결산",
+    mission: "🛬 08:00 숙소 체크아웃 ➡️ SFO 공항 이동 ➡️ 10:25 UA893 탑승 ➡️ 9/19(토) 15:00 인천 도착",
+    color: "bg-slate-100 border-slate-300 text-slate-900 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100"
+  }
+};
+
 export const ScheduleTab: React.FC<ScheduleTabProps> = ({
   events,
   onAddEvent,
@@ -455,6 +488,19 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
 
       {/* 6절 리스트 아이템 카드 목록 */}
       <div className="space-y-3">
+        {/* 날짜별 투어가이드 핵심 미션 하이라이트 배너 */}
+        {selectedDate !== "all" && DAILY_MISSIONS[selectedDate] && (
+          <div className={`p-3.5 rounded-2xl border space-y-1 shadow-xs ${DAILY_MISSIONS[selectedDate].color}`}>
+            <div className="flex items-center gap-1.5 font-black text-[12.5px]">
+              <span>🧭</span>
+              <span>{DAILY_MISSIONS[selectedDate].badge}</span>
+            </div>
+            <p className="text-[12px] font-bold leading-relaxed">
+              {DAILY_MISSIONS[selectedDate].mission}
+            </p>
+          </div>
+        )}
+
         {/* 9/13 출국일 전용 20단계 가이드 배너 */}
         {(selectedDate === "2026-09-13" || selectedDate === "all") && onOpenFlightGuide && (
           <div
