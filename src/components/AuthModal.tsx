@@ -27,7 +27,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       setError("");
       onSuccess();
     } else {
-      setError("PIN 번호가 일치하지 않습니다. (기본값: 9990)");
+      setError("PIN 번호가 일치하지 않습니다.");
       setPinInput("");
     }
   };
@@ -103,7 +103,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
             <div className="pt-1 text-[11px] text-[var(--color-text-secondary)] flex items-center justify-center gap-1.5">
               <ShieldCheck className="h-4 w-4 text-emerald-600" />
-              <span>로컬 보안 보관 시스템 (기본 PIN: <span className="font-bold text-[var(--color-blue)]">9990</span>)</span>
+              <span>안전한 브라우저 로컬 보안 보관 시스템</span>
             </div>
           </form>
         ) : (
