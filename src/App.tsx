@@ -70,8 +70,10 @@ export function App() {
     const savedTheme = localStorage.getItem("dreampass_theme");
     if (savedTheme === "dark") {
       document.documentElement.setAttribute("data-theme", "dark");
+      document.documentElement.classList.add("dark");
     } else {
       document.documentElement.removeAttribute("data-theme");
+      document.documentElement.classList.remove("dark");
     }
   }, []);
 

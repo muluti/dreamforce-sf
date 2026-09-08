@@ -475,12 +475,12 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
               onClick={() => setSelectedDate(d.date)}
               className={`px-3 py-2 rounded-xl shrink-0 text-center transition-all cursor-pointer border active:scale-95 ${
                 isActive
-                  ? "border-blue-200 bg-blue-50 text-[var(--color-blue)] ring-2 ring-blue-500/10 font-bold shadow-sm"
-                  : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] hover:text-[var(--color-foreground)]"
+                  ? "border-[var(--color-blue)] bg-[var(--color-blue-soft)] text-[var(--color-blue)] font-black shadow-xs ring-1 ring-[var(--color-blue)]/30"
+                  : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] font-semibold hover:text-[var(--color-foreground)]"
               }`}
             >
-              <div className="text-[13px] font-bold leading-tight">{d.label}</div>
-              <div className="text-[10px] opacity-75 font-normal">{d.sub}</div>
+              <div className="text-[13px] font-black leading-tight">{d.label}</div>
+              <div className="text-[10px] font-semibold opacity-85 mt-0.5">{d.sub}</div>
             </button>
           );
         })}

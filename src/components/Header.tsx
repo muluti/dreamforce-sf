@@ -79,9 +79,11 @@ export const Header: React.FC<HeaderProps> = ({
     setIsDarkMode(nextDark);
     if (nextDark) {
       document.documentElement.setAttribute("data-theme", "dark");
+      document.documentElement.classList.add("dark");
       localStorage.setItem("dreampass_theme", "dark");
     } else {
       document.documentElement.removeAttribute("data-theme");
+      document.documentElement.classList.remove("dark");
       localStorage.setItem("dreampass_theme", "light");
     }
   };
@@ -94,21 +96,21 @@ export const Header: React.FC<HeaderProps> = ({
       label: "출장 D-Day",
       value: dDayText,
       sub: dDaySub,
-      icon: <Flame className="w-3.5 h-3.5 text-violet-600 dark:text-violet-400" />
+      icon: <Flame className="w-3.5 h-3.5 text-violet-600 dark:text-violet-400 shrink-0" />
     },
     {
       key: "sf" as const,
-      label: "SF 현지시각",
+      label: "SF 현지",
       value: sfTime || "--:--",
       sub: "14°~21°C",
-      icon: <CloudFog className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
+      icon: <CloudFog className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0" />
     },
     {
       key: "seoul" as const,
       label: "서울 본사",
       value: seoulTime || "--:--",
       sub: `1$ = ${formattedExchangeRate}원`,
-      icon: <Clock className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+      icon: <Clock className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 shrink-0" />
     }
   ];
 
@@ -119,11 +121,11 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Brand Pill */}
         <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--color-surface-alt)] border border-[var(--color-border)] shrink min-w-0">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-          <span className="text-[10px] sm:text-[10.5px] font-extrabold tracking-wider text-[var(--color-text-secondary)] uppercase whitespace-nowrap">
+          <span className="text-[10.5px] sm:text-[11px] font-extrabold tracking-wider text-[var(--color-text-secondary)] uppercase whitespace-nowrap">
             DF 2026
           </span>
           <span className="text-[9px] text-[var(--color-text-muted)]">•</span>
-          <span className="text-[10px] sm:text-[10.5px] font-bold text-[var(--color-blue)] truncate">SF</span>
+          <span className="text-[10.5px] sm:text-[11px] font-bold text-[var(--color-blue)] truncate">SF</span>
         </div>
 
         {/* 5 Action Icons */}
@@ -175,10 +177,10 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Main Title Section */}
       <div className="flex flex-col">
-        <h1 className="text-[20px] sm:text-[23px] font-black tracking-tight text-[var(--color-foreground)] leading-snug">
+        <h1 className="text-[21px] sm:text-[24px] font-black tracking-tight text-[var(--color-foreground)] leading-snug">
           드림포스 출장 비서
         </h1>
-        <p className="text-[11.5px] sm:text-[12px] text-[var(--color-text-secondary)] font-medium mt-0.5">
+        <p className="text-[12px] sm:text-[12.5px] text-[var(--color-text-secondary)] font-semibold mt-0.5">
           샌프란시스코 현지 출장 & 세션 통합 어시스턴트
         </p>
       </div>
@@ -198,9 +200,9 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
             >
               {/* Top Row: Icon + Label */}
-              <div className="flex items-center gap-1 sm:gap-1.5 w-full min-w-0">
+              <div className="flex items-center gap-1 w-full min-w-0">
                 <div
-                  className={`rounded-lg p-0.5 sm:p-1 transition-colors shrink-0 ${
+                  className={`rounded-md p-0.5 transition-colors shrink-0 ${
                     isActive
                       ? "bg-white dark:bg-slate-800 shadow-2xs"
                       : "bg-[var(--color-surface)] dark:bg-slate-800/60"
@@ -209,7 +211,7 @@ export const Header: React.FC<HeaderProps> = ({
                   {stat.icon}
                 </div>
                 <span
-                  className={`text-[10px] sm:text-[11px] font-bold tracking-tight truncate ${
+                  className={`text-[10px] sm:text-[10.5px] font-extrabold tracking-tight whitespace-nowrap overflow-hidden ${
                     isActive ? "text-[var(--color-blue)]" : "text-[var(--color-text-secondary)]"
                   }`}
                 >
@@ -219,10 +221,10 @@ export const Header: React.FC<HeaderProps> = ({
 
               {/* Value Row */}
               <div className="mt-1.5 w-full min-w-0">
-                <p className="text-[15px] sm:text-[17px] font-extrabold leading-none tracking-tight text-[var(--color-foreground)] stripe-number tabular-nums truncate">
+                <p className="text-[15px] sm:text-[17px] font-black leading-none tracking-tight text-[var(--color-foreground)] stripe-number tabular-nums truncate">
                   {stat.value}
                 </p>
-                <p className="text-[9.5px] sm:text-[10px] text-[var(--color-text-muted)] font-medium mt-1 truncate">
+                <p className="text-[9.5px] sm:text-[10px] text-[var(--color-text-muted)] font-semibold mt-1 truncate">
                   {stat.sub}
                 </p>
               </div>

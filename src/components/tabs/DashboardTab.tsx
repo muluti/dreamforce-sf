@@ -58,95 +58,95 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
       {/* 0. 초보자 안심 4대 서바이벌 퀵 액션 그리드 */}
       <div className="space-y-1.5">
         <div className="flex items-center justify-between px-1">
-          <span className="text-[11px] sm:text-[11.5px] font-extrabold text-[var(--color-foreground)] tracking-tight flex items-center gap-1.5">
+          <span className="text-[12px] font-black text-[var(--color-foreground)] tracking-tight flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-amber-500" />
             <span>초보자 안심 4대 편의 도구</span>
           </span>
-          <span className="text-[9.5px] text-slate-400 font-medium">원터치 팝업</span>
+          <span className="text-[10px] text-slate-400 dark:text-slate-400 font-semibold">원터치 팝업</span>
         </div>
 
         <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
           {/* 1. 영어 SOS */}
           <button
             onClick={onOpenEnglishSos}
-            className="flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-2xl border border-amber-200/80 dark:border-amber-800/60 bg-amber-50/80 dark:bg-amber-950/30 hover:border-amber-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
+            className="flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-2xl border border-amber-300/80 dark:border-amber-700/60 bg-white dark:bg-slate-900 hover:border-amber-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
           >
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform">
-              <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <div className="w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform">
+              <MessageSquare className="w-4 h-4" />
             </div>
-            <span className="text-[10.5px] sm:text-[11px] font-extrabold text-amber-950 dark:text-amber-200 whitespace-nowrap">영어 SOS</span>
-            <span className="text-[9px] sm:text-[9.5px] text-amber-700/80 dark:text-amber-400 font-medium whitespace-nowrap">보여주기</span>
+            <span className="text-[11px] sm:text-[11.5px] font-black text-slate-900 dark:text-slate-100 whitespace-nowrap">영어 SOS</span>
+            <span className="text-[9.5px] text-amber-600 dark:text-amber-400 font-bold whitespace-nowrap">보여주기</span>
           </button>
 
           {/* 2. 팁 & 환율 */}
           <button
             onClick={onOpenCalculator}
-            className="flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-2xl border border-emerald-200/80 dark:border-emerald-800/60 bg-emerald-50/80 dark:bg-emerald-950/30 hover:border-emerald-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
+            className="flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-2xl border border-emerald-300/80 dark:border-emerald-700/60 bg-white dark:bg-slate-900 hover:border-emerald-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
           >
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform">
-              <DollarSign className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <div className="w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform">
+              <DollarSign className="w-4 h-4" />
             </div>
-            <span className="text-[10.5px] sm:text-[11px] font-extrabold text-emerald-950 dark:text-emerald-200 whitespace-nowrap">팁 & 환율</span>
-            <span className="text-[9px] sm:text-[9.5px] text-emerald-700/80 dark:text-emerald-400 font-medium whitespace-nowrap">더치페이</span>
+            <span className="text-[11px] sm:text-[11.5px] font-black text-slate-900 dark:text-slate-100 whitespace-nowrap">팁 & 환율</span>
+            <span className="text-[9.5px] text-emerald-600 dark:text-emerald-400 font-bold whitespace-nowrap">더치페이</span>
           </button>
 
           {/* 3. 20단계 가이드 */}
           <button
             onClick={onOpenFlightGuide}
-            className="flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-2xl border border-blue-200/80 dark:border-blue-800/60 bg-blue-50/80 dark:bg-blue-950/30 hover:border-blue-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
+            className="flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-2xl border border-blue-300/80 dark:border-blue-700/60 bg-white dark:bg-slate-900 hover:border-blue-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
           >
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[var(--color-blue)] text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform">
-              <Plane className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <div className="w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-xl bg-[var(--color-blue)] text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform">
+              <Plane className="w-4 h-4" />
             </div>
-            <span className="text-[10.5px] sm:text-[11px] font-extrabold text-blue-950 dark:text-blue-200 whitespace-nowrap">입국가이드</span>
-            <span className="text-[9px] sm:text-[9.5px] text-blue-700/80 dark:text-blue-400 font-medium whitespace-nowrap">20단계</span>
+            <span className="text-[11px] sm:text-[11.5px] font-black text-slate-900 dark:text-slate-100 whitespace-nowrap">입국가이드</span>
+            <span className="text-[9.5px] text-blue-600 dark:text-blue-400 font-bold whitespace-nowrap">20단계</span>
           </button>
 
           {/* 4. 긴급 SOS */}
           <button
             onClick={onOpenEmergencySos}
-            className="flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-2xl border border-rose-200/80 dark:border-rose-800/60 bg-rose-50/80 dark:bg-rose-950/30 hover:border-rose-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
+            className="flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-2xl border border-rose-300/80 dark:border-rose-700/60 bg-white dark:bg-slate-900 hover:border-rose-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
           >
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-rose-600 text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform animate-pulse">
-              <ShieldAlert className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <div className="w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-xl bg-rose-600 text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform animate-pulse">
+              <ShieldAlert className="w-4 h-4" />
             </div>
-            <span className="text-[10.5px] sm:text-[11px] font-extrabold text-rose-950 dark:text-rose-200 whitespace-nowrap">긴급 SOS</span>
-            <span className="text-[9px] sm:text-[9.5px] text-rose-700/80 dark:text-rose-400 font-medium whitespace-nowrap">911·영사관</span>
+            <span className="text-[11px] sm:text-[11.5px] font-black text-slate-900 dark:text-slate-100 whitespace-nowrap">긴급 SOS</span>
+            <span className="text-[9.5px] text-rose-600 dark:text-rose-400 font-bold whitespace-nowrap">911·영사관</span>
           </button>
         </div>
       </div>
 
       {/* 투어가이드 오늘의 행동 나침반 */}
-      <div className="rounded-2xl border border-indigo-200/80 dark:border-indigo-800/60 bg-indigo-50/70 dark:bg-indigo-950/30 p-3.5 space-y-2 shadow-xs">
+      <div className="rounded-2xl border border-indigo-200 dark:border-indigo-800/80 bg-indigo-50/90 dark:bg-indigo-950/40 p-4 space-y-2.5 shadow-xs">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-base">🧭</span>
-            <h4 className="text-[13px] font-black text-indigo-950 dark:text-indigo-200">
+            <h4 className="text-[13.5px] font-black text-indigo-950 dark:text-indigo-100">
               투어가이드의 출장 코칭 나침반
             </h4>
           </div>
-          <span className="px-2 py-0.5 rounded-full bg-indigo-200/80 text-indigo-900 text-[10px] font-extrabold">
+          <span className="px-2.5 py-0.5 rounded-full bg-indigo-600 text-white text-[10.5px] font-extrabold shadow-2xs">
             D-8 준비기
           </span>
         </div>
-        <p className="text-[11.5px] text-indigo-900/90 dark:text-indigo-300/90 leading-relaxed font-medium">
-          "지금은 출국 전 최종 점검 주간입니다! <strong>110V 돼지코 어댑터, 필수 상비약, ESTA 승인 번호</strong>를 패킹 탭에서 확인하고, 9/13 비행기 탑승 준비를 미리 눈에 익혀두세요."
+        <p className="text-[12px] text-slate-800 dark:text-slate-200 leading-relaxed font-semibold">
+          "지금은 출국 전 최종 점검 주간입니다! <strong className="text-indigo-950 dark:text-indigo-100 font-black underline decoration-indigo-400 decoration-2">110V 돼지코 어댑터, 필수 상비약, ESTA 승인 번호</strong>를 패킹 탭에서 확인하고, 9/13 비행기 탑승 준비를 미리 눈에 익혀두세요."
         </p>
         <div className="flex gap-2 pt-1">
           <button
             onClick={() => onChangeTab("hub")}
-            className="flex-1 py-1.5 px-2.5 rounded-xl bg-white dark:bg-slate-800 border border-indigo-200 text-indigo-700 dark:text-indigo-300 font-bold text-[11px] flex items-center justify-center gap-1 active:scale-95"
+            className="flex-1 py-2 px-2.5 rounded-xl bg-white dark:bg-slate-800 border border-indigo-200 dark:border-indigo-700 text-slate-900 dark:text-slate-100 font-bold text-[11.5px] flex items-center justify-center gap-1 active:scale-95 shadow-2xs"
           >
             <span>패킹 체크리스트 ({checkedCount}/{totalChecks})</span>
-            <ArrowRight className="w-3 h-3" />
+            <ArrowRight className="w-3.5 h-3.5" />
           </button>
           {onOpenFlightGuide && (
             <button
               onClick={onOpenFlightGuide}
-              className="flex-1 py-1.5 px-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-[11px] flex items-center justify-center gap-1 active:scale-95 shadow-2xs"
+              className="flex-1 py-2 px-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-[11.5px] flex items-center justify-center gap-1 active:scale-95 shadow-2xs"
             >
               <span>20단계 가이드</span>
-              <ArrowRight className="w-3 h-3" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           )}
         </div>
@@ -155,7 +155,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
       {/* 현장 메모 & 사진 퀵 액션 카드 */}
       <div 
         onClick={() => onChangeTab("memos")}
-        className="rounded-2xl border border-blue-200/80 dark:border-blue-800/60 bg-gradient-to-r from-blue-500/10 via-indigo-500/5 to-transparent p-3.5 flex items-center justify-between transition-all duration-200 active:scale-[0.98] shadow-xs hover:border-blue-400 cursor-pointer group"
+        className="rounded-2xl border border-blue-200 dark:border-blue-800/80 bg-white dark:bg-slate-900 p-3.5 flex items-center justify-between transition-all duration-200 active:scale-[0.98] shadow-xs hover:border-blue-400 cursor-pointer group"
       >
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-2xs group-hover:scale-105 transition-transform">
@@ -167,15 +167,15 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
                 FIELD MEMO & PHOTO
               </span>
               {(data.memos?.length || 0) > 0 && (
-                <span className="px-1.5 py-0.2 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 text-[10px] font-bold">
+                <span className="px-1.5 py-0.2 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-800 dark:text-blue-200 text-[10px] font-bold">
                   {data.memos?.length}건
                 </span>
               )}
             </div>
-            <h4 className="text-[13px] font-black text-[var(--color-foreground)]">
+            <h4 className="text-[13.5px] font-black text-slate-900 dark:text-slate-100">
               현장 메모 & 사진 보관함
             </h4>
-            <p className="text-[11px] text-[var(--color-text-secondary)]">
+            <p className="text-[11.5px] text-slate-600 dark:text-slate-300 font-medium">
               세션 발표, 부스 데모, 맛집 영수증 사진을 즉시 남겨보세요
             </p>
           </div>
@@ -188,7 +188,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
       {/* 1. Safety Alert Banner (Pixel Perfect Warning Card) */}
       <div
         onClick={onOpenTips}
-        className="overflow-hidden rounded-2xl border border-amber-300/80 dark:border-amber-700/60 bg-amber-50/80 dark:bg-amber-950/30 p-3.5 transition-all duration-200 active:scale-[0.98] shadow-xs hover:border-amber-400 dark:hover:border-amber-600 cursor-pointer group"
+        className="overflow-hidden rounded-2xl border border-amber-300 dark:border-amber-700/80 bg-amber-50/90 dark:bg-amber-950/40 p-3.5 transition-all duration-200 active:scale-[0.98] shadow-xs hover:border-amber-400 dark:hover:border-amber-600 cursor-pointer group"
       >
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-500 text-white shadow-xs">
@@ -197,19 +197,19 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
           
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1.5 mb-0.5">
-              <span className="shrink-0 whitespace-nowrap px-1.5 py-0.2 rounded text-[10px] font-extrabold bg-amber-200/80 dark:bg-amber-900/60 text-amber-900 dark:text-amber-200">
+              <span className="shrink-0 whitespace-nowrap px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-amber-600 text-white">
                 치안 경보
               </span>
-              <h4 className="truncate text-[13px] font-bold text-amber-950 dark:text-amber-200">
+              <h4 className="text-[13px] font-black text-amber-950 dark:text-amber-100 truncate">
                 SF 텐더로인(Tenderloin) 도보 진입 금지
               </h4>
             </div>
-            <p className="truncate text-[11.5px] font-medium text-amber-800/90 dark:text-amber-300/80">
+            <p className="text-[11.5px] font-semibold text-amber-900/90 dark:text-amber-200/90 truncate">
               터치하여 현지 선배들의 실전 꿀팁 {data.proTips.length}개 확인
             </p>
           </div>
 
-          <ChevronRight className="h-4 w-4 shrink-0 text-amber-600/80 dark:text-amber-400 group-hover:translate-x-0.5 transition-transform" />
+          <ChevronRight className="h-4 w-4 shrink-0 text-amber-700 dark:text-amber-300 group-hover:translate-x-0.5 transition-transform" />
         </div>
       </div>
 
@@ -217,7 +217,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
       {onOpenFlightGuide && (
         <div
           onClick={onOpenFlightGuide}
-          className="overflow-hidden rounded-2xl border border-blue-200/90 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/30 p-3.5 transition-all duration-200 active:scale-[0.98] shadow-xs hover:border-blue-300 dark:hover:border-blue-700 cursor-pointer group"
+          className="overflow-hidden rounded-2xl border border-blue-200 dark:border-blue-800 bg-blue-50/90 dark:bg-blue-950/40 p-3.5 transition-all duration-200 active:scale-[0.98] shadow-xs hover:border-blue-400 dark:hover:border-blue-600 cursor-pointer group"
         >
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[var(--color-blue)] text-white shadow-xs">
@@ -226,19 +226,19 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
             
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5 mb-0.5">
-                <span className="shrink-0 whitespace-nowrap px-1.5 py-0.2 rounded text-[10px] font-extrabold bg-blue-200/80 dark:bg-blue-900/60 text-blue-900 dark:text-blue-200">
+                <span className="shrink-0 whitespace-nowrap px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-blue-600 text-white">
                   초보자 필독
                 </span>
-                <h4 className="truncate text-[13px] font-bold text-blue-950 dark:text-blue-200">
+                <h4 className="text-[13px] font-black text-blue-950 dark:text-blue-100 truncate">
                   비행기 탑승 ~ SFO 호텔 체크인 20단계
                 </h4>
               </div>
-              <p className="truncate text-[11.5px] font-medium text-blue-800/90 dark:text-blue-300/80">
+              <p className="text-[11.5px] font-semibold text-blue-900/90 dark:text-blue-200/90 truncate">
                 기내 폰충전 · CBP 3문답 · "San Francisco" 출구 · Uber 탑승 확인
               </p>
             </div>
 
-            <ChevronRight className="h-4 w-4 shrink-0 text-blue-600/80 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform" />
+            <ChevronRight className="h-4 w-4 shrink-0 text-blue-700 dark:text-blue-300 group-hover:translate-x-0.5 transition-transform" />
           </div>
         </div>
       )}

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
+
 :root {
   /* ── Modern Premium Light Theme ── */
   --color-page: #f8fafc;
@@ -42,7 +44,8 @@
   --color-text-warning: #b45309;
 }
 
-[data-theme='dark'] {
+[data-theme='dark'],
+.dark {
   /* ── Modern Premium Dark Theme ── */
   --color-page: #0b0f17;
   --color-surface: #141b26;
