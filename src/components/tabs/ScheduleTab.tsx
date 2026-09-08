@@ -199,44 +199,33 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
 
   return (
     <div className="space-y-3.5 w-full">
-      {/* 3절 헤더 컨트롤 */}
+      {/* 헤더 컨트롤: 모던하고 깔끔한 액션 바 */}
       <div className="flex items-center justify-between px-1">
         <div>
-          <p className="notion-kicker">SCHEDULE & CAMPUS</p>
-          <h2 className="text-[18px] font-bold text-[var(--color-foreground)] tracking-tight">타임라인 & 캠퍼스</h2>
+          <h2 className="text-[19px] sm:text-[20px] font-black text-slate-900 dark:text-white tracking-tight">타임라인 & 일정</h2>
+          <p className="text-[12px] text-slate-500 dark:text-slate-400 font-medium">9/13 출국 ~ 9/18 귀국 핵심 아젠다</p>
         </div>
 
         <div className="flex items-center gap-1.5">
           <button
             onClick={() => setShowMosconeGuide(!showMosconeGuide)}
-            className={`p-2 rounded-xl border text-xs font-semibold flex items-center gap-1 transition-all active:scale-95 cursor-pointer ${
+            className={`h-9 px-2.5 rounded-xl border text-xs font-bold flex items-center gap-1 transition-all active:scale-95 cursor-pointer ${
               showMosconeGuide
-                ? "border-blue-200 bg-blue-50 text-[var(--color-blue)] ring-2 ring-blue-500/10"
-                : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-alt)]"
+                ? "border-[var(--color-blue)] bg-blue-50 dark:bg-blue-950/50 text-[var(--color-blue)]"
+                : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-50"
             }`}
             title="모스콘 맵 & 공식 아젠다"
           >
             <Compass className="h-4 w-4" />
-            <span className="hidden sm:inline font-bold">캠퍼스 맵/아젠다</span>
+            <span>맵/아젠다</span>
           </button>
-
-          {onOpenFlightGuide && (
-            <button
-              onClick={onOpenFlightGuide}
-              className="p-2 rounded-xl border border-blue-200 bg-blue-50/70 dark:bg-blue-950/40 text-[var(--color-blue)] text-xs font-semibold flex items-center gap-1 transition-all active:scale-95 cursor-pointer hover:bg-blue-100"
-              title="비행기 탑승 ~ SFO 호텔 체크인 20단계 가이드"
-            >
-              <Plane className="h-4 w-4" />
-              <span className="hidden sm:inline font-bold">20단계 입국 가이드</span>
-            </button>
-          )}
 
           <button
             onClick={handleOpenAdd}
-            className="notion-button-primary py-2 px-3 text-xs flex items-center gap-1 active:scale-[0.97] cursor-pointer"
+            className="h-9 px-3 rounded-xl bg-[var(--color-blue)] hover:bg-[var(--color-blue-hover)] text-white text-xs font-bold flex items-center gap-1 active:scale-95 shadow-xs cursor-pointer"
           >
             <Plus className="h-4 w-4" />
-            <span>일정 추가</span>
+            <span>추가</span>
           </button>
         </div>
       </div>
@@ -449,88 +438,54 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
                 </div>
                 <div className="flex items-start gap-1.5">
                   <span className="font-bold text-purple-600 shrink-0">4.</span>
-                  <span>Tent에서 <strong>세일즈포스 코리아 직원(전선아 님, 조영보 상무님)</strong>과 조인</span>
+                  <span>Tent에서 <strong>세일즈포스 코리아 직원</strong>과 조인 후 61층 오하나 플로어 입장</span>
                 </div>
-                <div className="flex items-start gap-1.5">
-                  <span className="font-bold text-purple-600 shrink-0">5.</span>
-                  <span>전용 줄을 서서 세일즈포스 코리아 직원 동행 하에 <strong>61층 오하나 플로어</strong>로 입장</span>
-                </div>
-              </div>
-
-              <div className="p-2 bg-purple-50 dark:bg-purple-950/50 rounded-lg border border-purple-200 dark:border-purple-800 text-[10.5px] text-purple-800 dark:text-purple-200">
-                ⚠️ 투어 24~48시간 전 발송되는 <strong>'Guest Pre-registration' 이메일</strong>을 꼭 확인하여 NDA 서명 후 사전 QR코드를 받아두셔야 합니다 (스팸함 확인 필수).
               </div>
             </div>
           )}
         </div>
       )}
 
-      {/* 날짜 필터 탭 (4절 Stat Tab 미니 버전) */}
-      <div className="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+      {/* 날짜 필터: 스크롤바 완벽 제거 및 둥근 알약 탭 */}
+      <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {DATES.map((d) => {
           const isActive = selectedDate === d.date;
           return (
             <button
               key={d.date}
               onClick={() => setSelectedDate(d.date)}
-              className={`px-3 py-2 rounded-xl shrink-0 text-center transition-all cursor-pointer border active:scale-95 ${
+              className={`px-3.5 py-2 rounded-2xl shrink-0 text-center transition-all cursor-pointer border active:scale-95 ${
                 isActive
-                  ? "border-[var(--color-blue)] bg-[var(--color-blue-soft)] text-[var(--color-blue)] font-black shadow-xs ring-1 ring-[var(--color-blue)]/30"
-                  : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] font-semibold hover:text-[var(--color-foreground)]"
+                  ? "border-[var(--color-blue)] bg-[var(--color-blue)] text-white font-black shadow-xs"
+                  : "border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 font-semibold hover:border-slate-300"
               }`}
             >
               <div className="text-[13px] font-black leading-tight">{d.label}</div>
-              <div className="text-[10px] font-semibold opacity-85 mt-0.5">{d.sub}</div>
+              <div className={`text-[11px] font-medium mt-0.5 ${isActive ? "text-blue-100" : "text-slate-400"}`}>
+                {d.sub}
+              </div>
             </button>
           );
         })}
       </div>
 
-      {/* 6절 리스트 아이템 카드 목록 */}
+      {/* 일정 리스트 카드 목록: 군더더기 없는 모던 클린 카드 */}
       <div className="space-y-3">
-        {/* 날짜별 투어가이드 핵심 미션 하이라이트 배너 */}
+        {/* 날짜별 핵심 가이드 팁 (선택된 날짜에만 간결하게 표시) */}
         {selectedDate !== "all" && DAILY_MISSIONS[selectedDate] && (
-          <div className={`p-3.5 rounded-2xl border space-y-1 shadow-xs ${DAILY_MISSIONS[selectedDate].color}`}>
-            <div className="flex items-center gap-1.5 font-black text-[12.5px]">
+          <div className="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850 space-y-1 shadow-xs">
+            <div className="flex items-center gap-1.5 font-black text-[13px] text-slate-900 dark:text-white">
               <span>🧭</span>
               <span>{DAILY_MISSIONS[selectedDate].badge}</span>
             </div>
-            <p className="text-[12px] font-bold leading-relaxed">
+            <p className="text-[12.5px] font-medium text-slate-600 dark:text-slate-300 leading-relaxed">
               {DAILY_MISSIONS[selectedDate].mission}
             </p>
           </div>
         )}
 
-        {/* 9/13 출국일 전용 20단계 가이드 배너 */}
-        {(selectedDate === "2026-09-13" || selectedDate === "all") && onOpenFlightGuide && (
-          <div
-            onClick={onOpenFlightGuide}
-            className="p-3.5 rounded-2xl border border-blue-200 dark:border-blue-800 bg-blue-50/80 dark:bg-blue-950/30 flex items-center justify-between cursor-pointer active:scale-[0.98] transition-all hover:border-blue-300 shadow-xs group"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-[var(--color-blue)] text-white flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
-                <Plane className="w-4.5 h-4.5" />
-              </div>
-              <div>
-                <div className="flex items-center gap-1.5 mb-0.5">
-                  <span className="px-1.5 py-0.2 rounded text-[10px] font-extrabold bg-blue-200 text-blue-900 dark:bg-blue-900 dark:text-blue-200">
-                    9/13 출국 필수
-                  </span>
-                  <h4 className="text-[13px] font-bold text-blue-950 dark:text-blue-200">
-                    비행기 탑승 ~ SFO 호텔 체크인 20단계
-                  </h4>
-                </div>
-                <p className="text-[11.5px] font-medium text-blue-800/90 dark:text-blue-300">
-                  기내 폰충전 · CBP 3문답 · "San Francisco" 출구 · Uber 탑승 확인
-                </p>
-              </div>
-            </div>
-            <ChevronRight className="w-4 h-4 text-blue-600 shrink-0 group-hover:translate-x-0.5 transition-transform" />
-          </div>
-        )}
-
         {filteredEvents.length === 0 ? (
-          <div className="rounded-[16px] border border-dashed border-slate-200 bg-slate-50/50 px-4 py-12 text-center text-sm text-slate-400">
+          <div className="rounded-2xl border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 px-4 py-12 text-center text-sm text-slate-400 font-medium">
             해당 날짜에 등록된 일정이 없습니다.
           </div>
         ) : (
@@ -540,39 +495,39 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
             return (
               <article
                 key={evt.id}
-                className={`os-virtualized-card w-full overflow-hidden rounded-[16px] border transition-all duration-200 shadow-sm p-4 ${
+                className={`w-full overflow-hidden rounded-3xl border transition-all duration-150 shadow-xs p-4 sm:p-5 space-y-3 bg-white dark:bg-slate-900 ${
                   evt.completed
-                    ? "border-[var(--color-border)] bg-[var(--color-surface-alt)] opacity-60"
-                    : evt.isImportant
-                    ? "border-[#b9b9f9] bg-[var(--color-surface)] ring-1 ring-[#b9b9f9]"
-                    : "border-[var(--color-border)] bg-[var(--color-surface)]"
+                    ? "border-slate-200 dark:border-slate-800 opacity-60 bg-slate-50/80 dark:bg-slate-900/80"
+                    : "border-slate-200/90 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700"
                 }`}
               >
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <div className="flex items-center gap-2 flex-wrap">
+                {/* 상단 메타 바: 시간 + 체크 + 필수뱃지 + 액션 버튼들 */}
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
                     <button
                       onClick={() => toggleComplete(evt)}
-                      className="text-slate-400 hover:text-emerald-600 transition-colors cursor-pointer"
+                      className="text-slate-400 hover:text-emerald-600 transition-colors cursor-pointer p-0.5"
                     >
                       {evt.completed ? (
                         <CheckCircle2 className="h-5 w-5 text-emerald-600" />
                       ) : (
-                        <Circle className="h-5 w-5 text-slate-300" />
+                        <Circle className="h-5 w-5 text-slate-300 dark:text-slate-600" />
                       )}
                     </button>
 
-                    <span className="shrink-0 rounded-[4px] border border-slate-100 bg-slate-50 px-1.5 py-0.5 text-[10px] font-mono font-medium text-slate-500">
+                    <span className="font-mono text-[13px] font-black text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">
                       {evt.date.slice(5)} {evt.time}
                     </span>
 
                     {evt.isImportant && (
-                      <span className="shrink-0 rounded-[4px] border border-purple-100 bg-purple-50 px-1.5 py-0.5 text-[10px] font-bold text-purple-600">
-                        MUST VISIT
+                      <span className="px-2 py-0.5 rounded-md bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 text-[11px] font-black border border-rose-200/80 dark:border-rose-900/40">
+                        MUST
                       </span>
                     )}
                   </div>
 
-                  <div className="flex items-center gap-1">
+                  {/* 우측 액션: 사진 / 수정 / 삭제 */}
+                  <div className="flex items-center gap-1.5">
                     <button
                       onClick={() =>
                         onOpenMediaModal(
@@ -581,19 +536,19 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
                           (updatedList) => onUpdateEvent({ ...evt, media: updatedList })
                         )
                       }
-                      className={`px-2 py-1 rounded-lg text-xs flex items-center gap-1 transition-all active:scale-95 cursor-pointer font-bold ${
+                      className={`h-8 px-2.5 rounded-lg text-xs flex items-center gap-1 transition-all active:scale-95 cursor-pointer font-bold ${
                         hasMedia
-                          ? "bg-blue-50 text-[var(--color-blue)] border border-blue-200"
-                          : "bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] border border-[var(--color-border)]"
+                          ? "bg-blue-50 text-[var(--color-blue)] border border-blue-200 dark:bg-blue-950/50"
+                          : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
                       }`}
                     >
                       <Film className="h-3.5 w-3.5" />
-                      <span>{hasMedia ? `사진 (${evt.media?.length})` : "+ 사진"}</span>
+                      <span>{hasMedia ? `사진 ${evt.media?.length}` : "사진"}</span>
                     </button>
 
                     <button
                       onClick={() => handleOpenEdit(evt)}
-                      className="p-1 text-slate-400 hover:text-[var(--color-blue)] rounded-lg transition-colors cursor-pointer"
+                      className="h-8 w-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-800 dark:hover:text-white bg-slate-50 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 transition-colors cursor-pointer"
                       title="수정"
                     >
                       <Edit3 className="h-3.5 w-3.5" />
@@ -601,7 +556,7 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
 
                     <button
                       onClick={() => onDeleteEvent(evt.id)}
-                      className="p-1 text-slate-400 hover:text-rose-600 rounded-lg transition-colors cursor-pointer"
+                      className="h-8 w-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 bg-slate-50 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 transition-colors cursor-pointer"
                       title="삭제"
                     >
                       <Trash2 className="h-3.5 w-3.5" />
@@ -609,30 +564,35 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
                   </div>
                 </div>
 
-                <h4
-                  className={`text-[15px] font-bold tracking-tight mb-1 text-[var(--color-foreground)] ${
-                    evt.completed ? "line-through text-slate-400" : ""
-                  }`}
-                >
-                  {evt.title}
-                </h4>
+                {/* 타이틀 및 장소 */}
+                <div>
+                  <h4
+                    className={`text-[16px] sm:text-[17px] font-black tracking-tight text-slate-900 dark:text-white leading-snug ${
+                      evt.completed ? "line-through text-slate-400 dark:text-slate-500" : ""
+                    }`}
+                  >
+                    {evt.title}
+                  </h4>
 
-                <p className="text-xs text-[var(--color-text-secondary)] flex items-center gap-1 mb-2 font-medium">
-                  <MapPin className="h-3.5 w-3.5 shrink-0 text-slate-400" />
-                  <span>{evt.location}</span>
-                </p>
+                  <p className="text-[13px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5 font-medium mt-1">
+                    <MapPin className="h-4 w-4 shrink-0 text-slate-400" />
+                    <span>{evt.location}</span>
+                  </p>
+                </div>
 
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-normal whitespace-pre-line">
+                {/* 본문 설명 (14px 시원한 가독성) */}
+                <p className="text-[14px] text-slate-700 dark:text-slate-300 leading-relaxed font-normal whitespace-pre-line">
                   {evt.description}
                 </p>
 
+                {/* 선배의 실전 팁: 조잡한 노란 박스 대신 은은하고 세련된 단일 인라인 팁 블록 */}
                 {evt.proTip && (
-                  <div className="mt-3 rounded-xl border border-amber-200/80 bg-amber-50/50 p-2.5 text-xs text-amber-900 font-medium">
-                    <p className="font-bold flex items-center gap-1 text-amber-800 mb-0.5">
-                      <Sparkles className="h-3.5 w-3.5 text-amber-600 shrink-0" />
-                      <span>선배의 실전 팁</span>
+                  <div className="rounded-2xl border border-amber-200/60 dark:border-amber-900/40 bg-amber-50/50 dark:bg-amber-950/20 p-3 text-[13px] text-amber-950 dark:text-amber-200 font-medium">
+                    <p className="font-bold flex items-center gap-1 text-amber-800 dark:text-amber-400 mb-0.5">
+                      <Sparkles className="h-3.5 w-3.5 shrink-0" />
+                      <span>실전 팁</span>
                     </p>
-                    <p className="text-[11.5px] leading-relaxed whitespace-pre-line text-amber-950/90">{evt.proTip}</p>
+                    <p className="leading-relaxed whitespace-pre-line">{evt.proTip}</p>
                   </div>
                 )}
               </article>
