@@ -54,64 +54,64 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
   const visitedPlacesCount = data.places?.filter((p) => p.visited).length || 0;
 
   return (
-    <div className="space-y-4 pb-24 max-w-md mx-auto">
+    <div className="space-y-3.5 w-full">
       {/* 0. 초보자 안심 4대 서바이벌 퀵 액션 그리드 */}
       <div className="space-y-1.5">
         <div className="flex items-center justify-between px-1">
-          <span className="text-[11.5px] font-extrabold text-[var(--color-foreground)] tracking-tight flex items-center gap-1.5">
+          <span className="text-[11px] sm:text-[11.5px] font-extrabold text-[var(--color-foreground)] tracking-tight flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-amber-500" />
             <span>초보자 안심 4대 편의 도구</span>
           </span>
-          <span className="text-[10px] text-slate-400 font-medium">원터치 팝업</span>
+          <span className="text-[9.5px] text-slate-400 font-medium">원터치 팝업</span>
         </div>
 
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
           {/* 1. 영어 SOS */}
           <button
             onClick={onOpenEnglishSos}
-            className="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-amber-200/80 dark:border-amber-800/60 bg-amber-50/80 dark:bg-amber-950/30 hover:border-amber-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
+            className="flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-2xl border border-amber-200/80 dark:border-amber-800/60 bg-amber-50/80 dark:bg-amber-950/30 hover:border-amber-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
           >
-            <div className="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform">
-              <MessageSquare className="w-4 h-4" />
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform">
+              <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
-            <span className="text-[11px] font-extrabold text-amber-950 dark:text-amber-200">영어 SOS</span>
-            <span className="text-[9.5px] text-amber-700/80 dark:text-amber-400 font-medium">보여주기</span>
+            <span className="text-[10.5px] sm:text-[11px] font-extrabold text-amber-950 dark:text-amber-200 whitespace-nowrap">영어 SOS</span>
+            <span className="text-[9px] sm:text-[9.5px] text-amber-700/80 dark:text-amber-400 font-medium whitespace-nowrap">보여주기</span>
           </button>
 
           {/* 2. 팁 & 환율 */}
           <button
             onClick={onOpenCalculator}
-            className="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-emerald-200/80 dark:border-emerald-800/60 bg-emerald-50/80 dark:bg-emerald-950/30 hover:border-emerald-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
+            className="flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-2xl border border-emerald-200/80 dark:border-emerald-800/60 bg-emerald-50/80 dark:bg-emerald-950/30 hover:border-emerald-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
           >
-            <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform">
-              <DollarSign className="w-4 h-4" />
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform">
+              <DollarSign className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
-            <span className="text-[11px] font-extrabold text-emerald-950 dark:text-emerald-200">팁 & 환율</span>
-            <span className="text-[9.5px] text-emerald-700/80 dark:text-emerald-400 font-medium">더치페이</span>
+            <span className="text-[10.5px] sm:text-[11px] font-extrabold text-emerald-950 dark:text-emerald-200 whitespace-nowrap">팁 & 환율</span>
+            <span className="text-[9px] sm:text-[9.5px] text-emerald-700/80 dark:text-emerald-400 font-medium whitespace-nowrap">더치페이</span>
           </button>
 
           {/* 3. 20단계 가이드 */}
           <button
             onClick={onOpenFlightGuide}
-            className="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-blue-200/80 dark:border-blue-800/60 bg-blue-50/80 dark:bg-blue-950/30 hover:border-blue-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
+            className="flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-2xl border border-blue-200/80 dark:border-blue-800/60 bg-blue-50/80 dark:bg-blue-950/30 hover:border-blue-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
           >
-            <div className="w-8 h-8 rounded-xl bg-[var(--color-blue)] text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform">
-              <Plane className="w-4 h-4" />
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[var(--color-blue)] text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform">
+              <Plane className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
-            <span className="text-[11px] font-extrabold text-blue-950 dark:text-blue-200">입국 가이드</span>
-            <span className="text-[9.5px] text-blue-700/80 dark:text-blue-400 font-medium">20단계</span>
+            <span className="text-[10.5px] sm:text-[11px] font-extrabold text-blue-950 dark:text-blue-200 whitespace-nowrap">입국가이드</span>
+            <span className="text-[9px] sm:text-[9.5px] text-blue-700/80 dark:text-blue-400 font-medium whitespace-nowrap">20단계</span>
           </button>
 
           {/* 4. 긴급 SOS */}
           <button
             onClick={onOpenEmergencySos}
-            className="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-rose-200/80 dark:border-rose-800/60 bg-rose-50/80 dark:bg-rose-950/30 hover:border-rose-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
+            className="flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-2xl border border-rose-200/80 dark:border-rose-800/60 bg-rose-50/80 dark:bg-rose-950/30 hover:border-rose-400 active:scale-95 transition-all cursor-pointer shadow-xs group"
           >
-            <div className="w-8 h-8 rounded-xl bg-rose-600 text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform animate-pulse">
-              <ShieldAlert className="w-4 h-4" />
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-rose-600 text-white flex items-center justify-center mb-1 shadow-2xs group-hover:scale-105 transition-transform animate-pulse">
+              <ShieldAlert className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
-            <span className="text-[11px] font-extrabold text-rose-950 dark:text-rose-200">긴급 SOS</span>
-            <span className="text-[9.5px] text-rose-700/80 dark:text-rose-400 font-medium">911·영사관</span>
+            <span className="text-[10.5px] sm:text-[11px] font-extrabold text-rose-950 dark:text-rose-200 whitespace-nowrap">긴급 SOS</span>
+            <span className="text-[9px] sm:text-[9.5px] text-rose-700/80 dark:text-rose-400 font-medium whitespace-nowrap">911·영사관</span>
           </button>
         </div>
       </div>

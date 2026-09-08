@@ -48,10 +48,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-end md:items-center justify-center bg-black/40 backdrop-blur-[10px] p-0 md:p-4 animate-in fade-in duration-200">
-      <div className="w-full max-w-md rounded-t-[32px] md:rounded-[32px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-2xl space-y-5 animate-in slide-in-from-bottom duration-300">
+    <div className="fixed inset-0 z-[60] flex items-end md:items-center justify-center bg-black/50 backdrop-blur-[10px] p-0 md:p-4 animate-in fade-in duration-200">
+      <div className="w-full max-w-md rounded-t-[28px] md:rounded-[28px] border border-[var(--color-border)] bg-[var(--color-surface)] p-5 sm:p-6 pb-[max(20px,env(safe-area-inset-bottom,20px))] shadow-2xl space-y-4 sm:space-y-5 animate-in slide-in-from-bottom duration-300">
         {/* 드래그 핸들 */}
-        <div className="h-1.5 w-12 rounded-full bg-[#d7e3f1] dark:bg-slate-700 mx-auto" />
+        <div className="h-1.5 w-12 rounded-full bg-[#d7e3f1] dark:bg-slate-700 mx-auto md:hidden" />
 
         {/* 헤더 */}
         <div className="text-center space-y-1">

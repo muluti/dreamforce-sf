@@ -160,15 +160,15 @@ export const TripHubTab: React.FC<TripHubTabProps> = ({
   };
 
   return (
-    <div className="space-y-4 pb-24 max-w-md mx-auto">
+    <div className="space-y-3.5 w-full">
       {/* 3절 헤더 레이블 */}
       <div className="px-1">
         <p className="notion-kicker">TRIP HUB</p>
-        <h2 className="text-[18px] font-bold text-[var(--color-foreground)] tracking-tight">출장 허브</h2>
+        <h2 className="text-[17px] sm:text-[18px] font-bold text-[var(--color-foreground)] tracking-tight">출장 허브</h2>
       </div>
 
       {/* 4절 Stat Tab (서브 네비게이션 4개) */}
-      <div className="grid grid-cols-4 gap-1.5 p-1 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm">
+      <div className="grid grid-cols-4 gap-1 p-1 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xs">
         {(["docs", "checklist", "team", "safety"] as const).map((tab) => {
           const isActive = subTab === tab;
           const labels = { docs: "서류", checklist: "패킹", team: "동료/명함", safety: "치안" };
@@ -179,14 +179,14 @@ export const TripHubTab: React.FC<TripHubTabProps> = ({
             <button
               key={tab}
               onClick={() => setSubTab(tab)}
-              className={`py-2 px-1 text-center rounded-xl text-xs font-bold flex flex-col items-center justify-center gap-1 transition-all cursor-pointer active:scale-95 ${
+              className={`py-1.5 sm:py-2 px-1 text-center rounded-xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-0.5 sm:gap-1 transition-all cursor-pointer active:scale-95 ${
                 isActive
-                  ? "bg-[var(--color-blue)] text-white shadow-sm"
-                  : "text-[#64748d] hover:text-[#061b31]"
+                  ? "bg-[var(--color-blue)] text-white shadow-xs"
+                  : "text-[#64748d] hover:text-[var(--color-foreground)]"
               }`}
             >
-              <Icon className="h-4 w-4" />
-              <span>{labels[tab]}</span>
+              <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              <span className="whitespace-nowrap">{labels[tab]}</span>
             </button>
           );
         })}

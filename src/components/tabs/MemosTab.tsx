@@ -293,9 +293,9 @@ export const MemosTab: React.FC<MemosTabProps> = ({
   const totalPhotosCount = memos.reduce((acc, m) => acc + m.photos.length, 0);
 
   return (
-    <div className="space-y-5 pb-24 animate-in fade-in duration-200 max-w-2xl mx-auto">
+    <div className="space-y-4 w-full">
       {/* 1. Header Banner */}
-      <section className="notion-card bg-gradient-to-br from-[#1d4ed8]/10 via-[#3b82f6]/5 to-transparent border-[var(--color-border)] p-5">
+      <section className="notion-card bg-gradient-to-br from-[#1d4ed8]/10 via-[#3b82f6]/5 to-transparent border-[var(--color-border)] p-4 sm:p-5">
         <div className="flex items-start justify-between gap-3">
           <div>
             <div className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider mb-1">
@@ -600,20 +600,25 @@ export const MemosTab: React.FC<MemosTabProps> = ({
       {/* 4. Memo Editor Modal (Create & Edit) */}
       {isEditorOpen && (
         <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center bg-black/50 backdrop-blur-xs p-0 md:p-4 animate-in fade-in duration-200">
-          <div className="w-full max-w-xl max-h-[92vh] flex flex-col rounded-t-[32px] md:rounded-[32px] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-2xl overflow-hidden animate-in slide-in-from-bottom duration-300">
+          <div className="w-full max-w-xl max-h-[90dvh] flex flex-col rounded-t-[28px] md:rounded-[28px] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-2xl overflow-hidden animate-in slide-in-from-bottom duration-300">
+            {/* Mobile Drag Handle */}
+            <div className="pt-3 pb-1 md:hidden">
+              <div className="h-1.5 w-12 rounded-full bg-[#d7e3f1] dark:bg-slate-700 mx-auto" />
+            </div>
+
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--color-border)]">
+            <div className="flex items-center justify-between px-5 sm:px-6 py-3.5 sm:py-4 border-b border-[var(--color-border)]">
               <div>
                 <span className="notion-kicker">
                   {editingMemoId ? "EDIT NOTE" : "NEW FIELD NOTE"}
                 </span>
-                <h2 className="text-lg font-black tracking-tight text-[var(--color-foreground)]">
+                <h2 className="text-base sm:text-lg font-black tracking-tight text-[var(--color-foreground)]">
                   {editingMemoId ? "현장 메모 수정" : "새 현장 메모 & 사진 등록"}
                 </h2>
               </div>
               <button
                 onClick={() => setIsEditorOpen(false)}
-                className="p-2 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer"
+                className="p-1.5 sm:p-2 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>

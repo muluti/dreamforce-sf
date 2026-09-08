@@ -43,9 +43,9 @@ export const FlightArrivalGuideModal: React.FC<FlightArrivalGuideModalProps> = (
 
   return (
     <div className="fixed inset-0 z-[70] flex items-end md:items-center justify-center bg-black/50 backdrop-blur-[8px] p-0 md:p-4 animate-in fade-in duration-200">
-      <div className="w-full max-w-2xl max-h-[92vh] flex flex-col rounded-t-[32px] md:rounded-[32px] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-2xl overflow-hidden animate-in slide-in-from-bottom duration-300">
+      <div className="w-full max-w-2xl max-h-[90dvh] flex flex-col rounded-t-[28px] md:rounded-[28px] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-2xl overflow-hidden animate-in slide-in-from-bottom duration-300">
         {/* 드래그 핸들 */}
-        <div className="pt-3 pb-1">
+        <div className="pt-3 pb-1 md:hidden">
           <div className="h-1.5 w-12 rounded-full bg-[#d7e3f1] dark:bg-slate-700 mx-auto" />
         </div>
 
@@ -717,14 +717,14 @@ export const FlightArrivalGuideModal: React.FC<FlightArrivalGuideModalProps> = (
         </div>
 
         {/* 푸터 */}
-        <div className="p-3 border-t border-[var(--color-border)] bg-[var(--color-surface)] flex items-center justify-between">
+        <div className="p-3 pb-[max(12px,env(safe-area-inset-bottom,12px))] border-t border-[var(--color-border)] bg-[var(--color-surface)] flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-[11px] text-[var(--color-text-secondary)]">
-            <Sparkles className="h-3.5 w-3.5 text-amber-500" />
-            <span>오프라인에서도 언제든 열람 가능합니다</span>
+            <Sparkles className="h-3.5 w-3.5 text-amber-500 shrink-0" />
+            <span className="truncate">오프라인에서도 언제든 열람 가능합니다</span>
           </div>
           <button
             onClick={onClose}
-            className="notion-button-primary px-4 py-2 text-xs active:scale-95 cursor-pointer font-bold"
+            className="notion-button-primary px-4 py-2 text-xs active:scale-95 cursor-pointer font-bold shrink-0"
           >
             확인 완료
           </button>

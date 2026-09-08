@@ -388,7 +388,7 @@ export const PlacesTab: React.FC<PlacesTabProps> = ({
   };
 
   return (
-    <div className="space-y-4 pb-28 max-w-md mx-auto">
+    <div className="space-y-3.5 w-full">
       {/* 1. Header Title & Top Controls */}
       <div className="flex items-center justify-between px-1">
         <div>
@@ -396,7 +396,7 @@ export const PlacesTab: React.FC<PlacesTabProps> = ({
             <Compass className="w-3.5 h-3.5 text-[var(--color-blue)]" />
             <span>SAN FRANCISCO MAP & SPOTS</span>
           </p>
-          <h2 className="text-[18px] font-bold text-[var(--color-foreground)] tracking-tight">
+          <h2 className="text-[17px] sm:text-[18px] font-bold text-[var(--color-foreground)] tracking-tight">
             가볼만한 곳 & 쇼핑
           </h2>
         </div>
@@ -685,7 +685,7 @@ export const PlacesTab: React.FC<PlacesTabProps> = ({
               {/* Map Canvas */}
               <div 
                 ref={mapContainerRef} 
-                className="w-full h-[380px] sm:h-[440px] z-10"
+                className="w-full h-[340px] sm:h-[420px] z-10"
               />
 
               {/* Map Legend Overlay */}

@@ -198,19 +198,19 @@ ${partners || "- 파트너 미팅 완료"}
   };
 
   return (
-    <div className="space-y-4 pb-24 max-w-md mx-auto">
+    <div className="space-y-3.5 w-full">
       {/* 3절 헤더 레이블 */}
       <div className="px-1">
         <p className="notion-kicker">WELLNESS & MORE</p>
-        <h2 className="text-[18px] font-bold text-[var(--color-foreground)] tracking-tight">웰니스 & 정산</h2>
+        <h2 className="text-[17px] sm:text-[18px] font-bold text-[var(--color-foreground)] tracking-tight">웰니스 & 정산</h2>
       </div>
 
       {/* 4절 Stat Tab (서브 네비게이션 4개) */}
-      <div className="grid grid-cols-4 gap-1.5 p-1 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm text-xs font-bold">
+      <div className="grid grid-cols-4 gap-1 p-1 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xs text-xs font-bold">
         <button
           onClick={() => setSubSection("jetlag")}
-          className={`py-2 text-center rounded-xl transition-all cursor-pointer active:scale-95 ${
-            subSection === "jetlag" ? "bg-[var(--color-blue)] text-white shadow-sm" : "text-[#64748d]"
+          className={`py-1.5 sm:py-2 px-1 text-center rounded-xl text-[11px] sm:text-xs transition-all cursor-pointer active:scale-95 whitespace-nowrap ${
+            subSection === "jetlag" ? "bg-[var(--color-blue)] text-white shadow-xs" : "text-[#64748d] hover:text-[var(--color-foreground)]"
           }`}
         >
           시차/수면
@@ -218,8 +218,8 @@ ${partners || "- 파트너 미팅 완료"}
 
         <button
           onClick={() => setSubSection("expenses")}
-          className={`py-2 text-center rounded-xl transition-all cursor-pointer active:scale-95 ${
-            subSection === "expenses" ? "bg-[var(--color-blue)] text-white shadow-sm" : "text-[#64748d]"
+          className={`py-1.5 sm:py-2 px-1 text-center rounded-xl text-[11px] sm:text-xs transition-all cursor-pointer active:scale-95 whitespace-nowrap ${
+            subSection === "expenses" ? "bg-[var(--color-blue)] text-white shadow-xs" : "text-[#64748d] hover:text-[var(--color-foreground)]"
           }`}
         >
           경비 정산
@@ -227,8 +227,8 @@ ${partners || "- 파트너 미팅 완료"}
 
         <button
           onClick={() => setSubSection("report")}
-          className={`py-2 text-center rounded-xl transition-all cursor-pointer active:scale-95 ${
-            subSection === "report" ? "bg-[var(--color-blue)] text-white shadow-sm" : "text-[#64748d]"
+          className={`py-1.5 sm:py-2 px-1 text-center rounded-xl text-[11px] sm:text-xs transition-all cursor-pointer active:scale-95 whitespace-nowrap ${
+            subSection === "report" ? "bg-[var(--color-blue)] text-white shadow-xs" : "text-[#64748d] hover:text-[var(--color-foreground)]"
           }`}
         >
           보고서
@@ -236,8 +236,8 @@ ${partners || "- 파트너 미팅 완료"}
 
         <button
           onClick={() => setSubSection("custom")}
-          className={`py-2 text-center rounded-xl transition-all cursor-pointer active:scale-95 ${
-            subSection === "custom" ? "bg-[var(--color-blue)] text-white shadow-sm" : "text-[#64748d]"
+          className={`py-1.5 sm:py-2 px-1 text-center rounded-xl text-[11px] sm:text-xs transition-all cursor-pointer active:scale-95 whitespace-nowrap ${
+            subSection === "custom" ? "bg-[var(--color-blue)] text-white shadow-xs" : "text-[#64748d] hover:text-[var(--color-foreground)]"
           }`}
         >
           메뉴/백업

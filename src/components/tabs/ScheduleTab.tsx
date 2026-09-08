@@ -198,7 +198,7 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
   };
 
   return (
-    <div className="space-y-4 pb-24 max-w-md mx-auto">
+    <div className="space-y-3.5 w-full">
       {/* 3절 헤더 컨트롤 */}
       <div className="flex items-center justify-between px-1">
         <div>
@@ -643,15 +643,18 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
 
       {/* 일정 추가/수정 모달 */}
       {isEditing && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-          <div className="w-full max-w-sm rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-2xl space-y-4">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="w-full max-w-md rounded-t-[28px] sm:rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)] p-5 sm:p-6 shadow-2xl space-y-4 max-h-[90dvh] overflow-y-auto pb-[max(16px,env(safe-area-inset-bottom,16px))]">
+            {/* 드래그 핸들 */}
+            <div className="h-1.5 w-12 rounded-full bg-[#d7e3f1] dark:bg-slate-700 mx-auto sm:hidden" />
+
             <div className="flex items-center justify-between">
               <h3 className="text-base font-bold text-[var(--color-foreground)]">
                 {editingId ? "일정 수정" : "새 일정 추가"}
               </h3>
               <button
                 onClick={() => setIsEditing(false)}
-                className="p-1 rounded-full text-slate-400 hover:text-slate-600"
+                className="p-1 rounded-full text-slate-400 hover:text-slate-600 cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>

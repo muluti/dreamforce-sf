@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { X, Upload, Film, Image as ImageIcon, Trash2, ExternalLink } from "lucide-react";
 import { MediaItem } from "../types";
 
@@ -72,9 +72,9 @@ export const MediaModal: React.FC<MediaModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-end md:items-center justify-center bg-black/40 backdrop-blur-[10px] p-0 md:p-4 animate-in fade-in duration-200">
-      <div className="w-full max-w-xl max-h-[90vh] flex flex-col rounded-t-[32px] md:rounded-[32px] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-2xl overflow-hidden animate-in slide-in-from-bottom duration-300">
+      <div className="w-full max-w-xl max-h-[90dvh] flex flex-col rounded-t-[28px] md:rounded-[28px] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-2xl overflow-hidden animate-in slide-in-from-bottom duration-300">
         {/* 드래그 핸들 */}
-        <div className="pt-3 pb-1">
+        <div className="pt-3 pb-1 md:hidden">
           <div className="h-1.5 w-12 rounded-full bg-[#d7e3f1] dark:bg-slate-700 mx-auto" />
         </div>
 

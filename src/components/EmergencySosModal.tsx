@@ -23,9 +23,9 @@ export const EmergencySosModal: React.FC<EmergencySosModalProps> = ({ isOpen, on
 
   return (
     <div className="fixed inset-0 z-[80] flex items-end md:items-center justify-center bg-black/60 backdrop-blur-[8px] p-0 md:p-4 animate-in fade-in duration-200">
-      <div className="w-full max-w-xl max-h-[92vh] flex flex-col rounded-t-[32px] md:rounded-[32px] border-2 border-rose-300 dark:border-rose-800 bg-[var(--color-surface)] shadow-2xl overflow-hidden animate-in slide-in-from-bottom duration-300">
+      <div className="w-full max-w-xl max-h-[90dvh] flex flex-col rounded-t-[28px] md:rounded-[28px] border-2 border-rose-300 dark:border-rose-800 bg-[var(--color-surface)] shadow-2xl overflow-hidden animate-in slide-in-from-bottom duration-300">
         {/* 드래그 핸들 */}
-        <div className="pt-3 pb-1">
+        <div className="pt-3 pb-1 md:hidden">
           <div className="h-1.5 w-12 rounded-full bg-rose-200 dark:bg-rose-900 mx-auto" />
         </div>
 
@@ -212,10 +212,10 @@ export const EmergencySosModal: React.FC<EmergencySosModalProps> = ({ isOpen, on
         </div>
 
         {/* 푸터 */}
-        <div className="p-3 border-t border-[var(--color-border)] bg-[var(--color-surface)] flex justify-end">
+        <div className="p-3 pb-[max(12px,env(safe-area-inset-bottom,12px))] border-t border-[var(--color-border)] bg-[var(--color-surface)] flex justify-end">
           <button
             onClick={onClose}
-            className="notion-button-primary px-4 py-1.5 text-xs active:scale-95 cursor-pointer font-bold"
+            className="notion-button-primary px-4 py-2 text-xs active:scale-95 cursor-pointer font-bold"
           >
             확인 및 닫기
           </button>

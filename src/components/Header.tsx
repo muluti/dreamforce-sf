@@ -115,23 +115,23 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="notion-hero">
       {/* Top Utility Bar: Badge + Action Buttons */}
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex items-center justify-between gap-1.5 w-full">
         {/* Brand Pill */}
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--color-surface-alt)] border border-[var(--color-border)]">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-[10.5px] font-extrabold tracking-wider text-[var(--color-text-secondary)] uppercase">
+        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--color-surface-alt)] border border-[var(--color-border)] shrink min-w-0">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+          <span className="text-[10px] sm:text-[10.5px] font-extrabold tracking-wider text-[var(--color-text-secondary)] uppercase whitespace-nowrap">
             DF 2026
           </span>
-          <span className="text-[10px] text-[var(--color-text-muted)]">•</span>
-          <span className="text-[10.5px] font-bold text-[var(--color-blue)]">San Francisco</span>
+          <span className="text-[9px] text-[var(--color-text-muted)]">•</span>
+          <span className="text-[10px] sm:text-[10.5px] font-bold text-[var(--color-blue)] truncate">SF</span>
         </div>
 
         {/* 5 Action Icons */}
-        <div className="flex items-center gap-1.5 shrink-0">
+        <div className="flex items-center gap-1 shrink-0">
           {onOpenEmergencySos && (
             <button
               onClick={onOpenEmergencySos}
-              className="h-8 px-2 rounded-xl flex items-center justify-center gap-1 bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-[11px] shadow-xs active:scale-90 cursor-pointer animate-pulse"
+              className="h-7.5 px-2 sm:h-8 sm:px-2.5 rounded-xl flex items-center justify-center gap-1 bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-[10.5px] sm:text-[11px] shadow-xs active:scale-90 cursor-pointer animate-pulse"
               title="1초 긴급 SOS"
             >
               <ShieldAlert className="w-3.5 h-3.5" />
@@ -141,66 +141,66 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={onOpenTips}
-            className="h-8 w-8 rounded-xl flex items-center justify-center bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/20 transition-all active:scale-90 cursor-pointer"
+            className="h-7.5 w-7.5 sm:h-8 sm:w-8 rounded-xl flex items-center justify-center bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/20 transition-all active:scale-90 cursor-pointer"
             title="실전 꿀팁"
           >
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
 
           <button
             onClick={toggleTheme}
-            className="h-8 w-8 rounded-xl flex items-center justify-center bg-[var(--color-surface-alt)] hover:bg-[var(--color-border)] text-[var(--color-text-secondary)] border border-[var(--color-border)] transition-all active:scale-90 cursor-pointer"
+            className="h-7.5 w-7.5 sm:h-8 sm:w-8 rounded-xl flex items-center justify-center bg-[var(--color-surface-alt)] hover:bg-[var(--color-border)] text-[var(--color-text-secondary)] border border-[var(--color-border)] transition-all active:scale-90 cursor-pointer"
             title="테마 전환"
           >
-            {isDarkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4" />}
+            {isDarkMode ? <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" /> : <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
           </button>
 
           <button
             onClick={onOpenSettings}
-            className="h-8 w-8 rounded-xl flex items-center justify-center bg-[var(--color-surface-alt)] hover:bg-[var(--color-border)] text-[var(--color-text-secondary)] border border-[var(--color-border)] transition-all active:scale-90 cursor-pointer"
+            className="h-7.5 w-7.5 sm:h-8 sm:w-8 rounded-xl flex items-center justify-center bg-[var(--color-surface-alt)] hover:bg-[var(--color-border)] text-[var(--color-text-secondary)] border border-[var(--color-border)] transition-all active:scale-90 cursor-pointer"
             title="설정"
           >
-            <Settings className="w-4 h-4" />
+            <Settings className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
 
           <button
             onClick={onLock}
-            className="h-8 w-8 rounded-xl flex items-center justify-center bg-[var(--color-surface-alt)] hover:bg-rose-500/10 text-[var(--color-text-secondary)] hover:text-rose-600 border border-[var(--color-border)] transition-all active:scale-90 cursor-pointer"
+            className="h-7.5 w-7.5 sm:h-8 sm:w-8 rounded-xl flex items-center justify-center bg-[var(--color-surface-alt)] hover:bg-rose-500/10 text-[var(--color-text-secondary)] hover:text-rose-600 border border-[var(--color-border)] transition-all active:scale-90 cursor-pointer"
             title="잠금"
           >
-            <Lock className="w-4 h-4" />
+            <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
         </div>
       </div>
 
       {/* Main Title Section */}
       <div className="flex flex-col">
-        <h1 className="text-[22px] sm:text-[24px] font-black tracking-tight text-[var(--color-foreground)] leading-snug">
+        <h1 className="text-[20px] sm:text-[23px] font-black tracking-tight text-[var(--color-foreground)] leading-snug">
           드림포스 출장 비서
         </h1>
-        <p className="text-[12px] text-[var(--color-text-secondary)] font-medium mt-0.5">
+        <p className="text-[11.5px] sm:text-[12px] text-[var(--color-text-secondary)] font-medium mt-0.5">
           샌프란시스코 현지 출장 & 세션 통합 어시스턴트
         </p>
       </div>
 
       {/* 3 Stat Tabs: Zero Truncation, Pixel Perfect Spacing */}
-      <div className="grid grid-cols-3 gap-2 w-full">
+      <div className="grid grid-cols-3 gap-1.5 sm:gap-2 w-full">
         {statTabs.map((stat) => {
           const isActive = activeStatTab === stat.key;
           return (
             <button
               key={stat.key}
               onClick={() => setActiveStatTab(stat.key)}
-              className={`flex flex-col items-start rounded-2xl p-2.5 sm:p-3 transition-all duration-200 active:scale-[0.96] cursor-pointer text-left relative overflow-hidden border ${
+              className={`flex flex-col items-start rounded-2xl p-2 sm:p-2.5 transition-all duration-200 active:scale-[0.96] cursor-pointer text-left relative overflow-hidden border ${
                 isActive
                   ? "border-[var(--color-blue)] bg-[var(--color-blue-soft)] ring-1 ring-[var(--color-blue)]/30 shadow-xs"
                   : "border-[var(--color-border)] bg-[var(--color-surface-alt)] hover:border-slate-300 dark:hover:border-slate-600"
               }`}
             >
               {/* Top Row: Icon + Label */}
-              <div className="flex items-center gap-1.5 w-full">
+              <div className="flex items-center gap-1 sm:gap-1.5 w-full min-w-0">
                 <div
-                  className={`rounded-lg p-1 transition-colors shrink-0 ${
+                  className={`rounded-lg p-0.5 sm:p-1 transition-colors shrink-0 ${
                     isActive
                       ? "bg-white dark:bg-slate-800 shadow-2xs"
                       : "bg-[var(--color-surface)] dark:bg-slate-800/60"
@@ -209,7 +209,7 @@ export const Header: React.FC<HeaderProps> = ({
                   {stat.icon}
                 </div>
                 <span
-                  className={`text-[11px] font-bold tracking-tight whitespace-nowrap overflow-hidden text-ellipsis ${
+                  className={`text-[10px] sm:text-[11px] font-bold tracking-tight truncate ${
                     isActive ? "text-[var(--color-blue)]" : "text-[var(--color-text-secondary)]"
                   }`}
                 >
@@ -218,11 +218,11 @@ export const Header: React.FC<HeaderProps> = ({
               </div>
 
               {/* Value Row */}
-              <div className="mt-2 w-full">
-                <p className="text-[16px] sm:text-[18px] font-extrabold leading-none tracking-tight text-[var(--color-foreground)] stripe-number tabular-nums">
+              <div className="mt-1.5 w-full min-w-0">
+                <p className="text-[15px] sm:text-[17px] font-extrabold leading-none tracking-tight text-[var(--color-foreground)] stripe-number tabular-nums truncate">
                   {stat.value}
                 </p>
-                <p className="text-[10px] text-[var(--color-text-muted)] font-medium mt-1 whitespace-nowrap overflow-hidden text-ellipsis">
+                <p className="text-[9.5px] sm:text-[10px] text-[var(--color-text-muted)] font-medium mt-1 truncate">
                   {stat.sub}
                 </p>
               </div>
