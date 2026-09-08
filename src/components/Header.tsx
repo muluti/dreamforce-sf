@@ -96,135 +96,125 @@ export const Header: React.FC<HeaderProps> = ({
       label: "출장 D-Day",
       value: dDayText,
       sub: dDaySub,
-      icon: <Flame className="w-3.5 h-3.5 text-violet-600 dark:text-violet-400 shrink-0" />
+      icon: <Flame className="w-4 h-4 text-rose-500 shrink-0" />
     },
     {
       key: "sf" as const,
       label: "SF 현지",
       value: sfTime || "--:--",
       sub: "14°~21°C",
-      icon: <CloudFog className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0" />
+      icon: <CloudFog className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
     },
     {
       key: "seoul" as const,
       label: "서울 본사",
       value: seoulTime || "--:--",
       sub: `1$ = ${formattedExchangeRate}원`,
-      icon: <Clock className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 shrink-0" />
+      icon: <Clock className="w-4 h-4 text-slate-600 dark:text-slate-400 shrink-0" />
     }
   ];
 
   return (
-    <header className="notion-hero">
-      {/* Top Utility Bar: Badge + Action Buttons */}
-      <div className="flex items-center justify-between gap-1.5 w-full">
+    <header className="notion-hero border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-4 rounded-3xl space-y-4">
+      {/* Top Utility Bar: Badge + Large Ergonomic Action Buttons */}
+      <div className="flex items-center justify-between gap-2 w-full">
         {/* Brand Pill */}
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--color-surface-alt)] border border-[var(--color-border)] shrink min-w-0">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-          <span className="text-[10.5px] sm:text-[11px] font-extrabold tracking-wider text-[var(--color-text-secondary)] uppercase whitespace-nowrap">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 shrink-0">
+          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+          <span className="text-[12px] font-black tracking-wide text-slate-800 dark:text-slate-200 uppercase whitespace-nowrap">
             DF 2026
           </span>
-          <span className="text-[9px] text-[var(--color-text-muted)]">•</span>
-          <span className="text-[10.5px] sm:text-[11px] font-bold text-[var(--color-blue)] truncate">SF</span>
+          <span className="text-slate-400 text-xs">•</span>
+          <span className="text-[12px] font-black text-[var(--color-blue)]">SF</span>
         </div>
 
-        {/* 5 Action Icons */}
-        <div className="flex items-center gap-1 shrink-0">
+        {/* 5 Action Icons with Standard 40px Touch Targets */}
+        <div className="flex items-center gap-1.5 shrink-0">
           {onOpenEmergencySos && (
             <button
               onClick={onOpenEmergencySos}
-              className="h-7.5 px-2 sm:h-8 sm:px-2.5 rounded-xl flex items-center justify-center gap-1 bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-[10.5px] sm:text-[11px] shadow-xs active:scale-90 cursor-pointer animate-pulse"
+              className="h-9.5 px-3 rounded-xl flex items-center justify-center gap-1.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs shadow-xs active:scale-95 cursor-pointer"
               title="1초 긴급 SOS"
             >
-              <ShieldAlert className="w-3.5 h-3.5" />
+              <ShieldAlert className="w-4 h-4" />
               <span>SOS</span>
             </button>
           )}
 
           <button
             onClick={onOpenTips}
-            className="h-7.5 w-7.5 sm:h-8 sm:w-8 rounded-xl flex items-center justify-center bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/20 transition-all active:scale-90 cursor-pointer"
+            className="h-9.5 w-9.5 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 transition-all active:scale-95 cursor-pointer"
             title="실전 꿀팁"
           >
-            <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <Sparkles className="w-4.5 h-4.5 text-amber-500" />
           </button>
 
           <button
             onClick={toggleTheme}
-            className="h-7.5 w-7.5 sm:h-8 sm:w-8 rounded-xl flex items-center justify-center bg-[var(--color-surface-alt)] hover:bg-[var(--color-border)] text-[var(--color-text-secondary)] border border-[var(--color-border)] transition-all active:scale-90 cursor-pointer"
+            className="h-9.5 w-9.5 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 transition-all active:scale-95 cursor-pointer"
             title="테마 전환"
           >
-            {isDarkMode ? <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" /> : <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+            {isDarkMode ? <Sun className="w-4.5 h-4.5 text-amber-400" /> : <Moon className="w-4.5 h-4.5 text-slate-600" />}
           </button>
 
           <button
             onClick={onOpenSettings}
-            className="h-7.5 w-7.5 sm:h-8 sm:w-8 rounded-xl flex items-center justify-center bg-[var(--color-surface-alt)] hover:bg-[var(--color-border)] text-[var(--color-text-secondary)] border border-[var(--color-border)] transition-all active:scale-90 cursor-pointer"
+            className="h-9.5 w-9.5 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 transition-all active:scale-95 cursor-pointer"
             title="설정"
           >
-            <Settings className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <Settings className="w-4.5 h-4.5" />
           </button>
 
           <button
             onClick={onLock}
-            className="h-7.5 w-7.5 sm:h-8 sm:w-8 rounded-xl flex items-center justify-center bg-[var(--color-surface-alt)] hover:bg-rose-500/10 text-[var(--color-text-secondary)] hover:text-rose-600 border border-[var(--color-border)] transition-all active:scale-90 cursor-pointer"
+            className="h-9.5 w-9.5 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-rose-50 dark:hover:bg-rose-950/30 text-slate-700 dark:text-slate-200 hover:text-rose-600 border border-slate-200/80 dark:border-slate-700 transition-all active:scale-95 cursor-pointer"
             title="잠금"
           >
-            <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <Lock className="w-4.5 h-4.5" />
           </button>
         </div>
       </div>
 
       {/* Main Title Section */}
-      <div className="flex flex-col">
-        <h1 className="text-[21px] sm:text-[24px] font-black tracking-tight text-[var(--color-foreground)] leading-snug">
+      <div>
+        <h1 className="text-[22px] sm:text-[24px] font-black tracking-tight text-slate-900 dark:text-white leading-tight">
           드림포스 출장 비서
         </h1>
-        <p className="text-[12px] sm:text-[12.5px] text-[var(--color-text-secondary)] font-semibold mt-0.5">
+        <p className="text-[13px] sm:text-[14px] text-slate-500 dark:text-slate-400 font-semibold mt-1">
           샌프란시스코 현지 출장 & 세션 통합 어시스턴트
         </p>
       </div>
 
-      {/* 3 Stat Tabs: Zero Truncation, Pixel Perfect Spacing */}
-      <div className="grid grid-cols-3 gap-1.5 sm:gap-2 w-full">
+      {/* 3 Stat Cards: Large, Clean, Modern */}
+      <div className="grid grid-cols-3 gap-2 w-full">
         {statTabs.map((stat) => {
           const isActive = activeStatTab === stat.key;
           return (
             <button
               key={stat.key}
               onClick={() => setActiveStatTab(stat.key)}
-              className={`flex flex-col items-start rounded-2xl p-2 sm:p-2.5 transition-all duration-200 active:scale-[0.96] cursor-pointer text-left relative overflow-hidden border ${
+              className={`flex flex-col items-start rounded-2xl p-2.5 sm:p-3 transition-all duration-200 active:scale-95 cursor-pointer text-left relative overflow-hidden border ${
                 isActive
                   ? "border-[var(--color-blue)] bg-[var(--color-blue-soft)] ring-1 ring-[var(--color-blue)]/30 shadow-xs"
-                  : "border-[var(--color-border)] bg-[var(--color-surface-alt)] hover:border-slate-300 dark:hover:border-slate-600"
+                  : "border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/40 hover:border-slate-300"
               }`}
             >
               {/* Top Row: Icon + Label */}
-              <div className="flex items-center gap-1 w-full min-w-0">
-                <div
-                  className={`rounded-md p-0.5 transition-colors shrink-0 ${
-                    isActive
-                      ? "bg-white dark:bg-slate-800 shadow-2xs"
-                      : "bg-[var(--color-surface)] dark:bg-slate-800/60"
-                  }`}
-                >
+              <div className="flex items-center gap-1.5 w-full min-w-0">
+                <div className="rounded-lg p-1 bg-white dark:bg-slate-800 shadow-2xs shrink-0">
                   {stat.icon}
                 </div>
-                <span
-                  className={`text-[10px] sm:text-[10.5px] font-extrabold tracking-tight whitespace-nowrap overflow-hidden ${
-                    isActive ? "text-[var(--color-blue)]" : "text-[var(--color-text-secondary)]"
-                  }`}
-                >
+                <span className="text-[12px] sm:text-[12.5px] font-black tracking-tight text-slate-800 dark:text-slate-200 truncate">
                   {stat.label}
                 </span>
               </div>
 
               {/* Value Row */}
-              <div className="mt-1.5 w-full min-w-0">
-                <p className="text-[15px] sm:text-[17px] font-black leading-none tracking-tight text-[var(--color-foreground)] stripe-number tabular-nums truncate">
+              <div className="mt-2 w-full min-w-0">
+                <p className="text-[17px] sm:text-[19px] font-black leading-none tracking-tight text-slate-900 dark:text-slate-100 stripe-number tabular-nums truncate">
                   {stat.value}
                 </p>
-                <p className="text-[9.5px] sm:text-[10px] text-[var(--color-text-muted)] font-semibold mt-1 truncate">
+                <p className="text-[11px] sm:text-[11.5px] text-slate-500 dark:text-slate-400 font-semibold mt-1 truncate">
                   {stat.sub}
                 </p>
               </div>

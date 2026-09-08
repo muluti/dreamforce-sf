@@ -36,7 +36,6 @@ import { ScheduleTab } from "./components/tabs/ScheduleTab";
 import { MemosTab } from "./components/tabs/MemosTab";
 import { TripHubTab } from "./components/tabs/TripHubTab";
 import { PlacesTab } from "./components/tabs/PlacesTab";
-import { WellnessTab } from "./components/tabs/WellnessTab";
 
 export function App() {
   const [data, setData] = useState<AppData>(() => loadAppData());
@@ -459,6 +458,16 @@ export function App() {
             />
           )}
 
+          {activeTab === "places" && (
+            <PlacesTab
+              places={data.places}
+              onToggleVisited={handleTogglePlaceVisited}
+              onAddPlace={handleAddPlace}
+              onUpdatePlace={handleUpdatePlace}
+              onDeletePlace={handleDeletePlace}
+            />
+          )}
+
           {activeTab === "hub" && (
             <TripHubTab
               documents={data.travelDocuments}
@@ -466,6 +475,10 @@ export function App() {
               colleagues={data.colleagues}
               businessCards={data.businessCards}
               safetyZones={data.safetyZones}
+              expenses={data.expenses}
+              exchangeRate={data.exchangeRate}
+              userName={data.userName}
+              timelineEvents={data.timelineEvents}
               onUpdateDocument={handleUpdateDocument}
               onAddDocument={handleAddDocument}
               onDeleteDocument={handleDeleteDocument}
@@ -477,39 +490,17 @@ export function App() {
               onDeleteColleague={handleDeleteColleague}
               onAddBusinessCard={handleAddBusinessCard}
               onDeleteBusinessCard={handleDeleteBusinessCard}
-              onOpenMediaModal={handleOpenMediaModal}
-              onOpenFlightGuide={() => setIsFlightGuideOpen(true)}
-            />
-          )}
-
-          {activeTab === "places" && (
-            <PlacesTab
-              places={data.places}
-              onToggleVisited={handleTogglePlaceVisited}
-              onAddPlace={handleAddPlace}
-              onUpdatePlace={handleUpdatePlace}
-              onDeletePlace={handleDeletePlace}
-            />
-          )}
-
-          {activeTab === "wellness" && (
-            <WellnessTab
-              data={data}
               onAddExpense={handleAddExpense}
               onDeleteExpense={handleDeleteExpense}
-              onAddSection={handleAddSection}
-              onDeleteSection={handleDeleteSection}
-              onAddItemToSection={handleAddItemToSection}
-              onDeleteItemFromSection={handleDeleteItemFromSection}
-              onRestoreData={handleRestoreData}
               onOpenMediaModal={handleOpenMediaModal}
+              onOpenFlightGuide={() => setIsFlightGuideOpen(true)}
               onOpenCalculator={() => setIsCalculatorOpen(true)}
             />
           )}
         </main>
       </div>
 
-      {/* 2-7절 Bottom Navigation Bar */}
+      {/* 2-7절 Bottom Navigation Bar (5 Tabs) */}
       <Navbar activeTab={activeTab} onChangeTab={setActiveTab} />
     </div>
   );

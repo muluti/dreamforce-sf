@@ -15,8 +15,12 @@ import {
   Tag, 
   AlertTriangle,
   Copy,
+  Check,
   X,
-  Plane
+  Plane,
+  DollarSign,
+  Receipt,
+  FileCheck
 } from "lucide-react";
 import { 
   TravelDocument, 
@@ -24,7 +28,9 @@ import {
   ColleagueContact, 
   BusinessCardRecord, 
   SafetyZone, 
-  MediaItem 
+  MediaItem,
+  ExpenseRecord,
+  TimelineEvent
 } from "../../types";
 
 interface TripHubTabProps {
@@ -33,6 +39,10 @@ interface TripHubTabProps {
   colleagues: ColleagueContact[];
   businessCards: BusinessCardRecord[];
   safetyZones: SafetyZone[];
+  expenses: ExpenseRecord[];
+  exchangeRate: number;
+  userName: string;
+  timelineEvents: TimelineEvent[];
   onUpdateDocument: (doc: TravelDocument) => void;
   onAddDocument: (doc: TravelDocument) => void;
   onDeleteDocument: (id: string) => void;
@@ -44,8 +54,11 @@ interface TripHubTabProps {
   onDeleteColleague: (id: string) => void;
   onAddBusinessCard: (card: BusinessCardRecord) => void;
   onDeleteBusinessCard: (id: string) => void;
+  onAddExpense: (expense: ExpenseRecord) => void;
+  onDeleteExpense: (id: string) => void;
   onOpenMediaModal: (title: string, mediaList: MediaItem[], onUpdate: (items: MediaItem[]) => void) => void;
   onOpenFlightGuide?: () => void;
+  onOpenCalculator?: () => void;
 }
 
 export const TripHubTab: React.FC<TripHubTabProps> = ({
@@ -54,6 +67,10 @@ export const TripHubTab: React.FC<TripHubTabProps> = ({
   colleagues,
   businessCards,
   safetyZones,
+  expenses,
+  exchangeRate,
+  userName,
+  timelineEvents,
   onUpdateDocument,
   onAddDocument,
   onDeleteDocument,
@@ -65,10 +82,22 @@ export const TripHubTab: React.FC<TripHubTabProps> = ({
   onDeleteColleague,
   onAddBusinessCard,
   onDeleteBusinessCard,
+  onAddExpense,
+  onDeleteExpense,
   onOpenMediaModal,
-  onOpenFlightGuide
+  onOpenFlightGuide,
+  onOpenCalculator
 }) => {
-  const [subTab, setSubTab] = useState<"docs" | "checklist" | "team" | "safety">("docs");
+  const [subTab, setSubTab] = useState<"docs" | "checklist" | "team" | "expenses" | "safety">("docs");
+
+  // Expense Form
+  const [isAddingExpense, setIsAddingExpense] = useState(false);
+  const [expDate, setExpDate] = useState("2026-09-14");
+  const [expCat, setExpCat] = useState<ExpenseRecord["category"]>("meals");
+  const [expUSD, setExpUSD] = useState<number>(30);
+  const [expDesc, setExpDesc] = useState("");
+  const [expMethod, setExpMethod] = useState<ExpenseRecord["paymentMethod"]>("법인카드");
+  const [copiedReport, setCopiedReport] = useState(false);
 
   // Checklist Form
   const [newCheckText, setNewCheckText] = useState("");
@@ -159,34 +188,89 @@ export const TripHubTab: React.FC<TripHubTabProps> = ({
     setBcFollowUp("");
   };
 
+  const totalUSD = (expenses || []).reduce((acc, cur) => acc + cur.amountUSD, 0);
+  const totalKRW = (expenses || []).reduce((acc, cur) => acc + cur.amountKRW, 0);
+
+  const handleSaveExpense = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!expDesc.trim() || expUSD <= 0) return;
+
+    const newExp: ExpenseRecord = {
+      id: `exp-${Date.now()}`,
+      date: expDate,
+      category: expCat,
+      amountUSD: expUSD,
+      amountKRW: Math.round(expUSD * exchangeRate),
+      description: expDesc.trim(),
+      paymentMethod: expMethod
+    };
+    onAddExpense(newExp);
+    setIsAddingExpense(false);
+    setExpDesc("");
+    setExpUSD(30);
+  };
+
+  const generateReportText = () => {
+    const importantSessions = (timelineEvents || [])
+      .filter((e) => e.isImportant)
+      .map((e) => `- [${e.date}] ${e.title} (${e.location})`)
+      .join("\n");
+
+    const partners = (businessCards || [])
+      .map((c) => `- ${c.name} (${c.company} / ${c.role}) - ${c.keyDiscussion}`)
+      .join("\n");
+
+    return `# 📄 [출장 결과 보고서] Salesforce Dreamforce 2026 참관 결과
+
+- **출장자**: ${userName}
+- **출장 기간**: 2026.09.13 ~ 2026.09.18
+- **출장지**: 미국 샌프란시스코 (Moscone Center)
+
+## 주요 참석 세션
+${importantSessions || "- 세션 참관 완료"}
+
+## 네트워킹 성과
+${partners || "- 파트너 미팅 완료"}
+
+## 총 소요 경비 요약
+- **총 사용액**: $${totalUSD.toFixed(2)} (약 ₩${totalKRW.toLocaleString()}원 / 환율 1 USD = ${exchangeRate}원 기준)
+`;
+  };
+
+  const handleCopyReport = () => {
+    navigator.clipboard.writeText(generateReportText());
+    setCopiedReport(true);
+    setTimeout(() => setCopiedReport(false), 2000);
+  };
+
   return (
-    <div className="space-y-3.5 w-full">
+    <div className="space-y-4 w-full">
       {/* 3절 헤더 레이블 */}
       <div className="px-1">
         <p className="notion-kicker">TRIP HUB</p>
-        <h2 className="text-[17px] sm:text-[18px] font-bold text-[var(--color-foreground)] tracking-tight">출장 허브</h2>
+        <h2 className="text-[19px] sm:text-[20px] font-black text-slate-900 dark:text-white tracking-tight">출장 허브</h2>
       </div>
 
-      {/* 4절 Stat Tab (서브 네비게이션 4개) */}
-      <div className="grid grid-cols-4 gap-1 p-1 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xs">
-        {(["docs", "checklist", "team", "safety"] as const).map((tab) => {
+      {/* 5개 서브 탭 네비게이션 */}
+      <div className="grid grid-cols-5 gap-1 p-1 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs">
+        {(["docs", "checklist", "team", "expenses", "safety"] as const).map((tab) => {
           const isActive = subTab === tab;
-          const labels = { docs: "서류", checklist: "패킹", team: "동료/명함", safety: "치안" };
-          const icons = { docs: FileText, checklist: CheckSquare, team: Users, safety: ShieldAlert };
+          const labels = { docs: "서류", checklist: "패킹", team: "팀/명함", expenses: "경비정산", safety: "치안" };
+          const icons = { docs: FileText, checklist: CheckSquare, team: Users, expenses: Receipt, safety: ShieldAlert };
           const Icon = icons[tab];
 
           return (
             <button
               key={tab}
               onClick={() => setSubTab(tab)}
-              className={`py-1.5 sm:py-2 px-1 text-center rounded-xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-0.5 sm:gap-1 transition-all cursor-pointer active:scale-95 ${
+              className={`py-2 px-0.5 text-center rounded-xl text-[12px] font-bold flex flex-col items-center justify-center gap-1 transition-all cursor-pointer active:scale-95 ${
                 isActive
-                  ? "bg-[var(--color-blue)] text-white shadow-xs"
-                  : "text-[#64748d] hover:text-[var(--color-foreground)]"
+                  ? "bg-[var(--color-blue)] text-white shadow-xs font-black"
+                  : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
-              <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              <span className="whitespace-nowrap">{labels[tab]}</span>
+              <Icon className="h-4 w-4" />
+              <span className="whitespace-nowrap leading-none">{labels[tab]}</span>
             </button>
           );
         })}
@@ -554,7 +638,192 @@ export const TripHubTab: React.FC<TripHubTabProps> = ({
         </div>
       )}
 
-      {/* 4. Safety */}
+      {/* 4. Expenses & Report SubTab */}
+      {subTab === "expenses" && (
+        <div className="space-y-4">
+          {/* Summary Card */}
+          <div className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 sm:p-5 flex items-center justify-between shadow-xs">
+            <div>
+              <span className="text-[13px] font-bold text-slate-500 dark:text-slate-400">총 누적 경비 ({(expenses || []).length}건)</span>
+              <div className="text-[24px] font-black text-slate-900 dark:text-white stripe-number mt-0.5">
+                ${totalUSD.toFixed(2)}
+              </div>
+            </div>
+            <div className="text-right border-l border-slate-200 dark:border-slate-800 pl-4">
+              <span className="text-[13px] font-bold text-slate-500 dark:text-slate-400">원화 환산 합계</span>
+              <div className="text-[17px] font-black text-emerald-600 dark:text-emerald-400 stripe-number mt-0.5">
+                ₩{totalKRW.toLocaleString()}원
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Tip Calculator Button */}
+          {onOpenCalculator && (
+            <button
+              onClick={onOpenCalculator}
+              className="w-full min-h-[48px] px-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-slate-50 text-slate-800 dark:text-slate-200 font-bold text-[14px] flex items-center justify-center gap-2 active:scale-[0.98] transition-all cursor-pointer shadow-xs"
+            >
+              <DollarSign className="w-4.5 h-4.5 text-emerald-600" />
+              <span>미국 식당 팁(15/18/20%) & 더치페이 계산기</span>
+            </button>
+          )}
+
+          {/* Add Expense Button & Form */}
+          <div className="flex justify-between items-center px-1">
+            <h3 className="text-[15px] font-black text-slate-900 dark:text-white">지출 내역</h3>
+            <button
+              onClick={() => setIsAddingExpense(!isAddingExpense)}
+              className="px-3.5 py-2 rounded-xl bg-[var(--color-blue)] hover:bg-[var(--color-blue-hover)] text-white font-bold text-[13px] flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer shadow-xs"
+            >
+              <Plus className="h-4 w-4" />
+              <span>{isAddingExpense ? "닫기" : "지출 등록"}</span>
+            </button>
+          </div>
+
+          {isAddingExpense && (
+            <form onSubmit={handleSaveExpense} className="p-4 sm:p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3 text-sm shadow-md">
+              <h4 className="text-[15px] font-black text-slate-900 dark:text-white">새 지출 등록</h4>
+              <div className="grid grid-cols-2 gap-2.5">
+                <input
+                  type="date"
+                  value={expDate}
+                  onChange={(e) => setExpDate(e.target.value)}
+                  className="min-h-[44px] px-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-medium"
+                />
+                <select
+                  value={expCat}
+                  onChange={(e) => setExpCat(e.target.value as ExpenseRecord["category"])}
+                  className="min-h-[44px] px-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-semibold"
+                >
+                  <option value="meals">식비</option>
+                  <option value="transport">교통비</option>
+                  <option value="drinks">음료/카페</option>
+                  <option value="hotel">호텔</option>
+                  <option value="shopping">선물/기타</option>
+                </select>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2.5">
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
+                  <input
+                    type="number"
+                    step="0.01"
+                    placeholder="금액"
+                    value={expUSD}
+                    onChange={(e) => setExpUSD(Number(e.target.value))}
+                    className="w-full min-h-[44px] pl-7 pr-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-mono font-bold"
+                  />
+                </div>
+                <select
+                  value={expMethod}
+                  onChange={(e) => setExpMethod(e.target.value as ExpenseRecord["paymentMethod"])}
+                  className="min-h-[44px] px-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-semibold"
+                >
+                  <option value="법인카드">법인카드</option>
+                  <option value="개인카드">개인카드</option>
+                  <option value="현금">현금</option>
+                </select>
+              </div>
+
+              <input
+                type="text"
+                placeholder="지출 내역 상세 메모 (예: 팀 디너 식사)"
+                value={expDesc}
+                onChange={(e) => setExpDesc(e.target.value)}
+                className="w-full min-h-[44px] px-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-medium"
+              />
+
+              <div className="flex justify-end gap-2 pt-1">
+                <button
+                  type="button"
+                  onClick={() => setIsAddingExpense(false)}
+                  className="min-h-[42px] px-4 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold"
+                >
+                  취소
+                </button>
+                <button
+                  type="submit"
+                  className="min-h-[42px] px-5 rounded-xl bg-[var(--color-blue)] text-white font-bold shadow-xs active:scale-95"
+                >
+                  저장
+                </button>
+              </div>
+            </form>
+          )}
+
+          {/* Expense Item List */}
+          <div className="space-y-2.5">
+            {(expenses || []).length === 0 ? (
+              <div className="rounded-2xl border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 p-6 text-center text-sm text-slate-400 font-medium">
+                등록된 지출 내역이 없습니다.
+              </div>
+            ) : (
+              (expenses || []).map((exp) => (
+                <article
+                  key={exp.id}
+                  className="os-virtualized-card w-full rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 flex items-center justify-between gap-3 shadow-xs"
+                >
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[11.5px] font-bold">
+                        {exp.paymentMethod}
+                      </span>
+                      <span className="text-[12px] text-slate-400 font-mono">{exp.date}</span>
+                    </div>
+                    <p className="text-[15px] font-black text-slate-900 dark:text-white truncate">
+                      {exp.description}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 shrink-0">
+                    <div className="text-right">
+                      <p className="text-[16px] font-black text-slate-900 dark:text-white stripe-number">
+                        ${exp.amountUSD.toFixed(2)}
+                      </p>
+                      <p className="text-[12px] text-slate-400 font-medium stripe-number">
+                        약 ₩{exp.amountKRW.toLocaleString()}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => onDeleteExpense(exp.id)}
+                      className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg transition-colors cursor-pointer"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </div>
+                </article>
+              ))
+            )}
+          </div>
+
+          {/* Travel Summary Report Card */}
+          <div className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 sm:p-5 space-y-3 shadow-xs">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <FileCheck className="h-5 w-5 text-[var(--color-blue)]" />
+                <h4 className="text-[15px] font-black text-slate-900 dark:text-white">
+                  출장 결과 보고서 원클릭 생성
+                </h4>
+              </div>
+              <button
+                onClick={handleCopyReport}
+                className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 font-bold text-[12px] flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer border border-slate-200 dark:border-slate-700"
+              >
+                {copiedReport ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                <span>{copiedReport ? "복사됨!" : "전체 복사"}</span>
+              </button>
+            </div>
+            <textarea
+              readOnly
+              rows={8}
+              value={generateReportText()}
+              className="w-full p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-mono text-xs leading-relaxed focus:outline-none"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* 5. Safety */}
       {subTab === "safety" && (
         <div className="space-y-3">
           <div className="rounded-2xl border border-red-100 bg-red-50/50 p-4 space-y-2 text-xs">
