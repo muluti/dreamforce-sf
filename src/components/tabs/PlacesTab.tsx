@@ -392,64 +392,62 @@ export const PlacesTab: React.FC<PlacesTabProps> = ({
       {/* 1. Header Title & Top Controls */}
       <div className="flex items-center justify-between px-1">
         <div>
-          <p className="notion-kicker flex items-center gap-1">
-            <Compass className="w-3.5 h-3.5 text-[var(--color-blue)]" />
-            <span>SAN FRANCISCO MAP & SPOTS</span>
-          </p>
-          <h2 className="text-[17px] sm:text-[18px] font-bold text-[var(--color-foreground)] tracking-tight">
+          <h2 className="text-[19px] sm:text-[20px] font-black text-slate-900 dark:text-white tracking-tight">
             가볼만한 곳 & 쇼핑
           </h2>
+          <p className="text-[12px] text-slate-500 dark:text-slate-400 font-medium">샌프란시스코 명소 및 마트 안내</p>
         </div>
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-2">
           {/* 3-Way View Mode Switcher */}
-          <div className="flex items-center p-0.5 rounded-xl bg-[var(--color-surface-alt)] border border-[var(--color-border)] shadow-2xs">
+          <div className="flex items-center p-0.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
             <button
               onClick={() => setViewMode("map")}
-              className={`p-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1 text-xs ${
+              className={`h-8 px-2.5 rounded-lg transition-all cursor-pointer flex items-center gap-1 text-xs ${
                 viewMode === "map"
-                  ? "bg-[var(--color-surface)] text-[var(--color-blue)] shadow-xs font-bold"
-                  : "text-[var(--color-text-secondary)] hover:text-[var(--color-foreground)]"
+                  ? "bg-white dark:bg-slate-900 text-[var(--color-blue)] shadow-xs font-bold"
+                  : "text-slate-500 hover:text-slate-800 dark:hover:text-white"
               }`}
               title="지도 뷰"
             >
               <MapIcon className="w-3.5 h-3.5" />
-              <span className="text-[11px]">지도</span>
+              <span>지도</span>
             </button>
 
             <button
               onClick={() => setViewMode("card")}
-              className={`p-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1 text-xs ${
+              className={`h-8 px-2.5 rounded-lg transition-all cursor-pointer flex items-center gap-1 text-xs ${
                 viewMode === "card"
-                  ? "bg-[var(--color-surface)] text-[var(--color-blue)] shadow-xs font-bold"
-                  : "text-[var(--color-text-secondary)] hover:text-[var(--color-foreground)]"
+                  ? "bg-white dark:bg-slate-900 text-[var(--color-blue)] shadow-xs font-bold"
+                  : "text-slate-500 hover:text-slate-800 dark:hover:text-white"
               }`}
               title="카드 뷰"
             >
               <LayoutGrid className="w-3.5 h-3.5" />
-              <span className="text-[11px]">카드</span>
+              <span>카드</span>
             </button>
 
             <button
               onClick={() => setViewMode("list")}
-              className={`p-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1 text-xs ${
+              className={`h-8 px-2.5 rounded-lg transition-all cursor-pointer flex items-center gap-1 text-xs ${
                 viewMode === "list"
-                  ? "bg-[var(--color-surface)] text-[var(--color-blue)] shadow-xs font-bold"
-                  : "text-[var(--color-text-secondary)] hover:text-[var(--color-foreground)]"
+                  ? "bg-white dark:bg-slate-900 text-[var(--color-blue)] shadow-xs font-bold"
+                  : "text-slate-500 hover:text-slate-800 dark:hover:text-white"
               }`}
               title="리스트 뷰"
             >
               <ListIcon className="w-3.5 h-3.5" />
-              <span className="text-[11px]">리스트</span>
+              <span>리스트</span>
             </button>
           </div>
 
           {/* Add Spot Button */}
           <button
             onClick={handleOpenAddModal}
-            className="notion-button-primary py-1.5 px-2.5 text-xs flex items-center gap-1 active:scale-[0.97] cursor-pointer"
+            className="h-9 w-9 rounded-xl bg-[var(--color-blue)] hover:bg-[var(--color-blue-hover)] text-white flex items-center justify-center active:scale-95 shadow-xs cursor-pointer shrink-0"
+            title="장소 추가"
           >
-            <Plus className="h-3.5 w-3.5" />
+            <Plus className="h-4 w-4" />
           </button>
         </div>
       </div>
@@ -893,32 +891,32 @@ export const PlacesTab: React.FC<PlacesTabProps> = ({
                   onClick={() => setSelectedPlaceDetail(place)}
                   className="cursor-pointer group"
                 >
-                  <h3 className={`text-[15px] font-bold tracking-tight text-[var(--color-foreground)] group-hover:text-[var(--color-blue)] transition-colors ${
-                    isVisited ? "line-through opacity-80" : ""
+                  <h3 className={`text-[16px] sm:text-[17px] font-black tracking-tight text-slate-900 dark:text-white group-hover:text-[var(--color-blue)] transition-colors ${
+                    isVisited ? "line-through opacity-70" : ""
                   }`}>
                     {place.name}
                   </h3>
-                  <p className="text-[11.5px] font-medium text-[var(--color-text-muted)] font-mono mt-0.5">
+                  <p className="text-[12px] font-semibold text-slate-400 font-mono mt-0.5">
                     {place.nameEn}
                   </p>
                 </div>
 
-                {/* Description */}
-                <p className="text-[12.5px] text-[var(--color-foreground)] leading-relaxed font-normal">
+                {/* Description (14px 가독성) */}
+                <p className="text-[14px] text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
                   {place.description}
                 </p>
 
                 {/* Shopping Tips Box (for Marts & Bookstores) */}
                 {place.shoppingTips && place.shoppingTips.length > 0 && (
-                  <div className="p-2.5 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/70 dark:border-amber-800/50 space-y-1 text-xs">
-                    <p className="font-extrabold text-amber-900 dark:text-amber-200 flex items-center gap-1 text-[11px]">
-                      <ShoppingCart className="w-3.5 h-3.5 text-amber-600" />
+                  <div className="p-3 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/70 dark:border-amber-800/50 space-y-1.5 text-xs">
+                    <p className="font-bold text-amber-900 dark:text-amber-200 flex items-center gap-1 text-[12px]">
+                      <ShoppingCart className="w-4 h-4 text-amber-600 shrink-0" />
                       <span>추천 쇼핑 & 기념품 아이템:</span>
                     </p>
-                    <ul className="grid grid-cols-1 gap-1 text-[11.5px] text-amber-950/90 dark:text-amber-200/90 font-medium pl-1">
+                    <ul className="grid grid-cols-1 gap-1 text-[12.5px] text-amber-950/90 dark:text-amber-200/90 font-medium pl-1">
                       {place.shoppingTips.map((tip, idx) => (
                         <li key={idx} className="flex items-center gap-1.5">
-                          <span className="w-1 h-1 rounded-full bg-amber-500 shrink-0" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
                           <span>{tip}</span>
                         </li>
                       ))}
@@ -928,40 +926,40 @@ export const PlacesTab: React.FC<PlacesTabProps> = ({
 
                 {/* Recommended Course Box */}
                 {place.recommendedCourse && (
-                  <div className="p-2.5 rounded-xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200/60 dark:border-blue-900/40 text-[11.5px] text-blue-950 dark:text-blue-200">
+                  <div className="p-3 rounded-2xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200/60 dark:border-blue-900/40 text-[12.5px] text-blue-950 dark:text-blue-200 font-medium">
                     <span className="font-bold text-[var(--color-blue)]">🚶 추천 코스: </span>
                     <span>{place.recommendedCourse}</span>
                   </div>
                 )}
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-1">
+                <div className="flex flex-wrap gap-1.5">
                   {place.themeTags.map((tag, idx) => (
                     <span
                       key={idx}
-                      className="px-2 py-0.5 rounded-md bg-[var(--color-surface-alt)] border border-[var(--color-border)] text-[10.5px] font-medium text-[var(--color-text-secondary)]"
+                      className="px-2.5 py-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 text-[11px] font-semibold text-slate-600 dark:text-slate-300"
                     >
                       #{tag}
                     </span>
                   ))}
                   {place.hours && (
-                    <span className="px-2 py-0.5 rounded-md bg-[var(--color-surface-alt)] border border-[var(--color-border)] text-[10.5px] font-mono text-[var(--color-text-muted)] flex items-center gap-1">
-                      <Clock className="w-2.5 h-2.5" />
+                    <span className="px-2.5 py-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 text-[11px] font-mono text-slate-500 flex items-center gap-1">
+                      <Clock className="w-3 h-3 text-slate-400" />
                       <span>{place.hours}</span>
                     </span>
                   )}
                 </div>
 
                 {/* Bottom Action Row: Google Maps Navigation & Details */}
-                <div className="pt-2 border-t border-[var(--color-border)] flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-1.5">
+                <div className="pt-2.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
                     {/* Google Maps Button */}
                     <button
                       onClick={() => openGoogleMaps(place.googleMapsQuery)}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[var(--color-blue-soft)] hover:bg-blue-100 text-[var(--color-blue)] font-bold text-xs border border-[var(--color-blue-border)] shadow-2xs transition-all active:scale-95 cursor-pointer"
+                      className="h-9 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 text-xs font-bold flex items-center gap-1.5 transition-all border border-slate-200 dark:border-slate-700 cursor-pointer active:scale-95"
                     >
-                      <Navigation className="w-3.5 h-3.5 fill-current" />
-                      <span>길찾기 (Google Maps)</span>
+                      <Navigation className="w-3.5 h-3.5 text-blue-600" />
+                      <span>구글맵 길찾기</span>
                     </button>
 
                     {/* Call Button */}

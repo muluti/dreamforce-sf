@@ -339,34 +339,34 @@ export const MemosTab: React.FC<MemosTabProps> = ({
       </section>
 
       {/* 2. Search & Filter Bar */}
-      <section className="space-y-2.5">
+      <section className="space-y-3">
         <div className="relative">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--color-text-muted)]" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="메모 제목, 내용, 태그, 위치 검색..."
-            className="w-full pl-9 pr-8 py-2.5 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] text-xs text-[var(--color-foreground)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-blue-500 shadow-2xs"
+            className="w-full min-h-[44px] pl-10 pr-9 py-2.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-[var(--color-blue)] shadow-xs"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 text-slate-400 hover:text-slate-600"
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600"
             >
-              <X className="w-3.5 h-3.5" />
+              <X className="w-4 h-4" />
             </button>
           )}
         </div>
 
         {/* Category Pill Filters */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs">
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden text-xs">
           <button
             onClick={() => setSelectedCategory("all")}
-            className={`px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-all cursor-pointer ${
+            className={`h-9 px-3.5 rounded-xl font-bold whitespace-nowrap transition-all cursor-pointer ${
               selectedCategory === "all"
-                ? "bg-[var(--color-foreground)] text-[var(--color-surface)] shadow-2xs"
-                : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-slate-400"
+                ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-xs"
+                : "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-slate-300"
             }`}
           >
             전체 ({memos.length})
@@ -380,28 +380,28 @@ export const MemosTab: React.FC<MemosTabProps> = ({
               <button
                 key={catKey}
                 onClick={() => setSelectedCategory(catKey)}
-                className={`px-2.5 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-all flex items-center gap-1 cursor-pointer ${
+                className={`h-9 px-3 rounded-xl font-bold whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer border ${
                   isSelected
-                    ? "bg-blue-600 text-white shadow-2xs"
-                    : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-slate-400"
+                    ? "bg-[var(--color-blue)] text-white border-[var(--color-blue)] shadow-xs"
+                    : "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-slate-300"
                 }`}
               >
                 <span>{meta.icon}</span>
                 <span>{meta.label}</span>
-                <span className="text-[10px] opacity-75">({count})</span>
+                <span className="text-[11px] opacity-75">({count})</span>
               </button>
             );
           })}
 
           <button
             onClick={() => setShowPinnedOnly(!showPinnedOnly)}
-            className={`px-2.5 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-all flex items-center gap-1 cursor-pointer ml-auto ${
+            className={`h-9 px-3 rounded-xl font-bold whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer ml-auto border ${
               showPinnedOnly
-                ? "bg-amber-500 text-white shadow-2xs"
-                : "bg-[var(--color-surface)] text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800/60"
+                ? "bg-amber-500 text-white border-amber-500 shadow-xs"
+                : "bg-white dark:bg-slate-900 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800/60"
             }`}
           >
-            <Pin className="w-3 h-3" />
+            <Pin className="w-3.5 h-3.5" />
             <span>고정만</span>
           </button>
         </div>
@@ -410,22 +410,22 @@ export const MemosTab: React.FC<MemosTabProps> = ({
       {/* 3. Memo List */}
       <section className="space-y-3.5">
         {filteredMemos.length === 0 ? (
-          <div className="notion-card p-10 text-center space-y-3">
+          <div className="rounded-3xl border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 p-10 text-center space-y-3">
             <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/40 text-blue-500 flex items-center justify-center mx-auto">
               <StickyNote className="w-6 h-6" />
             </div>
-            <h3 className="text-sm font-bold text-[var(--color-foreground)]">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
               {searchQuery ? "검색 결과와 일치하는 메모가 없습니다" : "작성된 메모가 없습니다"}
             </h3>
-            <p className="text-xs text-[var(--color-text-secondary)] max-w-xs mx-auto">
+            <p className="text-xs text-slate-500 max-w-xs mx-auto font-medium">
               {searchQuery
                 ? "다른 검색어나 카테고리 필터를 선택해 보세요."
-                : "세션 요약이나 현장 사진, 맛집 메모를 첫 번째로 남겨보세요!"}
+                : "세션 요약이나 현장 사진, 영수증 메모를 첫 번째로 남겨보세요!"}
             </p>
             {!searchQuery && (
               <button
                 onClick={handleOpenCreate}
-                className="notion-button-primary inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold mt-2"
+                className="inline-flex items-center gap-1.5 min-h-[42px] px-4 rounded-xl bg-[var(--color-blue)] text-white text-xs font-bold shadow-xs active:scale-95 transition-all mt-2"
               >
                 <Plus className="w-4 h-4" />
                 <span>첫 메모 남기기</span>
@@ -440,18 +440,18 @@ export const MemosTab: React.FC<MemosTabProps> = ({
             return (
               <div
                 key={memo.id}
-                className={`notion-card p-4 space-y-3 transition-all relative ${
+                className={`rounded-3xl border p-4 sm:p-5 space-y-3 transition-all relative bg-white dark:bg-slate-900 shadow-xs ${
                   memo.isPinned
-                    ? "border-amber-300 dark:border-amber-700/60 bg-gradient-to-b from-amber-500/[0.04] to-transparent shadow-sm"
-                    : "border-[var(--color-border)]"
+                    ? "border-amber-300/80 dark:border-amber-700/60 ring-1 ring-amber-400/20"
+                    : "border-slate-200/90 dark:border-slate-800 hover:border-slate-300"
                 }`}
               >
                 {/* Card Header */}
                 <div className="flex items-start justify-between gap-2">
-                  <div className="flex flex-wrap items-center gap-1.5">
+                  <div className="flex flex-wrap items-center gap-2">
                     {/* Category Badge */}
                     <span
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-[11px] font-bold border ${cat.bg} ${cat.text} ${cat.border}`}
+                      className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg text-[11.5px] font-bold border ${cat.bg} ${cat.text} ${cat.border}`}
                     >
                       <span>{cat.icon}</span>
                       <span>{cat.label}</span>
@@ -459,14 +459,14 @@ export const MemosTab: React.FC<MemosTabProps> = ({
 
                     {/* Location Badge */}
                     {memo.location && (
-                      <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-lg text-[11px] font-medium bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] border border-[var(--color-border)]">
-                        <MapPin className="w-3 h-3 text-red-500" />
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg text-[11.5px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                        <MapPin className="w-3 h-3 text-rose-500" />
                         <span>{memo.location}</span>
                       </span>
                     )}
 
                     {/* Date */}
-                    <span className="text-[11px] text-[var(--color-text-muted)] font-mono">
+                    <span className="text-[12px] text-slate-400 font-mono">
                       {memo.createdAt}
                       {memo.updatedAt && " (수정됨)"}
                     </span>
@@ -487,13 +487,13 @@ export const MemosTab: React.FC<MemosTabProps> = ({
                 </div>
 
                 {/* Title */}
-                <h3 className="text-base font-bold text-[var(--color-foreground)] tracking-tight">
+                <h3 className="text-[16px] sm:text-[17px] font-black text-slate-900 dark:text-white tracking-tight leading-snug">
                   {memo.title}
                 </h3>
 
-                {/* Content */}
+                {/* Content (14px 가독성 폰트) */}
                 {memo.content && (
-                  <p className="text-xs leading-relaxed text-[var(--color-foreground)]/90 whitespace-pre-wrap font-normal">
+                  <p className="text-[14px] leading-relaxed text-slate-700 dark:text-slate-300 whitespace-pre-wrap font-normal">
                     {memo.content}
                   </p>
                 )}

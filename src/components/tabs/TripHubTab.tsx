@@ -245,13 +245,13 @@ ${partners || "- 파트너 미팅 완료"}
 
   return (
     <div className="space-y-4 w-full">
-      {/* 3절 헤더 레이블 */}
+      {/* 헤더 타이틀 */}
       <div className="px-1">
-        <p className="notion-kicker">TRIP HUB</p>
         <h2 className="text-[19px] sm:text-[20px] font-black text-slate-900 dark:text-white tracking-tight">출장 허브</h2>
+        <p className="text-[12px] text-slate-500 dark:text-slate-400 font-medium">출장 필수 서류, 준비물, 명함 및 경비 정산</p>
       </div>
 
-      {/* 5개 서브 탭 네비게이션 */}
+      {/* 5개 서브 탭 네비게이션: 완벽한 5분할 */}
       <div className="grid grid-cols-5 gap-1 p-1 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs">
         {(["docs", "checklist", "team", "expenses", "safety"] as const).map((tab) => {
           const isActive = subTab === tab;
@@ -285,14 +285,14 @@ ${partners || "- 파트너 미팅 완료"}
             return (
               <article
                 key={doc.id}
-                className="os-virtualized-card w-full overflow-hidden rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 shadow-sm space-y-3"
+                className="w-full overflow-hidden rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 sm:p-5 shadow-xs space-y-3"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <span className="shrink-0 rounded-[4px] border border-blue-100 bg-blue-50 px-1.5 py-0.5 text-[10px] font-bold text-blue-600 mb-1 inline-block">
+                    <span className="rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-200/80 dark:border-blue-900/50 px-2 py-0.5 text-[11px] font-black text-blue-700 dark:text-blue-300 mb-1.5 inline-block">
                       {doc.subtitle}
                     </span>
-                    <h4 className="text-[15px] font-semibold text-[var(--color-foreground)] tracking-tight">{doc.title}</h4>
+                    <h4 className="text-[16px] sm:text-[17px] font-black text-slate-900 dark:text-white tracking-tight">{doc.title}</h4>
                   </div>
 
                   <button
@@ -303,16 +303,22 @@ ${partners || "- 파트너 미팅 완료"}
                         (updatedList) => onUpdateDocument({ ...doc, media: updatedList })
                       )
                     }
-                    className={`px-2.5 py-1.5 rounded-lg text-xs flex items-center gap-1 transition-all active:scale-95 cursor-pointer font-bold ${
+                    className={`h-8 px-3 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all border ${
                       hasMedia
-                        ? "bg-blue-50 text-[var(--color-blue)] border border-blue-200"
-                        : "bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] border border-[var(--color-border)]"
+                        ? "bg-blue-50 text-[var(--color-blue)] border-blue-200 dark:bg-blue-950/50"
+                        : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700"
                     }`}
                   >
                     <Film className="h-3.5 w-3.5" />
-                    <span>{hasMedia ? `사진 (${doc.media?.length})` : "+ 사진"}</span>
+                    <span>{hasMedia ? `첨부 (${doc.media?.length})` : "사진/PDF"}</span>
                   </button>
                 </div>
+
+                {doc.notes && (
+                  <p className="text-[14px] text-slate-700 dark:text-slate-300 leading-relaxed font-normal whitespace-pre-line">
+                    {doc.notes}
+                  </p>
+                )}
 
                 {doc.id === "doc-icn-sfo-guide" && onOpenFlightGuide && (
                   <button
