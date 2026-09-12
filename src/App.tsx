@@ -42,6 +42,7 @@ export function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => isSessionAuthenticated());
   const [isChangingPin, setIsChangingPin] = useState(false);
   const [activeTab, setActiveTab] = useState<TabType>("dashboard");
+  const [scheduleViewMode, setScheduleViewMode] = useState<"timeline" | "timetable">("timeline");
 
   // Survival Toolkit Modal States
   const [isFlightGuideOpen, setIsFlightGuideOpen] = useState(false);
@@ -431,6 +432,10 @@ export function App() {
               onOpenEnglishSos={() => setIsEnglishSosOpen(true)}
               onOpenCalculator={() => setIsCalculatorOpen(true)}
               onOpenEmergencySos={() => setIsEmergencySosOpen(true)}
+              onOpenTimetable={() => {
+                setScheduleViewMode("timetable");
+                setActiveTab("schedule");
+              }}
               onSelectEvent={(evt) => {
                 setActiveTab("schedule");
               }}
@@ -445,6 +450,8 @@ export function App() {
               onDeleteEvent={handleDeleteEvent}
               onOpenMediaModal={handleOpenMediaModal}
               onOpenFlightGuide={() => setIsFlightGuideOpen(true)}
+              viewMode={scheduleViewMode}
+              onViewModeChange={setScheduleViewMode}
             />
           )}
 

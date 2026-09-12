@@ -25,6 +25,7 @@ import {
   ChevronRight
 } from "lucide-react";
 import { TimelineEvent, MediaItem } from "../../types";
+import { SessionTimetable } from "../SessionTimetable";
 
 interface ScheduleTabProps {
   events: TimelineEvent[];
@@ -33,6 +34,8 @@ interface ScheduleTabProps {
   onDeleteEvent: (id: string) => void;
   onOpenMediaModal: (title: string, mediaList: MediaItem[], onUpdate: (items: MediaItem[]) => void) => void;
   onOpenFlightGuide?: () => void;
+  viewMode?: "timeline" | "timetable";
+  onViewModeChange?: (mode: "timeline" | "timetable") => void;
 }
 
 const DATES = [
@@ -104,8 +107,18 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
   onUpdateEvent,
   onDeleteEvent,
   onOpenMediaModal,
-  onOpenFlightGuide
+  onOpenFlightGuide,
+  viewMode,
+  onViewModeChange
 }) => {
+  const [internalViewMode, setInternalViewMode] = useState<"timeline" | "timetable">(viewMode || "timeline");
+  const currentViewMode = viewMode ?? internalViewMode;
+
+  const setViewMode = (mode: "timeline" | "timetable") => {
+    if (onViewModeChange) onViewModeChange(mode);
+    setInternalViewMode(mode);
+  };
+
   const [selectedDate, setSelectedDate] = useState("all");
   const [showMosconeGuide, setShowMosconeGuide] = useState(false);
   const [guideSubTab, setGuideSubTab] = useState<"map" | "agenda" | "ohana">("map");
@@ -230,25 +243,51 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
         </div>
       </div>
 
+      {/* 뷰 모드 스위처 (내 여행 일정 vs 세션 타임테이블) */}
+      <div className="grid grid-cols-2 p-1 rounded-2xl bg-slate-100 dark:bg-slate-800 text-xs font-bold shadow-inner">
+        <button
+          onClick={() => setViewMode("timeline")}
+          className={`py-2 px-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+            currentViewMode === "timeline"
+              ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs font-black"
+              : "text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
+          }`}
+        >
+          <Calendar className="w-3.5 h-3.5" />
+          <span>내 여행 일정 (9/13~9/18)</span>
+        </button>
+        <button
+          onClick={() => setViewMode("timetable")}
+          className={`py-2 px-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+            currentViewMode === "timetable"
+              ? "bg-gradient-to-r from-[#0b5cff] to-[#7c3aed] text-white shadow-xs font-black"
+              : "text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
+          }`}
+        >
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>세션 테이블 (JS Timetable)</span>
+        </button>
+      </div>
+
       {/* 스마트 캠퍼스 & 아젠다 가이드 확장 패널 */}
       {showMosconeGuide && (
         <div className="rounded-2xl border border-blue-200/80 dark:border-blue-800/60 bg-blue-50/70 dark:bg-blue-950/30 p-3.5 space-y-3 shadow-sm text-xs">
-          {/* 가이드 상단 탭 (맵 / 아젠다 / 오하나) */}
+          {/* 가이드 상단 탭 (맵 / 아젠다 / 오하나 / 세션표) */}
           <div className="flex items-center justify-between gap-1 pb-1 border-b border-blue-200/60 dark:border-blue-800/40">
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 overflow-x-auto pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               <button
                 onClick={() => setGuideSubTab("map")}
-                className={`px-2.5 py-1.5 rounded-lg font-bold transition-all ${
+                className={`px-2.5 py-1.5 rounded-lg font-bold transition-all shrink-0 ${
                   guideSubTab === "map"
                     ? "bg-[var(--color-blue)] text-white shadow-xs"
                     : "bg-white/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300"
                 }`}
               >
-                🗺️ 캠퍼스 맵 (16개 구역)
+                🗺️ 캠퍼스 맵
               </button>
               <button
                 onClick={() => setGuideSubTab("agenda")}
-                className={`px-2.5 py-1.5 rounded-lg font-bold transition-all ${
+                className={`px-2.5 py-1.5 rounded-lg font-bold transition-all shrink-0 ${
                   guideSubTab === "agenda"
                     ? "bg-[var(--color-blue)] text-white shadow-xs"
                     : "bg-white/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300"
@@ -258,13 +297,22 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
               </button>
               <button
                 onClick={() => setGuideSubTab("ohana")}
-                className={`px-2.5 py-1.5 rounded-lg font-bold transition-all ${
+                className={`px-2.5 py-1.5 rounded-lg font-bold transition-all shrink-0 ${
                   guideSubTab === "ohana"
                     ? "bg-purple-600 text-white shadow-xs"
                     : "bg-white/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300"
                 }`}
               >
                 🏢 오하나 투어
+              </button>
+              <button
+                onClick={() => {
+                  setViewMode("timetable");
+                  setShowMosconeGuide(false);
+                }}
+                className="px-2.5 py-1.5 rounded-lg font-bold transition-all shrink-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-xs"
+              >
+                ⚡ 세션표 열기
               </button>
             </div>
 
@@ -446,171 +494,180 @@ export const ScheduleTab: React.FC<ScheduleTabProps> = ({
         </div>
       )}
 
-      {/* 날짜 필터: 스크롤바 완벽 제거 및 둥근 알약 탭 */}
-      <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-        {DATES.map((d) => {
-          const isActive = selectedDate === d.date;
-          return (
-            <button
-              key={d.date}
-              onClick={() => setSelectedDate(d.date)}
-              className={`px-3.5 py-2 rounded-2xl shrink-0 text-center transition-all cursor-pointer border active:scale-95 ${
-                isActive
-                  ? "border-[var(--color-blue)] bg-[var(--color-blue)] text-white font-black shadow-xs"
-                  : "border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 font-semibold hover:border-slate-300"
-              }`}
-            >
-              <div className="text-[13px] font-black leading-tight">{d.label}</div>
-              <div className={`text-[11px] font-medium mt-0.5 ${isActive ? "text-blue-100" : "text-slate-400"}`}>
-                {d.sub}
-              </div>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* 일정 리스트 카드 목록: 군더더기 없는 모던 클린 카드 */}
-      <div className="space-y-3">
-        {/* 날짜별 핵심 가이드 팁 (선택된 날짜에만 간결하게 표시) */}
-        {selectedDate !== "all" && DAILY_MISSIONS[selectedDate] && (
-          <div className="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850 space-y-1 shadow-xs">
-            <div className="flex items-center gap-1.5 font-black text-[13px] text-slate-900 dark:text-white">
-              <span>🧭</span>
-              <span>{DAILY_MISSIONS[selectedDate].badge}</span>
-            </div>
-            <p className="text-[12.5px] font-medium text-slate-600 dark:text-slate-300 leading-relaxed">
-              {DAILY_MISSIONS[selectedDate].mission}
-            </p>
-          </div>
-        )}
-
-        {filteredEvents.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 px-4 py-12 text-center text-sm text-slate-400 font-medium">
-            해당 날짜에 등록된 일정이 없습니다.
-          </div>
-        ) : (
-          filteredEvents.map((evt) => {
-            const hasMedia = evt.media && evt.media.length > 0;
-
-            return (
-              <article
-                key={evt.id}
-                className={`w-full overflow-hidden rounded-3xl border transition-all duration-150 shadow-xs p-4 sm:p-5 space-y-3 bg-white dark:bg-slate-900 ${
-                  evt.completed
-                    ? "border-slate-200 dark:border-slate-800 opacity-60 bg-slate-50/80 dark:bg-slate-900/80"
-                    : "border-slate-200/90 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700"
-                }`}
-              >
-                {/* 1. 상단 헤더: 체크박스 + 큰 시간 타이포 + 날짜 + MUST (좌) / 수정·삭제 (우) */}
-                <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-slate-100 dark:border-slate-800">
-                  <div className="flex items-center gap-2 min-w-0 flex-wrap">
-                    {/* 완료 체크 버튼 */}
-                    <button
-                      onClick={() => toggleComplete(evt)}
-                      className="text-slate-400 hover:text-emerald-600 transition-colors cursor-pointer shrink-0"
-                      title={evt.completed ? "완료 해제" : "완료 체크"}
-                    >
-                      {evt.completed ? (
-                        <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                      ) : (
-                        <Circle className="w-5 h-5 text-slate-300 dark:text-slate-600 hover:text-slate-400" />
-                      )}
-                    </button>
-
-                    {/* 시원한 텍스트 시간 (회색 박스 완전 제거) */}
-                    <span className="text-[16px] sm:text-[17px] font-black text-slate-900 dark:text-white stripe-number tracking-tight whitespace-nowrap">
-                      {evt.time}
-                    </span>
-
-                    <span className="text-[12px] font-bold text-slate-400 font-mono">
-                      {evt.date.slice(5)}
-                    </span>
-
-                    {evt.isImportant && (
-                      <span className="px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 text-[10.5px] font-black uppercase tracking-wider shrink-0 border border-rose-200/80 dark:border-rose-900/50">
-                        MUST
-                      </span>
-                    )}
+      {currentViewMode === "timetable" ? (
+        <SessionTimetable
+          timelineEvents={events}
+          onAddEventToTimeline={onAddEvent}
+        />
+      ) : (
+        <>
+          {/* 날짜 필터: 스크롤바 완벽 제거 및 둥근 알약 탭 */}
+          <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            {DATES.map((d) => {
+              const isActive = selectedDate === d.date;
+              return (
+                <button
+                  key={d.date}
+                  onClick={() => setSelectedDate(d.date)}
+                  className={`px-3.5 py-2 rounded-2xl shrink-0 text-center transition-all cursor-pointer border active:scale-95 ${
+                    isActive
+                      ? "border-[var(--color-blue)] bg-[var(--color-blue)] text-white font-black shadow-xs"
+                      : "border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 font-semibold hover:border-slate-300"
+                  }`}
+                >
+                  <div className="text-[13px] font-black leading-tight">{d.label}</div>
+                  <div className={`text-[11px] font-medium mt-0.5 ${isActive ? "text-blue-100" : "text-slate-400"}`}>
+                    {d.sub}
                   </div>
+                </button>
+              );
+            })}
+          </div>
 
-                  {/* 우측 상단: 단정한 수정 / 삭제 버튼 */}
-                  <div className="flex items-center gap-1 shrink-0">
-                    <button
-                      onClick={() => handleOpenEdit(evt)}
-                      className="h-7 px-2 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-xs font-bold flex items-center gap-1 cursor-pointer"
-                      title="수정"
-                    >
-                      <Edit3 className="w-3.5 h-3.5" />
-                      <span className="text-[11px]">수정</span>
-                    </button>
-
-                    <button
-                      onClick={() => onDeleteEvent(evt.id)}
-                      className="h-7 w-7 rounded-lg text-slate-300 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors flex items-center justify-center cursor-pointer"
-                      title="삭제"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+          {/* 일정 리스트 카드 목록: 군더더기 없는 모던 클린 카드 */}
+          <div className="space-y-3">
+            {/* 날짜별 핵심 가이드 팁 (선택된 날짜에만 간결하게 표시) */}
+            {selectedDate !== "all" && DAILY_MISSIONS[selectedDate] && (
+              <div className="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850 space-y-1 shadow-xs">
+                <div className="flex items-center gap-1.5 font-black text-[13px] text-slate-900 dark:text-white">
+                  <span>🧭</span>
+                  <span>{DAILY_MISSIONS[selectedDate].badge}</span>
                 </div>
-
-                {/* 2. 타이틀 & 장소 */}
-                <div>
-                  <h3
-                    className={`text-[17px] font-black tracking-tight text-slate-900 dark:text-white leading-snug ${
-                      evt.completed ? "line-through text-slate-400 dark:text-slate-500" : ""
-                    }`}
-                  >
-                    {evt.title}
-                  </h3>
-
-                  <p className="text-[13px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5 font-medium mt-1">
-                    <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                    <span>{evt.location}</span>
-                  </p>
-                </div>
-
-                {/* 3. 본문 설명 (14.5px 시원한 가독성) */}
-                <p className="text-[14.5px] text-slate-700 dark:text-slate-300 leading-relaxed font-normal whitespace-pre-line">
-                  {evt.description}
+                <p className="text-[12.5px] font-medium text-slate-600 dark:text-slate-300 leading-relaxed">
+                  {DAILY_MISSIONS[selectedDate].mission}
                 </p>
+              </div>
+            )}
 
-                {/* 4. 실전 팁: 품격 있는 인라인 콜아웃 */}
-                {evt.proTip && (
-                  <div className="p-3.5 rounded-2xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/70 dark:border-amber-900/40 text-[13px] text-amber-950 dark:text-amber-200">
-                    <p className="font-bold flex items-center gap-1 text-amber-800 dark:text-amber-400 text-xs mb-1">
-                      <Sparkles className="w-3.5 h-3.5 shrink-0" />
-                      <span>실전 팁</span>
-                    </p>
-                    <p className="leading-relaxed whitespace-pre-line font-medium">{evt.proTip}</p>
-                  </div>
-                )}
+            {filteredEvents.length === 0 ? (
+              <div className="rounded-2xl border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 px-4 py-12 text-center text-sm text-slate-400 font-medium">
+                해당 날짜에 등록된 일정이 없습니다.
+              </div>
+            ) : (
+              filteredEvents.map((evt) => {
+                const hasMedia = evt.media && evt.media.length > 0;
 
-                {/* 5. 하단 사진 첨부 바: 넉넉하고 편안한 터치 */}
-                <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
-                  <button
-                    onClick={() =>
-                      onOpenMediaModal(
-                        evt.title,
-                        evt.media || [],
-                        (updatedList) => onUpdateEvent({ ...evt, media: updatedList })
-                      )
-                    }
-                    className={`h-8 px-3 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
-                      hasMedia
-                        ? "bg-blue-50 text-[var(--color-blue)] border border-blue-200 dark:bg-blue-950/50"
-                        : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+                return (
+                  <article
+                    key={evt.id}
+                    className={`w-full overflow-hidden rounded-3xl border transition-all duration-150 shadow-xs p-4 sm:p-5 space-y-3 bg-white dark:bg-slate-900 ${
+                      evt.completed
+                        ? "border-slate-200 dark:border-slate-800 opacity-60 bg-slate-50/80 dark:bg-slate-900/80"
+                        : "border-slate-200/90 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700"
                     }`}
                   >
-                    <Film className="w-3.5 h-3.5" />
-                    <span>{hasMedia ? `사진 ${evt.media?.length}장` : "사진 첨부"}</span>
-                  </button>
-                </div>
-              </article>
-            );
-          })
-        )}
-      </div>
+                    {/* 1. 상단 헤더: 체크박스 + 큰 시간 타이포 + 날짜 + MUST (좌) / 수정·삭제 (우) */}
+                    <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-slate-100 dark:border-slate-800">
+                      <div className="flex items-center gap-2 min-w-0 flex-wrap">
+                        {/* 완료 체크 버튼 */}
+                        <button
+                          onClick={() => toggleComplete(evt)}
+                          className="text-slate-400 hover:text-emerald-600 transition-colors cursor-pointer shrink-0"
+                          title={evt.completed ? "완료 해제" : "완료 체크"}
+                        >
+                          {evt.completed ? (
+                            <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                          ) : (
+                            <Circle className="w-5 h-5 text-slate-300 dark:text-slate-600 hover:text-slate-400" />
+                          )}
+                        </button>
+
+                        {/* 시원한 텍스트 시간 (회색 박스 완전 제거) */}
+                        <span className="text-[16px] sm:text-[17px] font-black text-slate-900 dark:text-white stripe-number tracking-tight whitespace-nowrap">
+                          {evt.time}
+                        </span>
+
+                        <span className="text-[12px] font-bold text-slate-400 font-mono">
+                          {evt.date.slice(5)}
+                        </span>
+
+                        {evt.isImportant && (
+                          <span className="px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 text-[10.5px] font-black uppercase tracking-wider shrink-0 border border-rose-200/80 dark:border-rose-900/50">
+                            MUST
+                          </span>
+                        )}
+                      </div>
+
+                      {/* 우측 상단: 단정한 수정 / 삭제 버튼 */}
+                      <div className="flex items-center gap-1 shrink-0">
+                        <button
+                          onClick={() => handleOpenEdit(evt)}
+                          className="h-7 px-2 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-xs font-bold flex items-center gap-1 cursor-pointer"
+                          title="수정"
+                        >
+                          <Edit3 className="w-3.5 h-3.5" />
+                          <span className="text-[11px]">수정</span>
+                        </button>
+
+                        <button
+                          onClick={() => onDeleteEvent(evt.id)}
+                          className="h-7 w-7 rounded-lg text-slate-300 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors flex items-center justify-center cursor-pointer"
+                          title="삭제"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* 2. 타이틀 & 장소 */}
+                    <div>
+                      <h3
+                        className={`text-[17px] font-black tracking-tight text-slate-900 dark:text-white leading-snug ${
+                          evt.completed ? "line-through text-slate-400 dark:text-slate-500" : ""
+                        }`}
+                      >
+                        {evt.title}
+                      </h3>
+
+                      <p className="text-[13px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5 font-medium mt-1">
+                        <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                        <span>{evt.location}</span>
+                      </p>
+                    </div>
+
+                    {/* 3. 본문 설명 (14.5px 시원한 가독성) */}
+                    <p className="text-[14.5px] text-slate-700 dark:text-slate-300 leading-relaxed font-normal whitespace-pre-line">
+                      {evt.description}
+                    </p>
+
+                    {/* 4. 실전 팁: 품격 있는 인라인 콜아웃 */}
+                    {evt.proTip && (
+                      <div className="p-3.5 rounded-2xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/70 dark:border-amber-900/40 text-[13px] text-amber-950 dark:text-amber-200">
+                        <p className="font-bold flex items-center gap-1 text-amber-800 dark:text-amber-400 text-xs mb-1">
+                          <Sparkles className="w-3.5 h-3.5 shrink-0" />
+                          <span>실전 팁</span>
+                        </p>
+                        <p className="leading-relaxed whitespace-pre-line font-medium">{evt.proTip}</p>
+                      </div>
+                    )}
+
+                    {/* 5. 하단 사진 첨부 바: 넉넉하고 편안한 터치 */}
+                    <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
+                      <button
+                        onClick={() =>
+                          onOpenMediaModal(
+                            evt.title,
+                            evt.media || [],
+                            (updatedList) => onUpdateEvent({ ...evt, media: updatedList })
+                          )
+                        }
+                        className={`h-8 px-3 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+                          hasMedia
+                            ? "bg-blue-50 text-[var(--color-blue)] border border-blue-200 dark:bg-blue-950/50"
+                            : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+                        }`}
+                      >
+                        <Film className="w-3.5 h-3.5" />
+                        <span>{hasMedia ? `사진 ${evt.media?.length}장` : "사진 첨부"}</span>
+                      </button>
+                    </div>
+                  </article>
+                );
+              })
+            )}
+          </div>
+        </>
+      )}
 
       {/* 일정 추가/수정 모달 */}
       {isEditing && (

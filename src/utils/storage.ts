@@ -1,13 +1,14 @@
 import { AppData } from "../types";
 import { initialAppData } from "../data/initialData";
 
-const STORAGE_KEY = "dreampass_app_data_v9";
+const STORAGE_KEY = "dreampass_app_data_v10";
 const AUTH_KEY = "dreampass_auth_session";
 
 export function loadAppData(): AppData {
   try {
     const raw =
       localStorage.getItem(STORAGE_KEY) ||
+      localStorage.getItem("dreampass_app_data_v9") ||
       localStorage.getItem("dreampass_app_data_v8") ||
       localStorage.getItem("dreampass_app_data_v7") ||
       localStorage.getItem("dreampass_app_data_v6") ||

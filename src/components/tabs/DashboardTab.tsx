@@ -30,6 +30,7 @@ interface DashboardTabProps {
   onOpenEnglishSos?: () => void;
   onOpenCalculator?: () => void;
   onOpenEmergencySos?: () => void;
+  onOpenTimetable?: () => void;
   onSelectEvent: (event: TimelineEvent) => void;
 }
 
@@ -41,6 +42,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
   onOpenEnglishSos,
   onOpenCalculator,
   onOpenEmergencySos,
+  onOpenTimetable,
   onSelectEvent
 }) => {
   const upcomingEvents = data.timelineEvents
@@ -159,6 +161,37 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
           )}
         </div>
       </div>
+
+      {/* 2.5 드림포스 세션 타임테이블 배너 */}
+      {onOpenTimetable && (
+        <div
+          onClick={onOpenTimetable}
+          className="rounded-2xl border border-blue-200/90 dark:border-blue-800 bg-gradient-to-r from-blue-50/90 via-indigo-50/80 to-purple-50/90 dark:from-blue-950/40 dark:via-indigo-950/30 dark:to-purple-950/40 p-4 flex items-center justify-between transition-all duration-200 active:scale-[0.98] shadow-xs hover:border-blue-400 cursor-pointer group"
+        >
+          <div className="flex items-center gap-3.5 min-w-0">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 text-white shadow-2xs group-hover:scale-105 transition-transform">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="px-1.5 py-0.5 rounded text-[11px] font-black bg-blue-600 text-white shadow-2xs">
+                  JS TIMETABLE
+                </span>
+                <span className="text-[11.5px] font-extrabold text-purple-700 dark:text-purple-300">
+                  추천 세션 TOP 8 · 충돌 감지
+                </span>
+              </div>
+              <h4 className="text-[15px] font-black text-slate-900 dark:text-white mt-0.5 truncate">
+                드림포스 2026 세션 타임테이블
+              </h4>
+              <p className="text-[12px] text-slate-600 dark:text-slate-300 truncate">
+                공식 1,421개 카탈로그 기반 파트너 추천 & 한국 프로그램
+              </p>
+            </div>
+          </div>
+          <ChevronRight className="w-5 h-5 text-blue-600 group-hover:translate-x-0.5 transition-transform shrink-0 ml-2" />
+        </div>
+      )}
 
       {/* 3. 현장 메모 & 치안 알림 배너 */}
       <div className="grid grid-cols-1 gap-2.5">

@@ -102,11 +102,11 @@ export const initialAppData: AppData = {
     {
       id: "ev-6",
       date: "2026-09-14",
-      time: "10:00 - 12:30",
-      title: "★ [필수] 드림포스 사전 배지(Badge) 수령 & 모스콘 캠퍼스 답사",
+      time: "11:00 - 21:00",
+      title: "★ [필수] Badge Pickup (사전 배지 수령)",
       category: "keynote",
-      location: "Moscone West L1 (Registration) / Yerba Buena Gardens",
-      description: "★ 월요일 사전 배지 수령 필수! Moscone West 1층 등록 센터에서 실물 여권과 사전등록 바코드를 제시하고 목걸이 배지 및 웰컴 키트 수령",
+      location: "Moscone West · Level 1",
+      description: "가능하면 9/14에 미리 수령. General Guest 기준 11:00 AM–9:00 PM. 실물 여권과 사전등록 바코드를 제시하고 목걸이 배지 및 웰컴 키트 수령",
       proTip: "⚠️ 화요일 개막 당일 아침에는 배지 수령 줄이 30~60분 이상 길어집니다! 9/14(월)에 미리 받아두면 화요일 일정이 여유롭습니다. 실물 여권 지참 필수(사진 불가)!",
       isImportant: true,
       completed: false
@@ -129,8 +129,20 @@ export const initialAppData: AppData = {
       title: "🌉 🇰🇷 Korea Trailblazers Night (한국 참가자 공식 디너 & 네트워킹)",
       category: "party",
       location: "BIX SAN FRANCISCO (56 Gold St, San Francisco)",
-      description: "세일즈포스 코리아 주최 공식 한국 참가자 네트워킹 디너 리셉션. 역사적인 재즈바에서 최고급 핑거푸드와 주류가 무제한 제공되며, 국내 디지털 혁신 리더들과 교류",
+      description: "세일즈포스 코리아 주최 공식 한국 참가자 네트워킹 디너 리셉션. 역사적인 재즈바에서 최고급 핑거푸드와 주류가 무제한 제공되며, 국내 디지털 혁신 리더들과 교류. (18:00 Check-in -> 18:30 Welcome -> 20:40 Lucky Draw)",
       proTip: "★ BIX SF는 차이나타운 인근 골목에 위치합니다. 안전을 위해 모스콘이나 숙소에서 우버/택시를 타고 이동하세요! 영문 명함과 스마트폰 링크드인 QR 필수 지참.",
+      isImportant: true,
+      completed: false
+    },
+    {
+      id: "df-ev-reco-connect",
+      date: "2026-09-15",
+      time: "08:30 - 08:50",
+      title: "💡 [추천 TOP 1] Build Salesforce Connect Adapters with Agentforce Vibes",
+      category: "session",
+      location: "Moscone West L1 · Developer Grove",
+      description: "자연어와 Claude Code로 Salesforce Connect Adapter/Handler를 만드는 실전 세션. 비개발자 관점에서도 AI가 Salesforce 개발을 어떻게 바꾸는지 가장 직접적으로 확인 가능",
+      proTip: "Agentforce와 Claude Code 연동의 실제 구현 방식을 체감할 수 있는 20분 집중 세션입니다.",
       isImportant: true,
       completed: false
     },
@@ -149,7 +161,7 @@ export const initialAppData: AppData = {
     {
       id: "ev-cityview-15",
       date: "2026-09-15",
-      time: "11:45 - 13:00",
+      time: "11:45 - 12:30",
       title: "☕ 2번 City View International Lounge (KR / JP / TW 라운지) 휴식 & 커피",
       category: "custom",
       location: "City View (Metreon 인근, 캠퍼스 맵 2번 구역)",
@@ -158,14 +170,58 @@ export const initialAppData: AppData = {
       completed: false
     },
     {
+      id: "df-ev-reco-fabric-15",
+      date: "2026-09-15",
+      time: "12:30 - 12:50",
+      title: "💡 [추천 TOP 2] Build AI Experiences with Agent Fabric",
+      category: "session",
+      location: "Moscone West L2 · Theater 5",
+      description: "에이전트·모델·MCP 서버를 찾아 하나의 AI 경험으로 오케스트레이션. MuleSoft/통합 아키텍처와 Agentic AI를 연결하는 핵심 세션",
+      proTip: "MuleSoft 생태계와 MCP 서버 오케스트레이션 구조를 파악하기에 매우 적합합니다.",
+      isImportant: true,
+      completed: false
+    },
+    {
+      id: "df-ev-reco-ai-design",
+      date: "2026-09-15",
+      time: "13:00 - 13:40",
+      title: "5 Steps to Design AI Agents That Deliver True Business Value",
+      category: "session",
+      location: "Moscone West L3 · Room 3020",
+      description: "AI Agent를 실제 비즈니스 가치와 연결하는 5단계 프레임워크",
+      completed: false
+    },
+    {
+      id: "df-ev-reco-datakits",
+      date: "2026-09-15",
+      time: "13:30 - 13:50",
+      title: "💡 [추천 TOP 3] Automate Search and Retrieval Deployments via DataKits",
+      category: "session",
+      location: "Moscone West L1 · Developer Grove",
+      description: "Search index·retriever·ingestion 구성을 DataKit으로 배포하고 RAG 환경을 승격. RAG·Vector·Data 360 파이프라인과 직접 연결",
+      proTip: "※ 13:00 세션과 10분간 겹치므로 동선 및 우선순위 고려 필요 (충돌 감지 대상)",
+      isImportant: true,
+      completed: false
+    },
+    {
       id: "ev-9",
       date: "2026-09-15",
-      time: "13:00 - 16:30",
+      time: "14:00 - 16:00",
       title: "Campground (전시 부스) 탐방 & Agentic Enterprise 솔루션 시연",
       category: "session",
       location: "Moscone North LL & South LL",
       description: "글로벌 파트너/ISV 솔루션 부스 방문, 차세대 자율 AI 에이전트 라이브 데모 관람, 스와그(굿즈) 수집",
       proTip: "부스 스태프에게 'Could you give me a quick 2-minute demo?'로 질문하고 명함을 교환하세요.",
+      completed: false
+    },
+    {
+      id: "df-ev-reco-slack-deals",
+      date: "2026-09-15",
+      time: "16:00 - 16:20",
+      title: "From Conversation to Close: How Deals Get Done in Slack",
+      category: "session",
+      location: "Moscone West L2 · Learning Lab Theater B",
+      description: "Slack 대화에서 가격·견적·계약까지 이어지는 Agentforce Revenue Management",
       completed: false
     },
     {
@@ -176,6 +232,16 @@ export const initialAppData: AppData = {
       category: "meeting",
       location: "San Francisco 시내 (지정 레스토랑)",
       description: "한국 세일즈포스 고객사 및 파트너 임원진과의 프라이빗 디너 네트워킹",
+      completed: false
+    },
+    {
+      id: "df-ev-reco-goal-agent",
+      date: "2026-09-16",
+      time: "08:30 - 08:50",
+      title: "Automate Long-Running Work With New Goal-Based Agent",
+      category: "session",
+      location: "Moscone South LL · Content Pavilion Stage 4",
+      description: "Lead/Case 등 장시간 수행 업무를 Goal-based Agent로 자동화",
       completed: false
     },
     {
@@ -191,26 +257,74 @@ export const initialAppData: AppData = {
       completed: false
     },
     {
+      id: "df-ev-reco-agent-testing",
+      date: "2026-09-16",
+      time: "09:30 - 09:50",
+      title: "💡 [추천 TOP 4] Automate Multi-Turn Agentforce Testing",
+      category: "session",
+      location: "Moscone West L1 · Redwood Theater",
+      description: "Claude Code와 Test Center로 multi-turn Agentforce 여정을 자동 검증. AI 개발방법론과 품질관리 관점 필수 세션",
+      proTip: "Multi-turn 대화형 에이전트의 테스트 자동화 기법을 직접 확인할 수 있습니다.",
+      isImportant: true,
+      completed: false
+    },
+    {
+      id: "df-ev-reco-code-ext",
+      date: "2026-09-16",
+      time: "10:30 - 10:50",
+      title: "💡 [추천 TOP 5] Build Complex Data Transformations with Code Extensions",
+      category: "session",
+      location: "Moscone West L1 · Developer Grove",
+      description: "Data 360에서 Python 기반 복잡한 데이터 변환과 chunking 구현. 외부 ETL과 Data 360 경계 판단에 유용",
+      proTip: "Python 기반 전처리와 Data 360 연동 기법 확인",
+      isImportant: true,
+      completed: false
+    },
+    {
+      id: "df-ev-reco-unified-customer",
+      date: "2026-09-16",
+      time: "13:30 - 13:50",
+      title: "💡 [추천 TOP 6] Build a Unified Customer View with Data 360",
+      category: "session",
+      location: "Moscone West L1 · Redwood Theater",
+      description: "여러 시스템의 고객 데이터를 통합하고 Agentforce가 활용할 기반 구성. Salesforce CRM + Data 360 + Agentforce 전체 조망",
+      proTip: "13:50 종료 후 즉시 세일즈포스 타워 광장(도보 약 15분)으로 이동해야 14:00 오하나 투어 집결 가능!",
+      isImportant: true,
+      completed: false
+    },
+    {
       id: "ev-ohana-tour",
       date: "2026-09-16",
-      time: "13:40 - 14:40",
-      title: "🏢 🇰🇷 [Group A 확정] Ohana Floor Tour (세일즈포스 타워 61층 오하나 플로어 투어)",
+      time: "14:00 - 14:40",
+      title: "🏢 🇰🇷 [Group A 확정] Ohana Floor Tour (세일즈포스 타워 61층)",
       category: "party",
       location: "Salesforce Tower (1층 Salesforce Plaza Tent 집결 -> 61층 Ohana Floor)",
-      description: "★ [DKBMC 2명 Group A 배정!] 13:40까지 세일즈포스 플라자(1층 광장) 텐트 도착 후 체크인 완료! 실물 여권(사진 불가)과 24시간 전 수신된 QR코드를 보여주고 주황색 뱃지/손목밴드 수령. 세일즈포스 코리아 얼라이언스팀(전선아 님, 조영보 상무님)과 조인하여 전용 줄을 서서 61층으로 동행 입장 (총 11명: DKBMC 2명, DaeU AIon 6명, Discussion 3명). 61층에서 샌프란시스코 360도 파노라마 뷰 감상, 최고급 핑거푸드/음료, 기념 촬영",
-      proTip: "⚠️ [필수 주의사항]\n1. 13:40 정시 도착 필수 (드림포스 기간 대기 30~60분 소요 가능)\n2. 24시간 전 수신된 'Guest Pre-registration' 이메일로 사전 신청 & NDA 서명 후 QR코드 발급 필수 (스팸함 확인!)\n3. 실물 여권 필수 지참 (스마트폰 여권 사진/사본 절대 입장 불가!)\n4. 모든 게스트는 세일즈포스 코리아 직원과 동행하여 엘리베이터 탑승",
+      description: "★ [DKBMC 2명 Group A 배정!] 13:40까지 세일즈포스 플라자(1층 광장) 텐트 도착 후 체크인 완료! 실물 여권(사진 불가)과 24시간 전 수신된 QR코드를 보여주고 주황색 뱃지/손목밴드 수령. 세일즈포스 코리아 얼라이언스팀과 조인하여 전용 줄을 서서 61층으로 동행 입장 (총 11명). 샌프란시스코 360도 파노라마 뷰 감상, 최고급 핑거푸드/음료, 기념 촬영",
+      proTip: "⚠️ [필수 주의사항]\n1. 13:40 정시 도착 필수\n2. Guest Pre-registration 이메일 QR코드 발급 필수\n3. 실물 여권 필수 지참 (사진/사본 불가!)\n4. 세일즈포스 코리아 직원 동행 입장",
       isImportant: true,
       completed: false
     },
     {
       id: "ev-11",
       date: "2026-09-16",
-      time: "18:00 - 22:30",
+      time: "18:00 - 21:30",
       title: "🎸 Dreamfest 2026 자선 콘서트 (Usher & Gwen Stefani 라이브)",
       category: "party",
-      location: "Oracle Park (San Francisco Giants 야구장)",
+      location: "Giants Ballpark (Oracle Park)",
       description: "드림포스 공식 최대 야외 축제! 세계적인 팝 슈퍼스타 Usher(어셔) & Gwen Stefani(그웬 스테파니) 라이브 공연. 모스콘 센터에서 도보 15~20분 거리(셔틀 미운행). 경기장 내 푸드/맥주/와인/음료 무제한 무료 제공",
       proTip: "⚠️ [초특급 주의: 가방 규정]\n• 대형 백팩 및 노트북 가방은 절대 반입 불가 (입구에서 차단됨)!\n• 소형 클러치백이나 힙색만 허용됩니다. 백팩은 숙소나 Moscone West 락커에 미리 보관하세요.\n• 드림포스 배지 필수 지참! 바닷바람이 매우 쌀쌀하니 두꺼운 외투나 패딩을 꼭 챙기세요.",
+      isImportant: true,
+      completed: false
+    },
+    {
+      id: "df-ev-reco-skills-claude",
+      date: "2026-09-17",
+      time: "09:30 - 09:50",
+      title: "💡 [추천 TOP 7] Build Salesforce Agent Skills with Claude Code",
+      category: "session",
+      location: "Moscone West L1 · Developer Grove",
+      description: "Salesforce Agent Skill의 구조와 Claude Code + MCP를 활용한 개발. 최신 AI 개발 도구와 세일즈포스의 연결점 확인",
+      proTip: "Claude Code와 MCP(Model Context Protocol) 기반 세일즈포스 에이전트 스킬 개발 시연",
       isImportant: true,
       completed: false
     },
@@ -225,14 +339,36 @@ export const initialAppData: AppData = {
       completed: false
     },
     {
+      id: "df-ev-reco-fabric-17",
+      date: "2026-09-17",
+      time: "11:00 - 11:20",
+      title: "Build AI Experiences with Agent Fabric",
+      category: "session",
+      location: "Moscone West L2 · Theater 5",
+      description: "Agent Fabric을 활용한 agent/model/MCP 오케스트레이션 (9/15 동일 세션 앙코르)",
+      completed: false
+    },
+    {
+      id: "df-ev-reco-mulesoft-slack",
+      date: "2026-09-17",
+      time: "11:00 - 11:40",
+      title: "💡 [추천 TOP 8] Automate Data 360 Pipelines via MuleSoft and Slack",
+      category: "session",
+      location: "Moscone West L3 · Room 3024",
+      description: "MuleSoft API와 Slack 자연어 프롬프트로 Data 360 ingestion pipeline 자동화. 통합·자동화·Data 360를 한 세션에서 연결",
+      proTip: "※ 11:00 Agent Fabric 세션과 동시간대 충돌하므로 관심 분야(통합 파이프라인 vs 오케스트레이션)에 따라 선택 필요",
+      isImportant: true,
+      completed: false
+    },
+    {
       id: "ev-13",
       date: "2026-09-17",
-      time: "14:40 - 17:00",
-      title: "👨‍💻 🇰🇷 Korea Wrap-up Session (한국 참가자 공식 랩업 세션)",
+      time: "15:00 - 17:00",
+      title: "👨‍💻 🇰🇷 KR Wrap-up Session (한국 참가자 공식 랩업 세션)",
       category: "session",
-      location: "Salesforce Tower West 3F - C04/05",
-      description: "★ 3일간의 드림포스 핵심 발표와 세일즈포스 최신 AI 전략을 한국 SE 전문가들이 한국어로 명쾌하게 요약 정리해 드리는 필수 세션. 14:40까지 세일즈포스 타워에 도착하여 1층 체크인 프로세스 진행",
-      proTip: "세일즈포스 타워 입장 시 실물 여권 지참 필수! 14:40까지 미리 도착하세요. 귀국 후 사내 보고서 작성에 필요한 핵심 장표와 로드맵 인사이트를 얻을 수 있습니다.",
+      location: "Salesforce Tower West · 3F C04/05 + S01",
+      description: "★ 14:30 Check-in. 15:00–17:00 세션. 3일간의 드림포스 핵심 발표와 세일즈포스 최신 AI 전략을 한국 SE 전문가들이 한국어로 명쾌하게 요약 정리 및 네트워킹",
+      proTip: "세일즈포스 타워 입장 시 실물 여권 지참 필수! 14:30 체크인 시간을 준수하세요. 귀국 후 사내 보고서 작성에 필요한 핵심 장표와 로드맵 인사이트를 얻을 수 있습니다.",
       isImportant: true,
       completed: false
     },
